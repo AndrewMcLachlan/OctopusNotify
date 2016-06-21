@@ -189,7 +189,7 @@ namespace OctopusNotify.App.ViewModels
                 }
                 else
                 {
-                    key.DeleteValue(RegistryValueName);
+                    key.DeleteValue(RegistryValueName, false);
                 }
             }
         }

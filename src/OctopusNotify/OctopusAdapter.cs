@@ -170,6 +170,7 @@ namespace OctopusNotify
                               i.CompletedTime >= _lastElapsed
                         select i.ToDeploymentResult(dashboard);
 
+            items = items.Union(dashboard.Items.Where(i => !i.HasWarningsOrErrors && i.CompletedTime >= _lastElapsed && !dashboard.PreviousItems.Any(p => i.ReleaseId == p.ReleaseId && i.EnvironmentId == p.EnvironmentId)).Select(i => i.ToDeploymentResult(dashboard)));
 
             if (items.Any())
             {
@@ -189,6 +190,8 @@ namespace OctopusNotify
                               i.HasWarningsOrErrors && !p.HasWarningsOrErrors &&
                               i.CompletedTime >= _lastElapsed
                         select i.ToDeploymentResult(dashboard);
+
+            items = items.Union(dashboard.Items.Where(i => i.HasWarningsOrErrors && i.CompletedTime >= _lastElapsed && !dashboard.PreviousItems.Any(p => i.ReleaseId == p.ReleaseId && i.EnvironmentId == p.EnvironmentId)).Select(i => i.ToDeploymentResult(dashboard)));
 
             if (items.Any())
             {
