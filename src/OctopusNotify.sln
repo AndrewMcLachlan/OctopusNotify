@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctopusNotify.App", "OctopusNotify.App\OctopusNotify.App.csproj", "{C169DB33-61E9-47BC-B961-A53AF49F46B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctopusNotify", "OctopusNotify\OctopusNotify.csproj", "{99222F64-558B-4880-A3F8-88FE931F2EB7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Stub|Any CPU = Stub|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C169DB33-61E9-47BC-B961-A53AF49F46B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C169DB33-61E9-47BC-B961-A53AF49F46B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C169DB33-61E9-47BC-B961-A53AF49F46B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C169DB33-61E9-47BC-B961-A53AF49F46B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C169DB33-61E9-47BC-B961-A53AF49F46B6}.Stub|Any CPU.ActiveCfg = Stub|Any CPU
+		{C169DB33-61E9-47BC-B961-A53AF49F46B6}.Stub|Any CPU.Build.0 = Stub|Any CPU
+		{99222F64-558B-4880-A3F8-88FE931F2EB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99222F64-558B-4880-A3F8-88FE931F2EB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99222F64-558B-4880-A3F8-88FE931F2EB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99222F64-558B-4880-A3F8-88FE931F2EB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99222F64-558B-4880-A3F8-88FE931F2EB7}.Stub|Any CPU.ActiveCfg = Stub|Any CPU
+		{99222F64-558B-4880-A3F8-88FE931F2EB7}.Stub|Any CPU.Build.0 = Stub|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://andrewmclachlan.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = OctopusNotify.App\\OctopusNotify.App.csproj
+		SccProjectName1 = OctopusNotify.App
+		SccLocalPath1 = OctopusNotify.App
+		SccProjectUniqueName2 = OctopusNotify\\OctopusNotify.csproj
+		SccProjectName2 = OctopusNotify
+		SccLocalPath2 = OctopusNotify
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,52 @@
+﻿<Window x:Class="OctopusNotify.App.NotifyIconWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OctopusNotify.App"
+        xmlns:comm="clr-namespace:OctopusNotify.App.Commands"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+        xmlns:test="test-mode"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        x:Name="Window"
+        mc:Ignorable="d mc test"
+        Title="Octopus Notify" Height="350" Width="525" StateChanged="Window_StateChanged" Closing="Window_Closing" Icon="/App.ico">
+
+    <mc:AlternateContent>
+        <mc:Choice Requires="test">
+            <Window.Resources>
+                <Visibility x:Key="DebugVisible">Visible</Visibility>
+            </Window.Resources>
+        </mc:Choice>
+        <mc:Fallback>
+            <Window.Resources>
+                <Visibility x:Key="DebugVisible">Collapsed</Visibility>
+            </Window.Resources>
+        </mc:Fallback>
+    </mc:AlternateContent>
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="471*"/>
+            <ColumnDefinition Width="46*"/>
+        </Grid.ColumnDefinitions>
+        <tb:TaskbarIcon x:Name="NotifyIcon"
+                    Visibility="Visible"
+                    ToolTipText="Octopus Notify (Disconnected)"
+                    MenuActivation="RightClick" Grid.ColumnSpan="2"
+                        DoubleClickCommand="local:AppCommands.ShowSettings">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Open" Command="local:AppCommands.ShowMainWindow" FontWeight="Bold" Visibility="Collapsed" />
+                    <MenuItem Header="Settings..." Command="local:AppCommands.ShowSettings" FontWeight="Bold"  />
+                    <MenuItem Header="Open Octopus..." Command="local:AppCommands.LaunchOctopus" />
+                    <Separator />
+                    <MenuItem Header="Test..." Command="local:AppCommands.ShowStub" Visibility="{StaticResource DebugVisible}"  />
+                    <MenuItem Header="About..." Command="local:AppCommands.ShowAbout" />
+                    <Separator />
+                    <MenuItem Header="Exit" Command="local:AppCommands.Exit" />
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
+    </Grid>
+</Window>
