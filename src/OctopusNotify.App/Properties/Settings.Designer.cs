@@ -106,5 +106,17 @@ namespace OctopusNotify.App.Properties {
                 this["Upgraded"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public int PollingInterval {
+            get {
+                return ((int)(this["PollingInterval"]));
+            }
+            set {
+                this["PollingInterval"] = value;
+            }
+        }
     }
 }

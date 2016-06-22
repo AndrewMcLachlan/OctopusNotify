@@ -24,7 +24,7 @@
             <ColumnDefinition Width="73*"/>
             <ColumnDefinition Width="267*"/>
         </Grid.ColumnDefinitions>
-        <Image x:Name="Icon" Grid.Column="0" Grid.RowSpan="2" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Width="32" Height="32" />
+        <Image x:Name="Icon" Grid.Column="0" Grid.RowSpan="2" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Stretch="None" />
         <TextBlock x:Name="Title" Foreground="White" Grid.Column="1" Grid.Row="0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Margin="0,5,0,0">
         </TextBlock>
         <Image x:Name="Close" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Margin="0,5,5,0" Source="Images/Close_Lg.png" MouseDown="Close_MouseDown"/>

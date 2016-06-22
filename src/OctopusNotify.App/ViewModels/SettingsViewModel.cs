@@ -30,6 +30,8 @@ namespace OctopusNotify.App.ViewModels
         private bool _alertOnNewFailedBuild;
         private bool _alertOnFixedBuild;
         private bool _alertOnSuccessfulBuild;
+
+        private int _intervalTime;
         #endregion
 
         #region Properties
@@ -111,6 +113,16 @@ namespace OctopusNotify.App.ViewModels
                 OnPropertyChanged(nameof(AlertOnSuccessfulBuild));
             }
         }
+
+        public int IntervalTime
+        {
+            get { return _intervalTime; }
+            set
+            {
+                _intervalTime = value;
+                OnPropertyChanged(nameof(IntervalTime));
+            }
+        }
         #endregion
 
         #region Constructors
@@ -122,6 +134,8 @@ namespace OctopusNotify.App.ViewModels
             AlertOnNewFailedBuild = Settings.Default.AlertOnNewFailedBuild;
             AlertOnFixedBuild = Settings.Default.AlertOnFixedBuild;
             AlertOnSuccessfulBuild = Settings.Default.AlertOnSuccessfulBuild;
+
+            IntervalTime = Settings.Default.PollingInterval;
 
             RunOnStartup = GetRunOnStartup();
 
@@ -151,6 +165,8 @@ namespace OctopusNotify.App.ViewModels
             Settings.Default.AlertOnNewFailedBuild = AlertOnNewFailedBuild;
             Settings.Default.AlertOnFixedBuild = AlertOnFixedBuild;
             Settings.Default.AlertOnSuccessfulBuild = AlertOnSuccessfulBuild;
+
+            Settings.Default.PollingInterval = IntervalTime;
 
             Settings.Default.Save();
 
@@ -196,7 +212,7 @@ namespace OctopusNotify.App.ViewModels
 
         private void Validate()
         {
-            IsValid = ServerUrl != null && !String.IsNullOrEmpty(ServerUrl.ToString());
+            IsValid = ServerUrl != null && !String.IsNullOrEmpty(ServerUrl.ToString()) && IntervalTime > 0;
         }
         #endregion
     }

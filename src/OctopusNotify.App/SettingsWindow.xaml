@@ -23,7 +23,7 @@
             <GroupBox Header="Server Settings" Margin="10,10,10,10">
                 <StackPanel>
                     <Label x:Name="ServerUrlLabel" Content="Server URL:" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="ServerUrlText" Height="23" TextWrapping="Wrap" Margin="10,0,10,0" VerticalAlignment="Top" Validation.Error="Validation_Error" Width="221" MaxWidth="221">
+                    <TextBox x:Name="ServerUrlText" Height="23" TextWrapping="NoWrap" Margin="10,0,10,0" VerticalAlignment="Top" Validation.Error="Validation_Error" Width="221" MaxWidth="221">
                         <Binding Path="ServerUrl"
                          Mode="TwoWay"
                          UpdateSourceTrigger="LostFocus"
@@ -37,7 +37,7 @@
                         </Binding>
                     </TextBox>
                     <Label x:Name="APiKeyLabel" Content="API Key:" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" />
-                    <TextBox x:Name="ApiKeyText" Height="23" Margin="10,0,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Validation.Error="Validation_Error" TextChanged="ApiKeyText_TextChanged" Width="221" MaxWidth="221">
+                    <TextBox x:Name="ApiKeyText" Height="23" Margin="10,0,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" Validation.Error="Validation_Error" TextChanged="ApiKeyText_TextChanged" Width="221" MaxWidth="221">
                     </TextBox>
                     <Label x:Name="label" Content="Existing keys are not shown for security reasons" FontSize="11" Margin="0,0,0,0" HorizontalAlignment="Center" />
                     <Button x:Name="TestButton" Content="Test" HorizontalAlignment="Right" Margin="10,15,10,10" VerticalAlignment="Top" Width="75" IsDefault="True" Command="local:AppCommands.Test" />
@@ -49,6 +49,12 @@
                     <CheckBox Content="Alert on all failed builds" Margin="10,10,10,10" IsChecked="{Binding AlertOnFailedBuild }" />
                     <CheckBox Content="Alert on fixed build" Margin="10,10,10,10" IsChecked="{Binding AlertOnFixedBuild}" />
                     <CheckBox Content="Alert on all successful builds" Margin="10,10,10,10" IsChecked="{Binding AlertOnSuccessfulBuild}" />
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Label x:Name="IntervalLabel" Content="Poll Octopus every" />
+                        <TextBox x:Name="IntervalTime" Height="23" TextWrapping="NoWrap" VerticalAlignment="Top" Width="32" Text="{Binding IntervalTime }" PreviewTextInput="IntervalTime_PreviewTextInput" DataObject.Pasting="IntervalTime_Pasting">
+                        </TextBox>
+                        <Label x:Name="IntervalLabel2" Content="seconds" />
+                    </StackPanel>
                 </StackPanel>
             </GroupBox>
         </StackPanel>

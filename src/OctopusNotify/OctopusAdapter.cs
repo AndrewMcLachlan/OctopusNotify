@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Timers;
 using Octopus.Client;
 using Octopus.Client.Exceptions;
@@ -45,15 +46,6 @@ namespace OctopusNotify
         {
             _repository = repository;
 
-            try
-            {
-                var dashboard = _repository.Dashboards.GetDashboard();
-            }
-            catch (OctopusSecurityException osex)
-            {
-                throw new RepositoryException("Security error connecting to deployment repository", osex);
-            }
-
             _pollingInterval = interval;
             _pollingTimer.Elapsed += PollingTimer_Elapsed;
         }
@@ -69,7 +61,7 @@ namespace OctopusNotify
         {
             _pollingTimer.Interval = interval;
             _pollingTimer.Start();
-            Poll();
+            Task.Factory.StartNew(() => Poll());
         }
 
         public void StopPolling()

@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using OctopusNotify.App.Properties;
@@ -12,6 +14,9 @@ namespace OctopusNotify.App
     /// </summary>
     public partial class SettingsWindow : Window
     {
+        private static Regex PositiveInteger = new Regex("[0-9]+");
+        private static Regex Zero = new Regex("^0$");
+
         private int _validationErrorCount = 0;
         private bool _apiKeyChanged = false;
 
@@ -75,6 +80,32 @@ namespace OctopusNotify.App
         private void ApiKeyText_TextChanged(object sender, TextChangedEventArgs e)
         {
             _apiKeyChanged = true;
+        }
+
+        private void IntervalTime_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !ValidateIntervalTime(e.Text);
+        }
+
+        private bool ValidateIntervalTime(string text)
+        {
+            return PositiveInteger.IsMatch(text);
+        }
+
+        private void IntervalTime_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(string)))
+            {
+                string text = (string)e.DataObject.GetData(typeof(string));
+                if (!ValidateIntervalTime(text))
+                {
+                    e.CancelCommand();
+                }
+            }
+            else
+            {
+                e.CancelCommand();
+            }
         }
     }
 }

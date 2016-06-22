@@ -52,33 +52,6 @@ namespace OctopusNotify.App.Ioc
         #region Private Methods
         private void RegisterTypes()
         {
-            /*
-                < assembly name = "Octopus.Client, Version=3.3.16.0, Culture=neutral" />
-
-     < assembly name = "OctopusNotify.Library" />
-
-
-      <namespace name="Octopus.Client" />
-    <namespace name="OctopusNotify" />
-    <namespace name="OctopusNotify.Stub" />
-
-    <container>
-      <register type = "IDeploymentRepositoryAdapter" mapTo="OctopusAdapter">
-        <constructor>
-          <param name = "repository" dependencyName="Real" />
-          <param name = "interval" value="15000" />
-        </constructor>
-      </register>
-      <register type = "IOctopusRepository" mapTo="StubOctopusRepository" name="Stub">
-        <constructor />
-      </register>
-      <register type = "IOctopusRepository" mapTo="OctopusRepository" name="Real">
-        <constructor>
-          <param name = "endpoint" dependencyType="OctopusServerEndpoint" />
-        </constructor>
-      </register>
-    </container>
-        */
 #if STUB
             const string name = "Stub";
 #else
@@ -99,7 +72,7 @@ namespace OctopusNotify.App.Ioc
 
             _unityContainer.RegisterType<IDeploymentRepositoryAdapter, OctopusAdapter>(new[]
             {
-                new InjectionConstructor(new ResolvedParameter<IOctopusRepository>(name), 15000.0)
+                new InjectionConstructor(new ResolvedParameter<IOctopusRepository>(name), Settings.Default.PollingInterval * 1000d)
             });
         }
 
@@ -107,6 +80,6 @@ namespace OctopusNotify.App.Ioc
         {
             Configured?.Invoke(this, EventArgs.Empty);
         }
-#endregion
+        #endregion
     }
 }
