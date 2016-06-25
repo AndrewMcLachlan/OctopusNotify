@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Microsoft.Practices.Unity;
 using OctopusNotify.App.Ioc;
 using OctopusNotify.App.Properties;
@@ -20,6 +22,8 @@ namespace OctopusNotify.App
         private static readonly Icon ErrorNotifyIcon;
         private static readonly Icon DisconnectedNotifyIcon;
         private static readonly Icon ConnectedNotifyIcon;
+
+        private static readonly BitmapImage GreenTick = new BitmapImage(new Uri("pack://application:,,,/OctopusNotify;component/Images/Green Tick.png"));
         #endregion
 
         #region Constructors
@@ -206,10 +210,16 @@ namespace OctopusNotify.App
 
         private void ShowFixedBalloon(object sender, DeploymentEventArgs e)
         {
-            ShowBalloon(sender, e, "Deployment Succeeded", SystemIcons.Information);
+            ShowBalloon(sender, e, "Deployment Succeeded", GreenTick);
         }
 
         private void ShowBalloon(object sender, DeploymentEventArgs e, string title, Icon icon)
+        {
+            var item = e.Items.First();
+            NotifyIcon.ShowCustomBalloon(new Balloon(title, item.Project.Name, item.Version, item.Environment.Name, icon), System.Windows.Controls.Primitives.PopupAnimation.Slide, 10000);
+        }
+
+        private void ShowBalloon(object sender, DeploymentEventArgs e, string title, ImageSource icon)
         {
             var item = e.Items.First();
             NotifyIcon.ShowCustomBalloon(new Balloon(title, item.Project.Name, item.Version, item.Environment.Name, icon), System.Windows.Controls.Primitives.PopupAnimation.Slide, 10000);
