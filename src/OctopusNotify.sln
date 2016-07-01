@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctopusNotify.App", "Octopu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctopusNotify", "OctopusNotify\OctopusNotify.csproj", "{99222F64-558B-4880-A3F8-88FE931F2EB7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{97921B3E-F81D-4DB8-90B1-45B8E64FDA1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctopusNotify.Tests", "..\tests\OctopusNotify.Tests\OctopusNotify.Tests.csproj", "{D962AC12-CC1B-486B-8E94-464C6272353A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,20 +30,17 @@ Global
 		{99222F64-558B-4880-A3F8-88FE931F2EB7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{99222F64-558B-4880-A3F8-88FE931F2EB7}.Stub|Any CPU.ActiveCfg = Stub|Any CPU
 		{99222F64-558B-4880-A3F8-88FE931F2EB7}.Stub|Any CPU.Build.0 = Stub|Any CPU
+		{D962AC12-CC1B-486B-8E94-464C6272353A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D962AC12-CC1B-486B-8E94-464C6272353A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D962AC12-CC1B-486B-8E94-464C6272353A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D962AC12-CC1B-486B-8E94-464C6272353A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D962AC12-CC1B-486B-8E94-464C6272353A}.Stub|Any CPU.ActiveCfg = Debug|Any CPU
+		{D962AC12-CC1B-486B-8E94-464C6272353A}.Stub|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://andrewmclachlan.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = OctopusNotify.App\\OctopusNotify.App.csproj
-		SccProjectName1 = OctopusNotify.App
-		SccLocalPath1 = OctopusNotify.App
-		SccProjectUniqueName2 = OctopusNotify\\OctopusNotify.csproj
-		SccProjectName2 = OctopusNotify
-		SccLocalPath2 = OctopusNotify
+	GlobalSection(NestedProjects) = preSolution
+		{D962AC12-CC1B-486B-8E94-464C6272353A} = {97921B3E-F81D-4DB8-90B1-45B8E64FDA1B}
 	EndGlobalSection
 EndGlobal

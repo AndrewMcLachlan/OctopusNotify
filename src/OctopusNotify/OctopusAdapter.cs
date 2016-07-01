@@ -68,15 +68,8 @@ namespace OctopusNotify
         {
             _pollingTimer.Stop();
         }
-        #endregion
 
-        #region Private Methods
-        private void PollingTimer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            Poll();
-        }
-
-        private void Poll()
+        public void Poll()
         {
             Log.Debug("Polling...");
 
@@ -84,11 +77,6 @@ namespace OctopusNotify
 
             try
             {
-                if (Debugger.IsAttached)
-                {
-                    _pollingTimer.Stop();
-                }
-
                 var dashboard = _repository.Dashboards.GetDashboard();
 
                 Log.Debug("Got dashboard");
@@ -124,12 +112,20 @@ namespace OctopusNotify
                 _brokenConnection = true;
                 return;
             }
-            finally
+        }
+        #endregion
+
+        #region Private Methods
+        private void PollingTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if (Debugger.IsAttached)
             {
-                if (Debugger.IsAttached)
-                {
-                    _pollingTimer.Start();
-                }
+                _pollingTimer.Stop();
+            }
+            Poll();
+            if (Debugger.IsAttached)
+            {
+                _pollingTimer.Start();
             }
         }
 
