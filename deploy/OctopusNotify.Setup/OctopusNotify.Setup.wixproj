@@ -35,6 +35,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />
+    <Content Include="Dialog.png" />
+    <Content Include="License.rtf" />
+    <Content Include="Banner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--

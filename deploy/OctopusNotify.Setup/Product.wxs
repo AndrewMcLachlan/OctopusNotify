@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="4b915898-5053-4285-bc1c-36ae5d5d0e5f" Name="Octopus Notify" Language="1033" Version="0.9.0.0" Manufacturer="Andrew McLachlan" UpgradeCode="2c0dbe90-db26-4ea1-828f-bc8da386a14f">
-    
+
+  <Product Id="4b915898-5053-4285-bc1c-36ae5d5d0e5f" Name="Octopus Notify" Language="1033" Version="0.1.0.0" Manufacturer="Andrew McLachlan" UpgradeCode="2c0dbe90-db26-4ea1-828f-bc8da386a14f">
+
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
     <Icon Id="App.ico" SourceFile="App.ico" />
@@ -13,6 +14,15 @@
     <Feature Id="ProductFeature" Title="Octopus Notify" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
     </Feature>
+
+    <UIRef Id="WixUI_InstallDir" />
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <WixVariable Id="WixUIBannerBmp" Value="Banner.png" />
+    <WixVariable Id="WixUIDialogBmp" Value="Dialog.png" />
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+
+
   </Product>
 
   <Fragment>
