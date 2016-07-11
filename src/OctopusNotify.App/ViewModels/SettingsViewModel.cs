@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using OctopusNotify.App.Properties;
@@ -37,37 +39,20 @@ namespace OctopusNotify.App.ViewModels
         #region Properties
         public Uri ServerUrl
         {
-            get
-            {
-                return _serverUrl;
-            }
-
-            set
-            {
-                _serverUrl = value;
-                OnPropertyChanged(nameof(ServerUrl));
-            }
+            get { return _serverUrl; }
+            set { Set(ref _serverUrl, value); }
         }
 
         public bool IsValid
         {
             get { return _isValid; }
-            set
-            {
-                _isValid = value;
-                OnPropertyChanged(nameof(IsValid));
-            }
-
+            set { Set(ref _isValid, value); }
         }
 
         public bool RunOnStartup
         {
             get { return _runOnStartup; }
-            set
-            {
-                _runOnStartup = value;
-                OnPropertyChanged(nameof(RunOnStartup));
-            }
+            set { Set(ref _runOnStartup, value); }
         }
 
         public bool AlertOnFailedBuild
@@ -75,9 +60,8 @@ namespace OctopusNotify.App.ViewModels
             get { return _alertOnFailedBuild; }
             set
             {
-                _alertOnFailedBuild = value;
+                Set(ref _alertOnFailedBuild, value);
                 if (value) AlertOnNewFailedBuild = value;
-                OnPropertyChanged(nameof(AlertOnFailedBuild));
             }
         }
 
@@ -86,9 +70,8 @@ namespace OctopusNotify.App.ViewModels
             get { return _alertOnNewFailedBuild; }
             set
             {
-                _alertOnNewFailedBuild = value;
+                Set(ref _alertOnNewFailedBuild, value);
                 if (!value) AlertOnFailedBuild = value;
-                OnPropertyChanged(nameof(AlertOnNewFailedBuild));
             }
         }
 
@@ -97,9 +80,8 @@ namespace OctopusNotify.App.ViewModels
             get { return _alertOnFixedBuild; }
             set
             {
-                _alertOnFixedBuild = value;
+                Set(ref _alertOnFixedBuild, value);
                 if (!value) AlertOnSuccessfulBuild = value;
-                OnPropertyChanged(nameof(AlertOnFixedBuild));
             }
         }
 
@@ -108,20 +90,15 @@ namespace OctopusNotify.App.ViewModels
             get { return _alertOnSuccessfulBuild; }
             set
             {
-                _alertOnSuccessfulBuild = value;
+                Set(ref _alertOnSuccessfulBuild, value);
                 if (value) AlertOnFixedBuild = value;
-                OnPropertyChanged(nameof(AlertOnSuccessfulBuild));
             }
         }
 
         public int IntervalTime
         {
             get { return _intervalTime; }
-            set
-            {
-                _intervalTime = value;
-                OnPropertyChanged(nameof(IntervalTime));
-            }
+            set { Set(ref _intervalTime, value); }
         }
         #endregion
 
@@ -177,6 +154,14 @@ namespace OctopusNotify.App.ViewModels
         #endregion
 
         #region Private Methods
+        private void Set<T>(ref T field, T value, [CallerMemberName]string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
+
+            field = value;
+            OnPropertyChanged(propertyName);
+        }
+
         private void OnPropertyChanged(string propertyName)
         {
             if (propertyName != nameof(IsValid))

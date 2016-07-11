@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D962AC12-CC1B-486B-8E94-464C6272353A}</ProjectGuid>
+    <ProjectGuid>{A2D69648-9076-46BF-BF19-20EF4EA4024D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OctopusNotify.Tests</RootNamespace>
-    <AssemblyName>OctopusNotify.Tests</AssemblyName>
+    <RootNamespace>OctopusNotify.App.Tests</RootNamespace>
+    <AssemblyName>OctopusNotify.App.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -43,14 +43,6 @@
       <HintPath>..\..\src\packages\Moq.4.5.10\lib\net45\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\src\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Octopus.Client, Version=3.3.20.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\src\packages\Octopus.Client.3.3.20\lib\net40\Octopus.Client.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="TechTalk.SpecFlow, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
       <HintPath>..\..\src\packages\SpecFlow.2.1.0\lib\net45\TechTalk.SpecFlow.dll</HintPath>
@@ -70,41 +62,28 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ConnectionEvents\ConnectionEvents.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ConnectionEvents.feature</DependentUpon>
-    </Compile>
-    <Compile Include="ConnectionEvents\ConnectionEventsSteps.cs" />
-    <Compile Include="SingleItemEvents\FixedEventSteps.cs" />
-    <Compile Include="SingleItemEvents\FailedEventSteps.cs" />
-    <Compile Include="SingleItemEvents\FailedNewEventSteps.cs" />
-    <Compile Include="SingleItemEvents\CompletedEventSteps.cs" />
-    <Compile Include="SingleItemEvents\SingleItemEventSteps.cs" />
-    <Compile Include="SingleItemEvents\SingleItemEvents.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SingleItemEvents.feature</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\SettingsViewModelSteps.cs" />
+    <Compile Include="Settings\SettingsViewModel.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SettingsViewModel.feature</DependentUpon>
+    </Compile>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="ConnectionEvents\ConnectionEvents.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>ConnectionEvents.feature.cs</LastGenOutput>
-    </None>
-    <None Include="SingleItemEvents\SingleItemEvents.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>SingleItemEvents.feature.cs</LastGenOutput>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\OctopusNotify\OctopusNotify.csproj">
-      <Project>{99222f64-558b-4880-a3f8-88fe931f2eb7}</Project>
-      <Name>OctopusNotify</Name>
+    <ProjectReference Include="..\..\src\OctopusNotify.App\OctopusNotify.App.csproj">
+      <Project>{c169db33-61e9-47bc-b961-a53af49f46b6}</Project>
+      <Name>OctopusNotify.App</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Settings\SettingsViewModel.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SettingsViewModel.feature.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

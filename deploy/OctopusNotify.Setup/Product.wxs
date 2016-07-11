@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="4b915898-5053-4285-bc1c-36ae5d5d0e5f" Name="Octopus Notify" Language="1033" Version="0.9.0.0" Manufacturer="Andrew McLachlan" UpgradeCode="2c0dbe90-db26-4ea1-828f-bc8da386a14f">
+    
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <Icon Id="App.ico" SourceFile="App.ico" />
+    <Property Id="ARPPRODUCTICON" Value="App.ico" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate />
+
+    <Feature Id="ProductFeature" Title="Octopus Notify" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="OctopusNotify" />
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="ProductComponent" Guid="B49C184F-789F-45CA-BE2D-67960142830A">
+
+        <File Id="Hardcodet.Wpf.TaskbarNotification.dll" Name="Hardcodet.Wpf.TaskbarNotification.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\Hardcodet.Wpf.TaskbarNotification.dll"/>
+        <File Id="Microsoft.Practices.ServiceLocation.dll" Name="Microsoft.Practices.ServiceLocation.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\Microsoft.Practices.ServiceLocation.dll"/>
+        <File Id="Microsoft.Practices.Unity.Configuration.dll" Name="Microsoft.Practices.Unity.Configuration.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\Microsoft.Practices.Unity.Configuration.dll"/>
+        <File Id="Microsoft.Practices.Unity.dll" Name="Microsoft.Practices.Unity.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\Microsoft.Practices.Unity.dll"/>
+        <File Id="Microsoft.Practices.Unity.RegistrationByConvention.dll" Name="Microsoft.Practices.Unity.RegistrationByConvention.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\Microsoft.Practices.Unity.RegistrationByConvention.dll"/>
+        <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\Newtonsoft.Json.dll"/>
+        <File Id="Octopus.Client.dll" Name="Octopus.Client.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\Octopus.Client.dll"/>
+        <File Id="OctopusNotify.exe" Name="OctopusNotify.exe" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\OctopusNotify.exe"/>
+        <File Id="OctopusNotify.exe.config" Name="OctopusNotify.exe.config" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\OctopusNotify.exe.config"/>
+        <File Id="OctopusNotify.Library.dll" Name="OctopusNotify.Library.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\OctopusNotify.Library.dll"/>
+        <File Id="Serilog.dll" Name="Serilog.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\Serilog.dll"/>
+        <File Id="Serilog.Settings.AppSettings.dll" Name="Serilog.Settings.AppSettings.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\Serilog.Settings.AppSettings.dll"/>
+        <File Id="Serilog.Sinks.File.dll" Name="Serilog.Sinks.File.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\Serilog.Sinks.File.dll"/>
+
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

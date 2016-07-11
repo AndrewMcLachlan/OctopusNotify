@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OctopusNotify.Tests")]
-[assembly: AssemblyDescription("Library tests")]
+[assembly: AssemblyTitle("OctopusNotify.App.Tests")]
+[assembly: AssemblyDescription("Application tests")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("OctopusNotify.Tests")]
+[assembly: AssemblyProduct("OctopusNotify")]
 [assembly: AssemblyCopyright("Copyright © Andrew McLachlan 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d962ac12-cc1b-486b-8e94-464c6272353a")]
+[assembly: Guid("a2d69648-9076-46bf-bf19-20ef4ea4024d")]
 
 // Version information for an assembly consists of the following four values:
 //
