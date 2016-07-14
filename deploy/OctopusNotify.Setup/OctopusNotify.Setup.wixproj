@@ -35,6 +35,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />
+    <Content Include="Banner.bmp" />
+    <Content Include="Dialog.bmp" />
     <Content Include="Dialog.png" />
     <Content Include="License.rtf" />
     <Content Include="Banner.png" />

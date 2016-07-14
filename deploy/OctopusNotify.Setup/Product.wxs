@@ -13,13 +13,14 @@
 
     <Feature Id="ProductFeature" Title="Octopus Notify" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="ApplicationShortcut" />
     </Feature>
 
     <UIRef Id="WixUI_InstallDir" />
 
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
-    <WixVariable Id="WixUIBannerBmp" Value="Banner.png" />
-    <WixVariable Id="WixUIDialogBmp" Value="Dialog.png" />
+    <WixVariable Id="WixUIBannerBmp" Value="Banner.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="Dialog.bmp" />
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
 
 
@@ -29,6 +30,9 @@
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
         <Directory Id="INSTALLFOLDER" Name="OctopusNotify" />
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="Octopus Notify"/>
       </Directory>
     </Directory>
   </Fragment>
@@ -44,7 +48,7 @@
         <File Id="Microsoft.Practices.Unity.RegistrationByConvention.dll" Name="Microsoft.Practices.Unity.RegistrationByConvention.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\Microsoft.Practices.Unity.RegistrationByConvention.dll"/>
         <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\Newtonsoft.Json.dll"/>
         <File Id="Octopus.Client.dll" Name="Octopus.Client.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\Octopus.Client.dll"/>
-        <File Id="OctopusNotify.exe" Name="OctopusNotify.exe" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\OctopusNotify.exe"/>
+        <File Id="OctopusNotify.exe" Name="OctopusNotify.exe" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\OctopusNotify.exe" KeyPath="yes"/>
         <File Id="OctopusNotify.exe.config" Name="OctopusNotify.exe.config" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\OctopusNotify.exe.config"/>
         <File Id="OctopusNotify.Library.dll" Name="OctopusNotify.Library.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\OctopusNotify.Library.dll"/>
         <File Id="Serilog.dll" Name="Serilog.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\Serilog.dll"/>
@@ -53,5 +57,19 @@
 
       </Component>
     </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="b18662b3-903b-43bc-9bee-3a8f9fe4e886">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="Octopus Notify"
+                  Description="Octopus Notify"
+                  Target="[#OctopusNotify.exe]"
+                  WorkingDirectory="INSTALLFOLDER"/>
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\OctopusNotify" Name="installed" Type="integer" Value="1" xKeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
   </Fragment>
 </Wix>
