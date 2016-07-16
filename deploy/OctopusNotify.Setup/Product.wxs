@@ -9,20 +9,28 @@
     <Property Id="ARPPRODUCTICON" Value="App.ico" />
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-    <MediaTemplate EmbedCab="yes" />
+    <Media Id="1" Cabinet="OctopusNotify.cab" EmbedCab="yes" />
 
     <Feature Id="ProductFeature" Title="Octopus Notify" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
       <ComponentRef Id="ApplicationShortcut" />
     </Feature>
 
-    <UIRef Id="WixUI_InstallDir" />
+    <UI>
+      <UIRef Id="WixUI_InstallDir" />
+      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
 
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Octopus Notify" />
+
     <WixVariable Id="WixUIBannerBmp" Value="Banner.bmp" />
     <WixVariable Id="WixUIDialogBmp" Value="Dialog.bmp" />
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
 
+    <Property Id="WixShellExecTarget" Value="[#OctopusNotify.exe]" />
+
+    <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
 
   </Product>
 
