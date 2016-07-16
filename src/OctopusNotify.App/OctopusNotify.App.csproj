@@ -122,6 +122,7 @@
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\ExitCommand.cs" />
+    <Compile Include="Commands\ReportIssueCommand.cs" />
     <Compile Include="Commands\LaunchOctopusCommand.cs" />
     <Compile Include="AppCommands.cs" />
     <Compile Include="Commands\ShowAboutWindowCommand.cs" />

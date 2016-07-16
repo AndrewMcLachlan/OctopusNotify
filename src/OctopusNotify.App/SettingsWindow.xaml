@@ -36,11 +36,25 @@
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox>
-                    <Label x:Name="APiKeyLabel" Content="API Key:" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" />
+                    <StackPanel Orientation="Horizontal" Margin="5,10,0,0">
+                    <Label x:Name="APiKeyLabel" Content="API Key:"  VerticalAlignment="Top" />
+                    <!--<TextBlock x:Name="textBlock2" Margin="5,0,0,0" VerticalAlignment="Center">
+                            <Hyperlink NavigateUri="{Binding ApiKeyUri}" RequestNavigate="Hyperlink_RequestNavigate">
+                                How do I get an API key?
+                            </Hyperlink>
+                    </TextBlock>-->
+                    </StackPanel>
                     <TextBox x:Name="ApiKeyText" Height="23" Margin="10,0,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" Validation.Error="Validation_Error" TextChanged="ApiKeyText_TextChanged" Width="221" MaxWidth="221">
                     </TextBox>
                     <Label x:Name="label" Content="Existing keys are not shown for security reasons" FontSize="11" Margin="0,0,0,0" HorizontalAlignment="Center" />
-                    <Button x:Name="TestButton" Content="Test" HorizontalAlignment="Right" Margin="10,15,10,10" VerticalAlignment="Top" Width="75" IsDefault="True" Command="local:AppCommands.Test" />
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                        <TextBlock x:Name="textBlock" TextWrapping="Wrap" VerticalAlignment="Center" Margin="10,0,0,0">
+                            <Hyperlink NavigateUri="{Binding ApiKeyUri}" RequestNavigate="Hyperlink_RequestNavigate">
+                                How do I get an API key?
+                            </Hyperlink>
+                        </TextBlock>
+                        <Button x:Name="TestButton" Content="Test" HorizontalAlignment="Right" Margin="15,5,0,0" VerticalAlignment="Top" Width="75" IsDefault="True" Command="local:AppCommands.Test" />
+                    </StackPanel>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="Alert Settings" Margin="10,10,10,10" Width="250">

@@ -18,5 +18,7 @@ namespace OctopusNotify.App
         public static ShowStubWindowCommand ShowStub { get; } = new ShowStubWindowCommand();
 
         public static ShowAboutWindowCommand ShowAbout { get; } = new ShowAboutWindowCommand();
+
+        public static ReportIssueCommand ReportIssue { get; } = new ReportIssueCommand();
     }
 }

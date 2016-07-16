@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using OctopusNotify.App.Properties;
 using OctopusNotify.App.Utilities;
 using OctopusNotify.App.ViewModels;
@@ -106,6 +108,12 @@ namespace OctopusNotify.App
             {
                 e.CancelCommand();
             }
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
     }
 }

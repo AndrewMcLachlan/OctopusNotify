@@ -42,6 +42,7 @@
                     <MenuItem Header="Open Octopus..." Command="local:AppCommands.LaunchOctopus" />
                     <Separator />
                     <MenuItem Header="Test..." Command="local:AppCommands.ShowStub" Visibility="{StaticResource DebugVisible}"  />
+                    <MenuItem Header="Report Issue..." Command="local:AppCommands.ReportIssue" />
                     <MenuItem Header="About..." Command="local:AppCommands.ShowAbout" />
                     <Separator />
                     <MenuItem Header="Exit" Command="local:AppCommands.Exit" />

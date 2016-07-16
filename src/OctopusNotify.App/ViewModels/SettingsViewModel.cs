@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -99,6 +100,16 @@ namespace OctopusNotify.App.ViewModels
         {
             get { return _intervalTime; }
             set { Set(ref _intervalTime, value); }
+        }
+
+        public Uri ApiKeyUri
+        {
+            get
+            {
+                return String.IsNullOrEmpty(ConfigurationManager.AppSettings["doc:HowToCreateApiKey"]) ?
+                    new Uri("http://docs.octopusdeploy.com/display/OD/How+to+create+an+API+key") :
+                    new Uri(ConfigurationManager.AppSettings["doc:HowToCreateApiKey"]);
+            }
         }
         #endregion
 
