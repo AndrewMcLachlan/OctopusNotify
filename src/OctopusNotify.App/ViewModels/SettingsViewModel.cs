@@ -27,6 +27,7 @@ namespace OctopusNotify.App.ViewModels
         #region Fields
         private Uri _serverUrl;
         private bool _isValid;
+        private bool _canTest;
         private bool _runOnStartup;
 
         private bool _alertOnFailedBuild;
@@ -48,6 +49,12 @@ namespace OctopusNotify.App.ViewModels
         {
             get { return _isValid; }
             set { Set(ref _isValid, value); }
+        }
+
+        public bool CanTest
+        {
+            get { return _canTest; }
+            set { Set(ref _canTest, value); }
         }
 
         public bool RunOnStartup
@@ -206,8 +213,9 @@ namespace OctopusNotify.App.ViewModels
             }
         }
 
-        private void Validate()
+        public void Validate()
         {
+            CanTest = ServerUrl != null && !String.IsNullOrEmpty(ServerUrl.ToString());
             IsValid = ServerUrl != null && !String.IsNullOrEmpty(ServerUrl.ToString()) && IntervalTime > 0;
         }
         #endregion

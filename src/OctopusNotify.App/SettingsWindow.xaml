@@ -9,13 +9,13 @@
         xmlns:comm="clr-namespace:OctopusNotify.App.Commands"
         xmlns:vr="clr-namespace:OctopusNotify.App.ValidationRules"
         Closing="Window_Closing"
-        Title="Settings" Height="398.855" Width="557.094" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterScreen">
+        Title="Settings" Height="378.058" Width="557.094" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:SettingsViewModel />
     </Window.DataContext>
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Save" CanExecute="CommandBinding_CanExecute" Executed="SaveCommandBinding_Executed" />
-        <CommandBinding Command="local:AppCommands.Test" CanExecute="CommandBinding_CanExecute" Executed="TestCommandBinding_Executed" />
+        <CommandBinding Command="local:AppCommands.Test" CanExecute="Test_CanExecute" Executed="TestCommandBinding_Executed" />
     </Window.CommandBindings>
 
     <StackPanel>
@@ -23,10 +23,10 @@
             <GroupBox Header="Server Settings" Margin="10,10,10,10">
                 <StackPanel>
                     <Label x:Name="ServerUrlLabel" Content="Server URL:" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="ServerUrlText" Height="23" TextWrapping="NoWrap" Margin="10,0,10,0" VerticalAlignment="Top" Validation.Error="Validation_Error" Width="221" MaxWidth="221">
+                    <TextBox x:Name="ServerUrlText" Height="23" TextWrapping="NoWrap" Margin="10,0,10,0" VerticalAlignment="Top" Validation.Error="Validation_Error" Width="221" MaxWidth="221" Validation.ErrorTemplate="{x:Null}">
                         <Binding Path="ServerUrl"
                          Mode="TwoWay"
-                         UpdateSourceTrigger="LostFocus"
+                         UpdateSourceTrigger="PropertyChanged"
                          ValidatesOnNotifyDataErrors="True"
                          ValidatesOnDataErrors="True"
                          NotifyOnValidationError="True">

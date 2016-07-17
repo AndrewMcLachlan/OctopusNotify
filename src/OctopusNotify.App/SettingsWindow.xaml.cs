@@ -33,6 +33,14 @@ namespace OctopusNotify.App
             e.Handled = true;
         }
 
+        private void Test_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = ((SettingsViewModel)DataContext).CanTest;
+            e.Handled = true;
+        }
+
+
+
         private void SaveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var dc = (SettingsViewModel)DataContext;
