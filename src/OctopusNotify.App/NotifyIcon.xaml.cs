@@ -41,6 +41,15 @@ namespace OctopusNotify.App
 
             SetIconState(NotifyIconState.Disconnected);
 
+            if (String.IsNullOrEmpty(Settings.Default.ServerUrl.ToString()))
+            {
+
+                AppCommands.ShowSettings.Execute(null);
+                //SettingsWindow window = new SettingsWindow();
+                //window.ShowDialog();
+                //window = null;
+            }
+
             Container.Current.Configured += Container_Configured;
 
             CreateAdapter();

@@ -14,6 +14,7 @@ namespace OctopusNotify.App
     {
         public void App_Startup(object sender, StartupEventArgs e)
         {
+
             Log.Logger = new LoggerConfiguration().ReadFrom.AppSettings().CreateLogger();
 
             bool created;
@@ -32,13 +33,6 @@ namespace OctopusNotify.App
             }
 
             Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
-
-            if (String.IsNullOrEmpty(Settings.Default.ServerUrl.ToString()))
-            {
-                SettingsWindow window = new SettingsWindow();
-                window.ShowDialog();
-                window = null;
-            }
 
             Container.Current.Configure();
         }

@@ -1,33 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace OctopusNotify.App.Commands
 {
     public class ShowSettingsCommand : ICommand
     {
-        private static SettingsWindow window;
+        private SettingsWindow _window;
 
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
         {
-            //return window.Visibility != System.Windows.Visibility.Visible;
-            return window == null;
+            return true;
         }
 
         public void Execute(object parameter)
         {
-            /*
-            window.Show();
-            window.Focus();*/
+            if (_window != null)
+            {
+                _window.Activate();
+                return;
+            }
 
-            window = new SettingsWindow();
-            window.ShowDialog();
-            window = null;
+            _window = new SettingsWindow();
+            _window.ShowDialog();
+            _window = null;
             CommandManager.InvalidateRequerySuggested();
         }
 
