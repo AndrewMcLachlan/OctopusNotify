@@ -118,5 +118,29 @@ namespace OctopusNotify.App.Properties {
                 this["PollingInterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AlertOnManualStep {
+            get {
+                return ((bool)(this["AlertOnManualStep"]));
+            }
+            set {
+                this["AlertOnManualStep"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AlertOnGuidedFailure {
+            get {
+                return ((bool)(this["AlertOnGuidedFailure"]));
+            }
+            set {
+                this["AlertOnGuidedFailure"] = value;
+            }
+        }
     }
 }

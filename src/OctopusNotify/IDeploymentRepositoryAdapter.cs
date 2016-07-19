@@ -12,6 +12,9 @@ namespace OctopusNotify
         event EventHandler<DeploymentEventArgs> DeploymentFailedNew;
         event EventHandler<DeploymentEventArgs> DeploymentFixed;
 
+        event EventHandler<DeploymentEventArgs> DeploymentManualStep;
+        event EventHandler<DeploymentEventArgs> DeploymentGuidedFailure;
+
         event EventHandler ErrorsCleared;
         event EventHandler ErrorsFound;
 

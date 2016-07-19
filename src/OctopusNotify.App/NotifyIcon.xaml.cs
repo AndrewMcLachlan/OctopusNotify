@@ -111,6 +111,22 @@ namespace OctopusNotify.App
             }
         }
 
+        private void Adapter_DeploymentManualStep(object sender, DeploymentEventArgs e)
+        {
+            if (Settings.Default.AlertOnManualStep)
+            {
+                DispatcherHelper.RunEventHandler(ShowManualStepBalloon, sender, e);
+            }
+        }
+
+        private void Adapter_DeploymentGuidedFailure(object sender, DeploymentEventArgs e)
+        {
+            if (Settings.Default.AlertOnGuidedFailure)
+            {
+                DispatcherHelper.RunEventHandler(ShowGuidedFailureBalloon, sender, e);
+            }
+        }
+
         /// <summary>
         /// Handles changes to IOC configuration.
         /// </summary>
@@ -150,6 +166,9 @@ namespace OctopusNotify.App
                 _adapter.DeploymentFailed -= Adapter_DeploymentFailed;
                 _adapter.DeploymentFailedNew -= Adapter_DeploymentFailedNew;
                 _adapter.DeploymentFixed -= Adapter_DeploymentFixed;
+                _adapter.DeploymentManualStep -= Adapter_DeploymentManualStep;
+                _adapter.DeploymentGuidedFailure -= Adapter_DeploymentGuidedFailure;
+
                 _adapter.ErrorsCleared -= Adapter_ErrorsCleared;
                 _adapter.ErrorsFound -= Adapter_ErrorsFound;
                 _adapter.ConnectionError -= Adapter_ConnectionError;
@@ -165,6 +184,8 @@ namespace OctopusNotify.App
                 _adapter.DeploymentFailed += Adapter_DeploymentFailed;
                 _adapter.DeploymentFailedNew += Adapter_DeploymentFailedNew;
                 _adapter.DeploymentFixed += Adapter_DeploymentFixed;
+                _adapter.DeploymentManualStep += Adapter_DeploymentManualStep;
+                _adapter.DeploymentGuidedFailure += Adapter_DeploymentGuidedFailure;
 
                 _adapter.ErrorsCleared += Adapter_ErrorsCleared;
                 _adapter.ErrorsFound += Adapter_ErrorsFound;
@@ -220,6 +241,15 @@ namespace OctopusNotify.App
         private void ShowFixedBalloon(object sender, DeploymentEventArgs e)
         {
             ShowBalloon(sender, e, "Deployment Succeeded", GreenTick);
+        }
+
+        private void ShowManualStepBalloon(object sender, DeploymentEventArgs e)
+        {
+            ShowBalloon(sender, e, "Manual Action Required", SystemIcons.Question);
+        }
+        private void ShowGuidedFailureBalloon(object sender, DeploymentEventArgs e)
+        {
+            ShowBalloon(sender, e, "Guided Failure Requires Attention", SystemIcons.Warning);
         }
 
         private void ShowBalloon(object sender, DeploymentEventArgs e, string title, Icon icon)

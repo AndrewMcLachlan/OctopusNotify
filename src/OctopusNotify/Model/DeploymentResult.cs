@@ -6,6 +6,8 @@
 
         public Project Project { get; set; }
 
+        public string TaskId { get; set; }
+
         public string Version { get; set; }
 
         public bool HasError { get; set; }
