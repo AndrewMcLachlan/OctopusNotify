@@ -225,12 +225,12 @@ namespace OctopusNotify.App
 
         private void ShowSucceededBalloon(object sender, DeploymentEventArgs e)
         {
-            ShowBalloon(sender, e, "Deployment Succeeded", SystemIcons.Information);
+            ShowBalloon(sender, e, "Deployment Succeeded", GreenTick);
         }
 
         private void ShowFailedBalloon(object sender, DeploymentEventArgs e)
         {
-            ShowBalloon(sender, e, "Deployment Failed", SystemIcons.Warning);
+            ShowBalloon(sender, e, "Deployment Failed", SystemIcons.Error);
         }
 
         private void ShowFailedNewBalloon(object sender, DeploymentEventArgs e)
@@ -240,7 +240,7 @@ namespace OctopusNotify.App
 
         private void ShowFixedBalloon(object sender, DeploymentEventArgs e)
         {
-            ShowBalloon(sender, e, "Deployment Succeeded", GreenTick);
+            ShowBalloon(sender, e, "Deployment Fixed", GreenTick);
         }
 
         private void ShowManualStepBalloon(object sender, DeploymentEventArgs e)

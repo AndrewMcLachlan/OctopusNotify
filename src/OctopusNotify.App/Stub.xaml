@@ -5,14 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OctopusNotify.App"
         mc:Ignorable="d"
-        Title="Stub" Height="376.802" Width="300">
+        Title="Stub" Height="376.802" Width="617.508">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Width" Value="75" />
             <Setter Property="Height" Value="30" />
         </Style>
-        <Style TargetType="Button" x:Key="Break" BasedOn="{StaticResource {x:Type Button}}">
-            <Setter Property="Background" Value="Red" />
+        <Style TargetType="Button" x:Key="Left" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -26,8 +25,21 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style TargetType="Button" x:Key="Complete" BasedOn="{StaticResource {x:Type Button}}">
-            <Setter Property="Background" Value="Green" />
+        <Style TargetType="Button" x:Key="Middle" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0,1,1,1"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        Background="{TemplateBinding Background}"
+                        CornerRadius="0,0,0,0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Button" x:Key="Right" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -42,6 +54,10 @@
             </Setter>
         </Style>
     </Window.Resources>
+
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Replace" CanExecute="Replace_CanExecute" Executed="Replace_Executed" />
+    </Window.CommandBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
@@ -58,9 +74,14 @@
                 <Ellipse Height="10" Width="10" Fill="Green" Name="Build1Status" />
             </Canvas>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Width="150" Height="30" Grid.Column="1" Grid.Row="0">
-            <Button x:Name="Break1" Content="Break" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Break}" Click="Break1_Click" />
-            <Button x:Name="Success1" Content="Success" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Style="{StaticResource Complete}" Click="Success1_Click" />
+        <StackPanel Orientation="Horizontal" Width="530" Height="30" Grid.Column="1" Grid.Row="0">
+            <Button x:Name="Queued1" Content="Queued" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Left}" Command="Replace" CommandParameter="Queued" />
+            <Button x:Name="Executing1" Content="Executing" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="Executing" />
+            <Button x:Name="Failed1" Content="Failed" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="Failed" />
+            <Button x:Name="Canceled1" Content="Cancelled" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="Canceled" />
+            <Button x:Name="TimedOut1" Content="TimedOut" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="TimedOut" />
+            <Button x:Name="Success1" Content="Success" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle }" Command="Replace" CommandParameter="Success" />
+            <Button x:Name="Cancelling1" Content="Cancelling" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Right}" Command="Replace" CommandParameter="Cancelling" />
         </StackPanel>
 
         <StackPanel Grid.Column="0" Grid.Row="1">
@@ -70,8 +91,8 @@
             </Canvas>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Width="150" Height="30" Grid.Column="1" Grid.Row="1">
-            <Button x:Name="Break2" Content="Break" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Break}" Click="Break2_Click" />
-            <Button x:Name="Success2" Content="Success" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Style="{StaticResource Complete}" Click="Success2_Click" />
+            <Button x:Name="Break2" Content="Break" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Left}" Click="Break2_Click" />
+            <Button x:Name="Success2" Content="Success" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Style="{StaticResource Right}" Click="Success2_Click" />
         </StackPanel>
 
         <StackPanel Grid.Column="0" Grid.Row="2">
@@ -81,8 +102,8 @@
             </Canvas>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Width="150" Height="30" Grid.Column="1" Grid.Row="2">
-            <Button x:Name="Break3" Content="Break" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Break}" Click="Break3_Click" />
-            <Button x:Name="Success3" Content="Success" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Style="{StaticResource Complete}" Click="Success3_Click" />
+            <Button x:Name="Break3" Content="Break" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Left}" Click="Break3_Click" />
+            <Button x:Name="Success3" Content="Success" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Style="{StaticResource Right}" Click="Success3_Click" />
         </StackPanel>
 
     </Grid>

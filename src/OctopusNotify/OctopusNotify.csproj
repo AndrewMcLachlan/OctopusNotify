@@ -88,6 +88,7 @@
     <Compile Include="IDeploymentRepositoryAdapter.cs" />
     <Compile Include="Model\DeploymentEnvironment.cs" />
     <Compile Include="Model\DeploymentResult.cs" />
+    <Compile Include="Model\DeploymentStatus.cs" />
     <Compile Include="Model\Project.cs" />
     <Compile Include="OctopusAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Stub\StubProjectRepository.cs" />
     <Compile Include="Stub\StubDashboardRepository.cs" />
     <Compile Include="Stub\StubOctopusRepository.cs" />
+    <Compile Include="Utilities\DashboardItemResourceComparer.cs" />
     <Compile Include="Utilities\DashboardItemResourceExtensions.cs" />
     <Compile Include="Utilities\DashboardProjectResourceExtensions.cs" />
     <Compile Include="Utilities\DashboardEnvironmentResourceExtensions.cs" />

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Octopus.Client.Model;
 using OctopusNotify.Model;
@@ -11,7 +12,7 @@ namespace OctopusNotify.Utilities
         {
             return new DeploymentResult
             {
-                HasError = item.HasWarningsOrErrors,
+                Status = item.State.ToDeploymentStatus(),
                 ErrorMessage = item.ErrorMessage,
                 Version = item.ReleaseVersion,
                 Project = projects.Where(p => p.ProjectId == item.ProjectId).SingleOrDefault(),
@@ -24,13 +25,18 @@ namespace OctopusNotify.Utilities
         {
             return new DeploymentResult
             {
-                HasError = item.HasWarningsOrErrors,
+                Status = item.State.ToDeploymentStatus(),
                 ErrorMessage = item.ErrorMessage,
                 Version = item.ReleaseVersion,
                 Project = dashboard.Projects.Where(p => p.Id == item.ProjectId).Select(p => p.ToProject()).SingleOrDefault(),
                 Environment = dashboard.Environments.Where(e => e.Id == item.EnvironmentId).Select(e => e.ToDeploymentEnvironment()).SingleOrDefault(),
                 TaskId = item.TaskId,
             };
+        }
+
+        public static DeploymentStatus ToDeploymentStatus(this TaskState state)
+        {
+            return (DeploymentStatus)(int)state;
         }
     }
 }

@@ -32,6 +32,8 @@ namespace OctopusNotify
         #endregion
 
         #region Fields
+        private static readonly TaskState[] ErrorStates = new[] { TaskState.Failed, TaskState.TimedOut };
+
         private double _pollingInterval;
         private Timer _pollingTimer = new Timer();
         private DateTime _lastElapsed = DateTime.Now;
@@ -40,7 +42,7 @@ namespace OctopusNotify
 
         private IOctopusRepository _repository;
 
-        private List<DeploymentResult> _failedBuilds = new List<DeploymentResult>();
+        private List<DashboardItemResource> _failedBuilds = new List<DashboardItemResource>();
 
         private DashboardResource _previousDashboard;
         #endregion
@@ -86,7 +88,7 @@ namespace OctopusNotify
             {
                 var dashboard = _repository.Dashboards.GetDashboard();
 
-                if (_previousDashboard == null) _previousDashboard = dashboard;
+                //if (_previousDashboard == null) _previousDashboard = dashboard;
 
                 Log.Debug("Got dashboard");
 
@@ -103,17 +105,20 @@ namespace OctopusNotify
                 ManualStepDeployments(dashboard);
                 GuidedFailureDeployments(dashboard);
 
-                if (dashboard.Items.All(i => i.IsCurrent && !i.HasWarningsOrErrors))
+                if (dashboard.Items.All(i => i.IsCurrent && !ErrorStates.Contains(i.State)))
                 {
                     OnErrorsCleared();
                 }
-                else if (dashboard.Items.Any(i => i.IsCurrent && i.HasWarningsOrErrors))
+                else if (dashboard.Items.Any(i => i.IsCurrent && ErrorStates.Contains(i.State)))
                 {
                     OnErrorsFound();
                 }
 
                 _lastElapsed = now;
-                _previousDashboard = dashboard;
+
+                _failedBuilds = _failedBuilds.Intersect(dashboard.Items.Where(i => i.State != TaskState.Success), new DashboardItemResourceComparer())
+                                             .Union(dashboard.Items.Where(i => ErrorStates.Contains(i.State)))
+                                             .ToList();
             }
             catch
             {
@@ -145,9 +150,10 @@ namespace OctopusNotify
         private void FixedDeployments(DashboardResource dashboard)
         {
             var items = from i in dashboard.Items
-                        from p in _previousDashboard.Items
+                        from p in _failedBuilds
                         where i.ProjectId == p.ProjectId &&
                               i.EnvironmentId == p.EnvironmentId &&
+                              i.State == TaskState.Success &&
                               !i.HasWarningsOrErrors && p.HasWarningsOrErrors &&
                               i.CompletedTime >= _lastElapsed
                         select i.ToDeploymentResult(dashboard);
@@ -164,15 +170,16 @@ namespace OctopusNotify
         private void CompletedDeployments(DashboardResource dashboard)
         {
             var items = from i in dashboard.Items
-                        from p in _previousDashboard.Items
+                        from p in _failedBuilds
                         where i.ProjectId == p.ProjectId &&
                               i.EnvironmentId == p.EnvironmentId &&
+                              i.State == TaskState.Success &&
                               !i.HasWarningsOrErrors && !p.HasWarningsOrErrors &&
                               i.CompletedTime >= _lastElapsed
                         select i.ToDeploymentResult(dashboard);
 
             // Get any first-time builds
-            items = items.Union(dashboard.Items.Where(i => !i.HasWarningsOrErrors && i.CompletedTime >= _lastElapsed && !_previousDashboard.Items.Any(p => i.ProjectId == p.ProjectId && i.EnvironmentId == p.EnvironmentId)).Select(i => i.ToDeploymentResult(dashboard)));
+            items = items.Union(dashboard.Items.Where(i => i.State == TaskState.Success && !i.HasWarningsOrErrors && i.CompletedTime >= _lastElapsed && !_failedBuilds.Any(p => i.ProjectId == p.ProjectId && i.EnvironmentId == p.EnvironmentId)).Select(i => i.ToDeploymentResult(dashboard)));
 
             if (items.Any())
             {
@@ -186,15 +193,16 @@ namespace OctopusNotify
         private void NewFailedDeployments(DashboardResource dashboard)
         {
             var items = from i in dashboard.Items
-                        from p in _previousDashboard.Items
+                        from p in _failedBuilds
                         where i.ProjectId == p.ProjectId &&
                               i.EnvironmentId == p.EnvironmentId &&
+                              ErrorStates.Contains(i.State) &&
                               i.HasWarningsOrErrors && !p.HasWarningsOrErrors &&
                               i.CompletedTime >= _lastElapsed
                         select i.ToDeploymentResult(dashboard);
 
             // Get any first-time builds
-            items = items.Union(dashboard.Items.Where(i => i.HasWarningsOrErrors && i.CompletedTime >= _lastElapsed && !_previousDashboard.Items.Any(p => i.ProjectId == p.ProjectId && i.EnvironmentId == p.EnvironmentId)).Select(i => i.ToDeploymentResult(dashboard)));
+            items = items.Union(dashboard.Items.Where(i => ErrorStates.Contains(i.State) && i.HasWarningsOrErrors && i.CompletedTime >= _lastElapsed && !_failedBuilds.Any(p => i.ProjectId == p.ProjectId && i.EnvironmentId == p.EnvironmentId)).Select(i => i.ToDeploymentResult(dashboard)));
 
             if (items.Any())
             {
@@ -208,9 +216,10 @@ namespace OctopusNotify
         private void FailedDeployments(DashboardResource dashboard)
         {
             var items = from i in dashboard.Items
-                        from p in _previousDashboard.Items
+                        from p in _failedBuilds
                         where i.ProjectId == p.ProjectId &&
                               i.EnvironmentId == p.EnvironmentId &&
+                              ErrorStates.Contains(i.State) &&
                               i.HasWarningsOrErrors && p.HasWarningsOrErrors &&
                               i.CompletedTime >= _lastElapsed
                         select i.ToDeploymentResult(dashboard);

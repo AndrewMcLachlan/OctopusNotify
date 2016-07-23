@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Octopus.Client.Model;
 using OctopusNotify.Stub;
 
 namespace OctopusNotify.App
@@ -60,6 +61,22 @@ namespace OctopusNotify.App
         {
             StubDashboardRepository.BuildThreeBroken = false;
             Build3Status.Fill = new SolidColorBrush(Colors.Green);
+        }
+
+        private void Replace_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+            e.Handled = true;
+        }
+
+        private void Replace_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            string status = e.Parameter as string;
+
+            StubDashboardRepository.BuildOneStatus = (TaskState)Enum.Parse(typeof(TaskState), status);
+
+            e.Handled = true;
+
         }
     }
 }

@@ -82,9 +82,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 8
  testRunner.When("the ServerURL property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 9
- testRunner.Then("the property changed event at index \'0\' fired with name \'ServerUrl\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the property changed event at index \'0\' fired with name \'CanTest\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 10
- testRunner.And("the number of fired events will be 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("the property changed event at index \'1\' fired with name \'ServerUrl\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 11
+ testRunner.And("the number of fired events will be 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -97,15 +99,15 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should trigger property changed event for IsValid", new string[] {
                         "NotifyChange"});
-#line 13
-this.ScenarioSetup(scenarioInfo);
 #line 14
- testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 15
- testRunner.When("the IsValid property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 16
- testRunner.Then("the property changed event at index \'0\' fired with name \'IsValid\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("the IsValid property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 17
+ testRunner.Then("the property changed event at index \'0\' fired with name \'IsValid\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 18
  testRunner.And("the number of fired events will be 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -119,15 +121,15 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should trigger property changed event for RunOnStartup", new string[] {
                         "NotifyChange"});
-#line 20
-this.ScenarioSetup(scenarioInfo);
 #line 21
- testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 22
- testRunner.When("the RunOnStartup property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 23
- testRunner.Then("the property changed event at index \'0\' fired with name \'RunOnStartup\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("the RunOnStartup property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 24
+ testRunner.Then("the property changed event at index \'0\' fired with name \'RunOnStartup\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 25
  testRunner.And("the number of fired events will be 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -141,15 +143,17 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should trigger property changed event for AlertOnFailedBuild", new string[] {
                         "NotifyChange"});
-#line 27
-this.ScenarioSetup(scenarioInfo);
 #line 28
- testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 29
- testRunner.When("the AlertOnFailedBuild property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 30
- testRunner.Then("the property changed event at index \'0\' fired with name \'AlertOnFailedBuild\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("the AlertOnFailedBuild property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 31
+ testRunner.Then("the property changed event at index \'0\' fired with name \'AlertOnFailedBuild\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 32
+ testRunner.And("the property changed event at index \'1\' fired with name \'AlertOnNewFailedBuild\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 33
  testRunner.And("the number of fired events will be 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -163,15 +167,15 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should trigger property changed event for AlertOnNewFailedBuild", new string[] {
                         "NotifyChange"});
-#line 34
-this.ScenarioSetup(scenarioInfo);
-#line 35
- testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 36
- testRunner.When("the AlertOnNewFailedBuild property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 37
- testRunner.Then("the property changed event at index \'0\' fired with name \'AlertOnNewFailedBuild\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 38
+ testRunner.When("the AlertOnNewFailedBuild property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 39
+ testRunner.Then("the property changed event at index \'0\' fired with name \'AlertOnNewFailedBuild\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 40
  testRunner.And("the number of fired events will be 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -185,15 +189,15 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should trigger property changed event for AlertOnFixedBuild", new string[] {
                         "NotifyChange"});
-#line 41
-this.ScenarioSetup(scenarioInfo);
-#line 42
- testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 43
- testRunner.When("the AlertOnFixedBuild property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 44
- testRunner.Then("the property changed event at index \'0\' fired with name \'AlertOnFixedBuild\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 45
+ testRunner.When("the AlertOnFixedBuild property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 46
+ testRunner.Then("the property changed event at index \'0\' fired with name \'AlertOnFixedBuild\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 47
  testRunner.And("the number of fired events will be 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -207,17 +211,17 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should trigger property changed event for AlertOnSuccessfulBuild", new string[] {
                         "NotifyChange"});
-#line 48
-this.ScenarioSetup(scenarioInfo);
-#line 49
- testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 50
- testRunner.When("the AlertOnSuccessfulBuild property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 51
- testRunner.Then("the property changed event at index \'0\' fired with name \'AlertOnSuccessfulBuild\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 52
- testRunner.Then("the property changed event at index \'1\' fired with name \'AlertOnFixedBuild\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("the AlertOnSuccessfulBuild property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 53
+ testRunner.Then("the property changed event at index \'0\' fired with name \'AlertOnSuccessfulBuild\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 54
+ testRunner.Then("the property changed event at index \'1\' fired with name \'AlertOnFixedBuild\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 55
  testRunner.And("the number of fired events will be 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -231,15 +235,15 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should trigger property changed event for IntervalTime", new string[] {
                         "NotifyChange"});
-#line 56
-this.ScenarioSetup(scenarioInfo);
-#line 57
- testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 58
- testRunner.When("the IntervalTime property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 59
- testRunner.Then("the property changed event at index \'0\' fired with name \'IntervalTime\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 60
+ testRunner.When("the IntervalTime property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 61
+ testRunner.Then("the property changed event at index \'0\' fired with name \'IntervalTime\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 62
  testRunner.And("the number of fired events will be 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

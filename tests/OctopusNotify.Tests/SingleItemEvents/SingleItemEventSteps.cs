@@ -18,6 +18,8 @@ namespace OctopusNotify.Tests
         protected int eventFiredCount = 0;
         protected string firedEventType;
 
+        protected List<DashboardItemResource> _previousBuilds = new List<DashboardItemResource>();
+
         [BeforeScenario]
         public virtual void Setup()
         {
@@ -87,14 +89,19 @@ namespace OctopusNotify.Tests
         [Given(@"a previous build with errors or warnings '(.*)'")]
         public void GivenAPreviousBuildWithErrorsOrWarnings(bool hasErrors)
         {
-            dashboard.PreviousItems[0].HasWarningsOrErrors = hasErrors;
+            _previousBuilds[0].HasWarningsOrErrors = hasErrors;
+
+            if (hasErrors)
+            {
+                PrivateObject privAdapter = new PrivateObject(adapter);
+                privAdapter.SetField("_failedBuilds", _previousBuilds);
+            }
         }
 
         [Given(@"a previous build with an id of '(.*)'")]
         public void GivenAPreviousBuildWithAnIdOf(string id)
         {
-            dashboard.PreviousItems = new List<DashboardItemResource>
-            {
+            _previousBuilds.Add(
                 new DashboardItemResource
                 {
                     Id = id,
@@ -104,8 +111,19 @@ namespace OctopusNotify.Tests
                     IsPrevious = true,
                     IsCompleted = true,
                     CompletedTime = DateTime.Now.AddSeconds(-1),
-                }
-            };
+                });
+        }
+
+        [Given(@"has a state of '(.*)'")]
+        public void GivenHasAStateOf(TaskState state)
+        {
+            dashboard.Items[0].State = state;
+        }
+
+        [Given(@"a previous build with a state of '(.*)'")]
+        public void GivenAPreviousBuildWithAStateOf(TaskState state)
+        {
+            _previousBuilds[0].State = state;
         }
 
         [When(@"the repository is polled")]

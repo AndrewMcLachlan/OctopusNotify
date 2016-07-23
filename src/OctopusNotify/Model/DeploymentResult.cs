@@ -10,7 +10,7 @@
 
         public string Version { get; set; }
 
-        public bool HasError { get; set; }
+        public DeploymentStatus Status { get; set; }
 
         public string ErrorMessage { get; set; }
     }

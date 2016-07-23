@@ -6,8 +6,9 @@
 Scenario: Should trigger property changed event for ServerUrl
 	Given a SettingsViewModel instance
 	When the ServerURL property is changed
-	Then the property changed event at index '0' fired with name 'ServerUrl'
-	And the number of fired events will be 1
+	Then the property changed event at index '0' fired with name 'CanTest'
+	And the property changed event at index '1' fired with name 'ServerUrl'
+	And the number of fired events will be 2
 
 @NotifyChange
 Scenario: Should trigger property changed event for IsValid
@@ -28,6 +29,7 @@ Scenario: Should trigger property changed event for AlertOnFailedBuild
 	Given a SettingsViewModel instance
 	When the AlertOnFailedBuild property is changed
 	Then the property changed event at index '0' fired with name 'AlertOnFailedBuild'
+	And the property changed event at index '1' fired with name 'AlertOnNewFailedBuild'
 	And the number of fired events will be 2
 
 @NotifyChange

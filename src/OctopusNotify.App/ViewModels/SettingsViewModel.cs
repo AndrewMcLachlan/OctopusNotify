@@ -182,7 +182,7 @@ namespace OctopusNotify.App.ViewModels
 
         private void OnPropertyChanged(string propertyName)
         {
-            if (propertyName != nameof(IsValid))
+            if (propertyName != nameof(IsValid) && propertyName != nameof(CanTest))
             {
                 Validate();
             }
