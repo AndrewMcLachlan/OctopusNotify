@@ -255,13 +255,17 @@ namespace OctopusNotify.App
         private void ShowBalloon(object sender, DeploymentEventArgs e, string title, Icon icon)
         {
             var item = e.Items.First();
-            NotifyIcon.ShowCustomBalloon(new Balloon(title, item.Project.Name, item.Version, item.Environment.Name, icon), System.Windows.Controls.Primitives.PopupAnimation.Slide, 10000);
+
+            Uri link = new Uri(String.Format("{0}/app#/deployments/{1}", Settings.Default.ServerUrl.TrimEnd('/'), item.DeploymentId));
+            NotifyIcon.ShowCustomBalloon(new Balloon(title, item.Project.Name, item.Version, item.Environment.Name, link, icon), System.Windows.Controls.Primitives.PopupAnimation.Slide, 10000);
         }
 
         private void ShowBalloon(object sender, DeploymentEventArgs e, string title, ImageSource icon)
         {
             var item = e.Items.First();
-            NotifyIcon.ShowCustomBalloon(new Balloon(title, item.Project.Name, item.Version, item.Environment.Name, icon), System.Windows.Controls.Primitives.PopupAnimation.Slide, 10000);
+
+            Uri link = new Uri(String.Format("{0}/app#/deployments/{1}", Settings.Default.ServerUrl.TrimEnd('/'), item.DeploymentId));
+            NotifyIcon.ShowCustomBalloon(new Balloon(title, item.Project.Name, item.Version, item.Environment.Name, link, icon), System.Windows.Controls.Primitives.PopupAnimation.Slide, 10000);
         }
         #endregion
     }

@@ -8,7 +8,9 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              Height="120" Width="340"
-             Opacity="0.95">
+             Opacity="0.95"
+             MouseDown="BalloonControl_MouseDown"
+             Cursor="Hand">
     <UserControl.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF194A70" Offset="0"/>
@@ -27,7 +29,18 @@
         <Image x:Name="Icon" Grid.Column="0" Grid.RowSpan="2" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Width="32" Height="32" />
         <TextBlock x:Name="Title" Foreground="White" Grid.Column="1" Grid.Row="0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Margin="0,5,0,0">
         </TextBlock>
-        <Image x:Name="Close" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Margin="0,5,5,0" Source="Images/Close_Lg.png" MouseDown="Close_MouseDown"/>
+        <Image x:Name="Close" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Margin="0,5,5,0" MouseDown="Close_MouseDown" Cursor="Arrow">
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="Images/Close_Lg.png"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Source" Value="Images/Close_Highlight.png"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
         <StackPanel  Grid.Column="1" Grid.Row="1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
             <Viewbox Stretch="Uniform" Height="31" HorizontalAlignment="Left" Margin="0,0,10,0">
                 <TextBlock x:Name="ProjectText" Foreground="White" TextWrapping="Wrap" FontStretch="Normal" FontWeight="Bold" Text="{Binding Path=Project, ElementName=BalloonControl}">

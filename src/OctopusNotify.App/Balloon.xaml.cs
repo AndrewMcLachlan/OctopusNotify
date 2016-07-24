@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -14,6 +15,7 @@ namespace OctopusNotify.App
         public static DependencyProperty ProjectProperty = DependencyProperty.Register("Project", typeof(string), typeof(Balloon), new FrameworkPropertyMetadata());
         public static DependencyProperty VersionProperty = DependencyProperty.Register("Version", typeof(string), typeof(Balloon), new FrameworkPropertyMetadata());
         public static DependencyProperty EnvironmentProperty = DependencyProperty.Register("Environment", typeof(string), typeof(Balloon), new FrameworkPropertyMetadata());
+        public static DependencyProperty LinkProperty = DependencyProperty.Register("Link", typeof(Uri), typeof(Balloon), new FrameworkPropertyMetadata());
 
         public string Project
         {
@@ -33,18 +35,25 @@ namespace OctopusNotify.App
             set { SetValue(EnvironmentProperty, value); }
         }
 
-        public Balloon(string title, string project, string version, string environment, Icon icon) : this(title, project, version, environment, icon.ToImageSource())
+        public Uri Link
+        {
+            get { return GetValue(LinkProperty) as Uri; }
+            set {SetValue(LinkProperty, value); }
+        }
+
+        public Balloon(string title, string project, string version, string environment, Uri link, Icon icon) : this(title, project, version, environment, link, icon.ToImageSource())
         {
         }
 
-        public Balloon(string title, string project, string version, string environment, ImageSource icon)
-        { 
+        public Balloon(string title, string project, string version, string environment, Uri link, ImageSource icon)
+        {
             InitializeComponent();
 
             Title.Text = title;
             Project = project;
             Version = version;
             Environment = environment;
+            Link = link;
 
             Icon.Source = icon;
         }
@@ -53,6 +62,15 @@ namespace OctopusNotify.App
         {
             TaskbarIcon taskbarIcon = TaskbarIcon.GetParentTaskbarIcon(this);
             taskbarIcon.CloseBalloon();
+            e.Handled = true;
+        }
+
+        private void BalloonControl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (Link != null)
+            {
+                System.Diagnostics.Process.Start(Link.ToString());
+            }
         }
     }
 }

@@ -8,6 +8,8 @@
 
         public string TaskId { get; set; }
 
+        public string DeploymentId { get; set; }
+
         public string Version { get; set; }
 
         public DeploymentStatus Status { get; set; }
