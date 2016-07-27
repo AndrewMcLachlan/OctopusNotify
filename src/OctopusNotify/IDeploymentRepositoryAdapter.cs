@@ -7,6 +7,8 @@ namespace OctopusNotify
         event EventHandler ConnectionError;
         event EventHandler ConnectionRestored;
 
+        event EventHandler<DeploymentEventArgs> DeploymentsChanged;
+
         event EventHandler<DeploymentEventArgs> DeploymentSucceeded;
         event EventHandler<DeploymentEventArgs> DeploymentFailed;
         event EventHandler<DeploymentEventArgs> DeploymentFailedNew;

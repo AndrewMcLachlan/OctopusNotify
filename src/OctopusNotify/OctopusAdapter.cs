@@ -19,6 +19,8 @@ namespace OctopusNotify
         public event EventHandler ConnectionError;
         public event EventHandler ConnectionRestored;
 
+        public event EventHandler<DeploymentEventArgs> DeploymentsChanged;
+
         public event EventHandler<DeploymentEventArgs> DeploymentSucceeded;
         public event EventHandler<DeploymentEventArgs> DeploymentFailed;
         public event EventHandler<DeploymentEventArgs> DeploymentFailedNew;
@@ -43,8 +45,6 @@ namespace OctopusNotify
         private IOctopusRepository _repository;
 
         private List<DashboardItemResource> _failedBuilds = new List<DashboardItemResource>();
-
-        private DashboardResource _previousDashboard;
         #endregion
 
         #region Properties
@@ -87,8 +87,6 @@ namespace OctopusNotify
             try
             {
                 var dashboard = _repository.Dashboards.GetDashboard();
-
-                //if (_previousDashboard == null) _previousDashboard = dashboard;
 
                 Log.Debug("Got dashboard");
 
@@ -147,7 +145,7 @@ namespace OctopusNotify
             }
         }
 
-        private void FixedDeployments(DashboardResource dashboard)
+        private IEnumerable<DeploymentResult> FixedDeployments(DashboardResource dashboard)
         {
             var items = from i in dashboard.Items
                         from p in _failedBuilds
@@ -156,7 +154,7 @@ namespace OctopusNotify
                               i.State == TaskState.Success &&
                               !i.HasWarningsOrErrors && p.HasWarningsOrErrors &&
                               i.CompletedTime >= _lastElapsed
-                        select i.ToDeploymentResult(dashboard);
+                        select i.ToDeploymentResult(dashboard, DeploymentStatus.Fixed);
 
             if (items.Any())
             {
@@ -165,9 +163,11 @@ namespace OctopusNotify
                     Items = items.ToList()
                 });
             }
+
+            return items;
         }
 
-        private void CompletedDeployments(DashboardResource dashboard)
+        private IEnumerable<DeploymentResult> CompletedDeployments(DashboardResource dashboard)
         {
             var items = from i in dashboard.Items
                         from p in _failedBuilds
@@ -176,10 +176,10 @@ namespace OctopusNotify
                               i.State == TaskState.Success &&
                               !i.HasWarningsOrErrors && !p.HasWarningsOrErrors &&
                               i.CompletedTime >= _lastElapsed
-                        select i.ToDeploymentResult(dashboard);
+                        select i.ToDeploymentResult(dashboard, DeploymentStatus.Success);
 
             // Get any first-time builds
-            items = items.Union(dashboard.Items.Where(i => i.State == TaskState.Success && !i.HasWarningsOrErrors && i.CompletedTime >= _lastElapsed && !_failedBuilds.Any(p => i.ProjectId == p.ProjectId && i.EnvironmentId == p.EnvironmentId)).Select(i => i.ToDeploymentResult(dashboard)));
+            items = items.Union(dashboard.Items.Where(i => i.State == TaskState.Success && !i.HasWarningsOrErrors && i.CompletedTime >= _lastElapsed && !_failedBuilds.Any(p => i.ProjectId == p.ProjectId && i.EnvironmentId == p.EnvironmentId)).Select(i => i.ToDeploymentResult(dashboard, DeploymentStatus.Success)));
 
             if (items.Any())
             {
@@ -188,9 +188,11 @@ namespace OctopusNotify
                     Items = items.ToList()
                 });
             }
+
+            return items;
         }
 
-        private void NewFailedDeployments(DashboardResource dashboard)
+        private IEnumerable<DeploymentResult> NewFailedDeployments(DashboardResource dashboard)
         {
             var items = from i in dashboard.Items
                         from p in _failedBuilds
@@ -199,10 +201,10 @@ namespace OctopusNotify
                               ErrorStates.Contains(i.State) &&
                               i.HasWarningsOrErrors && !p.HasWarningsOrErrors &&
                               i.CompletedTime >= _lastElapsed
-                        select i.ToDeploymentResult(dashboard);
+                        select i.ToDeploymentResult(dashboard, i.State.ToDeploymentStatus(100));
 
             // Get any first-time builds
-            items = items.Union(dashboard.Items.Where(i => ErrorStates.Contains(i.State) && i.HasWarningsOrErrors && i.CompletedTime >= _lastElapsed && !_failedBuilds.Any(p => i.ProjectId == p.ProjectId && i.EnvironmentId == p.EnvironmentId)).Select(i => i.ToDeploymentResult(dashboard)));
+            items = items.Union(dashboard.Items.Where(i => ErrorStates.Contains(i.State) && i.HasWarningsOrErrors && i.CompletedTime >= _lastElapsed && !_failedBuilds.Any(p => i.ProjectId == p.ProjectId && i.EnvironmentId == p.EnvironmentId)).Select(i => i.ToDeploymentResult(dashboard, DeploymentStatus.FailedNew)));
 
             if (items.Any())
             {
@@ -211,9 +213,11 @@ namespace OctopusNotify
                     Items = items.ToList()
                 });
             }
+
+            return items;
         }
 
-        private void FailedDeployments(DashboardResource dashboard)
+        private IEnumerable<DeploymentResult> FailedDeployments(DashboardResource dashboard)
         {
             var items = from i in dashboard.Items
                         from p in _failedBuilds
@@ -222,7 +226,7 @@ namespace OctopusNotify
                               ErrorStates.Contains(i.State) &&
                               i.HasWarningsOrErrors && p.HasWarningsOrErrors &&
                               i.CompletedTime >= _lastElapsed
-                        select i.ToDeploymentResult(dashboard);
+                        select i.ToDeploymentResult(dashboard, i.State.ToDeploymentStatus());
 
             if (items.Any())
             {
@@ -231,15 +235,17 @@ namespace OctopusNotify
                     Items = items.ToList()
                 });
             }
+
+            return items;
         }
 
-        private void GuidedFailureDeployments(DashboardResource dashboard)
+        private IEnumerable<DeploymentResult> GuidedFailureDeployments(DashboardResource dashboard)
         {
             var items = from i in dashboard.Items
                         where i.HasWarningsOrErrors &&
                               i.HasPendingInterruptions &&
                               !i.IsCompleted
-                        select i.ToDeploymentResult(dashboard);
+                        select i.ToDeploymentResult(dashboard, DeploymentStatus.GuidedFailure);
 
             if (items.Any())
             {
@@ -261,16 +267,20 @@ namespace OctopusNotify
                         Items = newItems,
                     });
                 }
+
+                return newItems;
             }
+
+            return items;
         }
 
-        private void ManualStepDeployments(DashboardResource dashboard)
+        private IEnumerable<DeploymentResult> ManualStepDeployments(DashboardResource dashboard)
         {
             var items = from i in dashboard.Items
                         where !i.HasWarningsOrErrors &&
                               i.HasPendingInterruptions &&
                               !i.IsCompleted
-                        select i.ToDeploymentResult(dashboard);
+                        select i.ToDeploymentResult(dashboard, DeploymentStatus.ManualStep);
 
             if (items.Any())
             {
@@ -292,7 +302,11 @@ namespace OctopusNotify
                         Items = newItems,
                     });
                 }
+
+                return newItems;
             }
+
+            return items;
         }
         #endregion
 
@@ -319,6 +333,11 @@ namespace OctopusNotify
         {
             Log.Debug("On Errors Found");
             ErrorsFound?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void OnDeployment(DeploymentEventArgs e)
+        {
+            DeploymentsChanged?.Invoke(this, e);
         }
 
         private void OnDeploymentSucceeded(DeploymentEventArgs e)

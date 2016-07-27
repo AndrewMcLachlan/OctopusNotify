@@ -13,15 +13,11 @@ using Container = OctopusNotify.App.Ioc.Container;
 namespace OctopusNotify.App.ViewModels
 {
 
-    public class SettingsViewModel : INotifyPropertyChanged
+    public class SettingsViewModel : ViewModel
     {
         #region Constants
         private const string StartupRegistryPath = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
         private const string RegistryValueName = "OctopusNotify";
-        #endregion
-
-        #region Events
-        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Fields
@@ -172,22 +168,14 @@ namespace OctopusNotify.App.ViewModels
         #endregion
 
         #region Private Methods
-        private void Set<T>(ref T field, T value, [CallerMemberName]string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return;
-
-            field = value;
-            OnPropertyChanged(propertyName);
-        }
-
-        private void OnPropertyChanged(string propertyName)
+        protected override void OnPropertyChanged(string propertyName)
         {
             if (propertyName != nameof(IsValid) && propertyName != nameof(CanTest))
             {
                 Validate();
             }
 
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            base.OnPropertyChanged(propertyName);
         }
 
         private bool GetRunOnStartup()

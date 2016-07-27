@@ -6,11 +6,16 @@
         xmlns:local="clr-namespace:OctopusNotify.App"
         xmlns:comm="clr-namespace:OctopusNotify.App.Commands"
         xmlns:tb="http://www.hardcodet.net/taskbar"
+        xmlns:vm="clr-namespace:OctopusNotify.App.ViewModels"
         xmlns:test="test-mode"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         x:Name="Window"
         mc:Ignorable="d mc test"
         Title="Octopus Notify" Height="350" Width="525" StateChanged="Window_StateChanged" Closing="Window_Closing" Icon="/App.ico">
+
+    <Window.DataContext>
+        <vm:NotifyIconViewModel />
+    </Window.DataContext>
 
     <mc:AlternateContent>
         <mc:Choice Requires="test">
@@ -31,6 +36,7 @@
             <ColumnDefinition Width="46*"/>
         </Grid.ColumnDefinitions>
         <tb:TaskbarIcon x:Name="NotifyIcon"
+                        IconSource="{Binding Path=NotifyIcon}"
                     Visibility="Visible"
                     ToolTipText="Octopus Notify (Disconnected)"
                     MenuActivation="RightClick" Grid.ColumnSpan="2"

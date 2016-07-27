@@ -8,11 +8,11 @@ namespace OctopusNotify.Utilities
 {
     internal static class DashboardItemResourceExtensions
     {
-        public static DeploymentResult ToDeploymentResult(this DashboardItemResource item, IEnumerable<Project> projects, IEnumerable<DeploymentEnvironment> environments)
+        public static DeploymentResult ToDeploymentResult(this DashboardItemResource item, IEnumerable<Project> projects, IEnumerable<DeploymentEnvironment> environments, DeploymentStatus status)
         {
             return new DeploymentResult
             {
-                Status = item.State.ToDeploymentStatus(),
+                Status = status,
                 ErrorMessage = item.ErrorMessage,
                 Version = item.ReleaseVersion,
                 Project = projects.Where(p => p.ProjectId == item.ProjectId).SingleOrDefault(),
@@ -22,11 +22,11 @@ namespace OctopusNotify.Utilities
             };
         }
 
-        public static DeploymentResult ToDeploymentResult(this DashboardItemResource item, DashboardResource dashboard)
+        public static DeploymentResult ToDeploymentResult(this DashboardItemResource item, DashboardResource dashboard, DeploymentStatus status)
         {
             return new DeploymentResult
             {
-                Status = item.State.ToDeploymentStatus(),
+                Status = status,
                 ErrorMessage = item.ErrorMessage,
                 Version = item.ReleaseVersion,
                 Project = dashboard.Projects.Where(p => p.Id == item.ProjectId).Select(p => p.ToProject()).SingleOrDefault(),
@@ -39,6 +39,11 @@ namespace OctopusNotify.Utilities
         public static DeploymentStatus ToDeploymentStatus(this TaskState state)
         {
             return (DeploymentStatus)(int)state;
+        }
+
+        public static DeploymentStatus ToDeploymentStatus(this TaskState state, int offset)
+        {
+            return (DeploymentStatus)((int)state+offset);
         }
     }
 }

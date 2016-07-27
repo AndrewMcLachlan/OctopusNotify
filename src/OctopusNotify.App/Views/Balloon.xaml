@@ -32,10 +32,10 @@
         <Image x:Name="Close" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Margin="0,5,5,0" MouseDown="Close_MouseDown" Cursor="Arrow">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="Images/Close_Lg.png"/>
+                    <Setter Property="Source" Value="../Images/Close_Lg.png"/>
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Source" Value="Images/Close_Highlight.png"/>
+                            <Setter Property="Source" Value="../Images/Close_Highlight.png"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>

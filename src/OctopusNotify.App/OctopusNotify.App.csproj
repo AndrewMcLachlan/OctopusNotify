@@ -118,7 +118,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AboutWindow.xaml.cs">
+    <Compile Include="Views\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\ExitCommand.cs" />
@@ -131,35 +131,37 @@
     <Compile Include="IconExtension.cs" />
     <Compile Include="Utilities\DispatcherHelper.cs" />
     <Compile Include="Ioc\Container.cs" />
-    <Compile Include="Stub.xaml.cs">
+    <Compile Include="Views\Stub.xaml.cs">
       <DependentUpon>Stub.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\DeploymentResultExtensions.cs" />
     <Compile Include="Utilities\EncryptionHelper.cs" />
     <Compile Include="Utilities\IconExtensions.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsWindow.xaml.cs">
+    <Compile Include="Views\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\ShowMainWindowCommand.cs" />
-    <Compile Include="Balloon.xaml.cs">
+    <Compile Include="Views\Balloon.xaml.cs">
       <DependentUpon>Balloon.xaml</DependentUpon>
     </Compile>
     <Compile Include="ValidationRules\UrlValidationRule.cs" />
     <Compile Include="ValidationRules\RequiredValidationRule.cs" />
     <Compile Include="ViewModels\NotifyIconState.cs" />
+    <Compile Include="ViewModels\NotifyIconViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Page Include="AboutWindow.xaml">
+    <Compile Include="ViewModels\ViewModel.cs" />
+    <Page Include="Views\AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NotifyIcon.xaml">
+    <Page Include="Views\NotifyIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -167,19 +169,19 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="NotifyIcon.xaml.cs">
+    <Compile Include="Views\NotifyIcon.xaml.cs">
       <DependentUpon>NotifyIcon.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SettingsWindow.xaml">
+    <Page Include="Views\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Balloon.xaml">
+    <Page Include="Views\Balloon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Stub.xaml">
+    <Page Include="Views\Stub.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -224,7 +226,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NotifyIcons\Error.ico" />
+    <Resource Include="NotifyIcons\Error.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Close.png" />
@@ -233,13 +235,13 @@
     <Resource Include="Images\Close_Lg.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NotifyIcons\Connected.ico" />
+    <Resource Include="NotifyIcons\Connected.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NotifyIcons\Disconnected.ico" />
+    <Resource Include="NotifyIcons\Disconnected.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NotifyIcons\Red.ico" />
+    <Resource Include="NotifyIcons\Red.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Green Tick.png" />

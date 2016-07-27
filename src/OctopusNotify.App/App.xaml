@@ -5,7 +5,7 @@
              xmlns:comm="clr-namespace:OctopusNotify.App.Commands"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              Startup="App_Startup"
-             StartupUri="NotifyIcon.xaml" >
+             StartupUri="Views/NotifyIcon.xaml" >
     <Application.Resources>
         <sys:Boolean x:Key="TestMode">true</sys:Boolean>
     </Application.Resources>
