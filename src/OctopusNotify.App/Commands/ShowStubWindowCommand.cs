@@ -9,7 +9,7 @@ namespace OctopusNotify.App.Commands
 {
     public class ShowStubWindowCommand : ICommand
     {
-        private static Stub window = null;
+        private static Views.Stub window = null;
 
         public event EventHandler CanExecuteChanged;
 
@@ -20,8 +20,8 @@ namespace OctopusNotify.App.Commands
 
         public void Execute(object parameter)
         {
-            window = new Stub();
-            window.ShowDialog();
+            window = new Views.Stub();
+            window.Show();
             window = null;
         }
 

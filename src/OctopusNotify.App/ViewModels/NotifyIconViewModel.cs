@@ -9,10 +9,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Practices.Unity;
 using OctopusNotify.App.Ioc;
+using OctopusNotify.App.Models;
 using OctopusNotify.App.Properties;
+using OctopusNotify.App.Utilities;
 using OctopusNotify.Model;
 
-namespace OctopusNotify.App.ViewModels
+namespace OctopusNotify.App.Models
 {
     public class NotifyIconViewModel : ViewModel
     {
@@ -28,6 +30,10 @@ namespace OctopusNotify.App.ViewModels
         private string _stateSummary;
 
         private BlockingCollection<DeploymentResult> _notificationQueue = new BlockingCollection<DeploymentResult>();
+        #endregion
+
+        #region Events
+        public event EventHandler<NotificationEventArgs> Notification;
         #endregion
 
         #region Properties
@@ -125,7 +131,7 @@ namespace OctopusNotify.App.ViewModels
 
         private void Adapter_DeploymentsChanged(object sender, DeploymentEventArgs e)
         {
-            e.Items.ForEach(_notificationQueue.Add);
+            OnNotification(e.Items.Where(i => ShouldShowNotification(i)).Select(i => i.ToNotification()));
         }
         #endregion
 
@@ -187,6 +193,21 @@ namespace OctopusNotify.App.ViewModels
                 default:
                     throw new InvalidOperationException("Unknown icon type");
             }
+        }
+
+        private bool ShouldShowNotification(DeploymentResult item)
+        {
+            return (item.Status == DeploymentStatus.Success && Settings.Default.AlertOnSuccessfulBuild) ||
+                  ((item.Status == DeploymentStatus.Failed || item.Status == DeploymentStatus.TimedOut) && Settings.Default.AlertOnFailedBuild) ||
+                  ((item.Status == DeploymentStatus.FailedNew || item.Status == DeploymentStatus.TimedOutNew) && Settings.Default.AlertOnNewFailedBuild) ||
+                   (item.Status == DeploymentStatus.Fixed && Settings.Default.AlertOnFixedBuild) ||
+                   (item.Status == DeploymentStatus.ManualStep && Settings.Default.AlertOnManualStep) ||
+                   (item.Status == DeploymentStatus.GuidedFailure && Settings.Default.AlertOnGuidedFailure);
+        }
+
+        private void OnNotification(IEnumerable<Notification> notifications)
+        {
+            Notification?.Invoke(this, new NotificationEventArgs(notifications));
         }
         #endregion
     }

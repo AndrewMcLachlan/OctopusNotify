@@ -96,12 +96,16 @@ namespace OctopusNotify
                     OnConnectionRestored();
                 }
 
-                FixedDeployments(dashboard);
-                NewFailedDeployments(dashboard);
-                FailedDeployments(dashboard);
-                CompletedDeployments(dashboard);
-                ManualStepDeployments(dashboard);
-                GuidedFailureDeployments(dashboard);
+                List<DeploymentResult> results = new List<DeploymentResult>();
+
+                results.AddRange(FixedDeployments(dashboard));
+                results.AddRange(NewFailedDeployments(dashboard));
+                results.AddRange(FailedDeployments(dashboard));
+                results.AddRange(CompletedDeployments(dashboard));
+                results.AddRange(ManualStepDeployments(dashboard));
+                results.AddRange(GuidedFailureDeployments(dashboard));
+
+                OnDeployment(new DeploymentEventArgs { Items = results });
 
                 if (dashboard.Items.All(i => i.IsCurrent && !ErrorStates.Contains(i.State)))
                 {

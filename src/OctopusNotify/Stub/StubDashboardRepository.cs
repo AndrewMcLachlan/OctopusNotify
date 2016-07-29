@@ -19,6 +19,8 @@ namespace OctopusNotify.Stub
         private static bool _buildThreeBroken;
 
         private static TaskState _buildOneStatus;
+        private static TaskState _buildTwoStatus;
+        private static TaskState _buildThreeStatus;
 
         public static int deploymentCounter = 1;
 
@@ -49,6 +51,31 @@ namespace OctopusNotify.Stub
             }
         }
 
+        public static TaskState BuildTwoStatus
+        {
+            get
+            {
+                return _buildTwoStatus;
+            }
+            set
+            {
+                _buildTwoStatus = value;
+                BuildTwoLastUpdate = DateTime.Now;
+            }
+        }
+        public static TaskState BuildThreeStatus
+        {
+            get
+            {
+                return _buildThreeStatus;
+            }
+            set
+            {
+                _buildThreeStatus = value;
+                BuildThreeLastUpdate = DateTime.Now;
+            }
+        }
+
         public static bool BuildTwoBroken
         {
             get
@@ -62,7 +89,6 @@ namespace OctopusNotify.Stub
                 BuildTwoLastUpdate = DateTime.Now;
             }
         }
-
 
         public static bool BuildThreeBroken
         {
@@ -78,7 +104,6 @@ namespace OctopusNotify.Stub
             }
         }
 
-
         public static DateTime BuildOneLastUpdate = DateTime.MinValue.AddHours(12);
         public static DateTime BuildTwoLastUpdate = DateTime.MinValue.AddHours(12);
         public static DateTime BuildThreeLastUpdate = DateTime.MinValue.AddHours(12);
@@ -86,6 +111,8 @@ namespace OctopusNotify.Stub
         public DashboardResource GetDashboard()
         {
             DashboardItemResource build1 = GetBuild("1", BuildOneStatus, BuildOneLastUpdate);
+            DashboardItemResource build2 = GetBuild("2", BuildTwoStatus, BuildTwoLastUpdate);
+            DashboardItemResource build3 = GetBuild("3", BuildThreeStatus, BuildThreeLastUpdate);
             //DashboardItemResource build2 = GetBuild("2", BuildTwoBroken, BuildTwoLastUpdate);
             //DashboardItemResource build3 = GetBuild("3", BuildThreeBroken, BuildThreeLastUpdate);
 
@@ -146,8 +173,8 @@ namespace OctopusNotify.Stub
                 Items = new List<DashboardItemResource>
                 {
                     build1,
-                    //build2,
-                    //build3,
+                    build2,
+                    build3,
                 },
                 PreviousItems = new List<DashboardItemResource>
                 {

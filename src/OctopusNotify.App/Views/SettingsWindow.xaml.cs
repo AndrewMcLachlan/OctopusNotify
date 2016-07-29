@@ -7,7 +7,7 @@ using System.Windows.Input;
 using System.Windows.Navigation;
 using OctopusNotify.App.Properties;
 using OctopusNotify.App.Utilities;
-using OctopusNotify.App.ViewModels;
+using OctopusNotify.App.Models;
 
 namespace OctopusNotify.App
 {

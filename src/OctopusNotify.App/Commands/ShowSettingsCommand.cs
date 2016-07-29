@@ -23,7 +23,7 @@ namespace OctopusNotify.App.Commands
             }
 
             _window = new SettingsWindow();
-            _window.ShowDialog();
+            _window.Show();
             _window = null;
             CommandManager.InvalidateRequerySuggested();
         }

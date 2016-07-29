@@ -1,20 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Octopus.Client.Model;
 using OctopusNotify.Stub;
 
-namespace OctopusNotify.App
+namespace OctopusNotify.App.Views
 {
     /// <summary>
     /// Interaction logic for Stub.xaml
@@ -71,9 +62,28 @@ namespace OctopusNotify.App
 
         private void Replace_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            string status = e.Parameter as string;
+            string parameter = e.Parameter as string;
 
-            StubDashboardRepository.BuildOneStatus = (TaskState)Enum.Parse(typeof(TaskState), status);
+            string[] split = parameter.Split('|');
+
+            string status = split[1];
+
+            string buildNum = split[0];
+
+            TaskState state = (TaskState)Enum.Parse(typeof(TaskState), status);
+
+            if (buildNum == "1")
+            {
+                StubDashboardRepository.BuildOneStatus = state;
+            }
+            if (buildNum == "2")
+            {
+                StubDashboardRepository.BuildTwoStatus = state;
+            }
+            if (buildNum == "3")
+            {
+                StubDashboardRepository.BuildThreeStatus = state;
+            }
 
             e.Handled = true;
 

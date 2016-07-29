@@ -10,7 +10,7 @@ using OctopusNotify.App.Properties;
 using OctopusNotify.App.Utilities;
 using Container = OctopusNotify.App.Ioc.Container;
 
-namespace OctopusNotify.App.ViewModels
+namespace OctopusNotify.App.Models
 {
 
     public class SettingsViewModel : ViewModel

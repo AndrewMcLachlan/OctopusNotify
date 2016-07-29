@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OctopusNotify.App"
         mc:Ignorable="d"
-        xmlns:vm="clr-namespace:OctopusNotify.App.ViewModels"
+        xmlns:vm="clr-namespace:OctopusNotify.App.Models"
         xmlns:comm="clr-namespace:OctopusNotify.App.Commands"
         xmlns:vr="clr-namespace:OctopusNotify.App.ValidationRules"
         Closing="Window_Closing"

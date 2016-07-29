@@ -118,6 +118,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\BalloonIcon.cs" />
+    <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\NotificationEventArgs.cs" />
     <Compile Include="Views\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
@@ -149,7 +152,7 @@
     </Compile>
     <Compile Include="ValidationRules\UrlValidationRule.cs" />
     <Compile Include="ValidationRules\RequiredValidationRule.cs" />
-    <Compile Include="ViewModels\NotifyIconState.cs" />
+    <Compile Include="Models\NotifyIconState.cs" />
     <Compile Include="ViewModels\NotifyIconViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
