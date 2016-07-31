@@ -21,14 +21,6 @@ namespace OctopusNotify
 
         public event EventHandler<DeploymentEventArgs> DeploymentsChanged;
 
-        public event EventHandler<DeploymentEventArgs> DeploymentSucceeded;
-        public event EventHandler<DeploymentEventArgs> DeploymentFailed;
-        public event EventHandler<DeploymentEventArgs> DeploymentFailedNew;
-        public event EventHandler<DeploymentEventArgs> DeploymentFixed;
-
-        public event EventHandler<DeploymentEventArgs> DeploymentManualStep;
-        public event EventHandler<DeploymentEventArgs> DeploymentGuidedFailure;
-
         public event EventHandler ErrorsCleared;
         public event EventHandler ErrorsFound;
         #endregion
