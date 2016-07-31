@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -15,9 +18,11 @@ namespace OctopusNotify.App.Views
     public partial class NotifyIconWindow : Window
     {
         #region Fields
-        private Queue<Notification> _notificationQueue = new Queue<Notification>();
+        private ConcurrentQueue<Notification> _notificationQueue = new ConcurrentQueue<Notification>();
+        private static BlockingCollection<Notification> _displayQueue = new BlockingCollection<Notification>(new ConcurrentQueue<Notification>());
         private static bool BalloonVisible;
         private static object SyncRoot = new object();
+        private CancellationToken _cancellationToken = new CancellationToken();
         #endregion
 
         #region Constructors
@@ -27,6 +32,8 @@ namespace OctopusNotify.App.Views
             InitializeComponent();
 
             ((NotifyIconViewModel)DataContext).Notification += NotifyIconWindow_Notification;
+
+            Task.Factory.StartNew(DisplayLoop, _cancellationToken);
         }
 
         #endregion
@@ -71,8 +78,11 @@ namespace OctopusNotify.App.Views
             {
                 if (_notificationQueue.Any())
                 {
-                    Notification notification = _notificationQueue.Dequeue();
-                    DispatcherHelper.Run(ShowBalloon, notification);
+                    Notification notification;
+                    if (_notificationQueue.TryDequeue(out notification))
+                    {
+                        _displayQueue.Add(notification);
+                    }
                 }
                 else
                 {
@@ -98,6 +108,15 @@ namespace OctopusNotify.App.Views
         #endregion
 
         #region Private Methods
+
+        private void DisplayLoop()
+        {
+            do
+            {
+                Notification notification = _displayQueue.Take(_cancellationToken);
+                DispatcherHelper.Run(ShowBalloon, notification);
+            } while (!_cancellationToken.IsCancellationRequested);
+        }
 
         private void ShowBalloon(Notification notification)
         {

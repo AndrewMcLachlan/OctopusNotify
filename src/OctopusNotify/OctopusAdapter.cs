@@ -119,7 +119,7 @@ namespace OctopusNotify
                 _lastElapsed = now;
 
                 _failedBuilds = _failedBuilds.Intersect(dashboard.Items.Where(i => i.State != TaskState.Success), new DashboardItemResourceComparer())
-                                             .Union(dashboard.Items.Where(i => ErrorStates.Contains(i.State)))
+                                             .Union(dashboard.Items.Where(i => ErrorStates.Contains(i.State)), new DashboardItemResourceComparer())
                                              .ToList();
             }
             catch
