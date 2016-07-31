@@ -15,7 +15,7 @@ namespace OctopusNotify.Tests
         {
             base.Setup();
 
-            adapter.DeploymentFixed += Adapter_DeploymentFixed;
+            adapter.DeploymentsChanged += Adapter_DeploymentFixed;
         }
 
         private void Adapter_DeploymentFixed(object sender, DeploymentEventArgs e)

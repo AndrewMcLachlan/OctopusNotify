@@ -15,7 +15,7 @@ namespace OctopusNotify.Tests
         {
             base.Setup();
 
-            adapter.DeploymentFailed += Adapter_DeploymentFailed;
+            adapter.DeploymentsChanged += Adapter_DeploymentFailed;
         }
 
         private void Adapter_DeploymentFailed(object sender, DeploymentEventArgs e)

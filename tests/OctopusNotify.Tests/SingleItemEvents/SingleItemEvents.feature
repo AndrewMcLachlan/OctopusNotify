@@ -11,32 +11,31 @@ Scenario Outline: Detect completed build
 	And a previous build with errors or warnings '<previousHasErrors>'
 	And a previous build with a state of '<previousState>'
 	When the repository is polled
-	Then an event fires: '<eventFires>'
-	And the event type is '<eventType>'
+	Then an event fires: 'true'
 	And the event has <numberOfBuilds> builds
 	And the event has a build with an id of '<outputId>'
 
 Examples:
-| outputId | previousId | seconds | hasErrors | previousHasErrors | state    | previousState | eventFires | numberOfBuilds | eventType |
-| 1234     | 1234       | 100     | false     | false             | Success  | Success       | true       | 1              | Completed |
-|          | 1234       | -10     | false     | false             | Success  | Success       | false      | 0              |           |
-|          | 1234       | 100     | true      | false             | Failed   | Success       | false      | 0              |           |
-|          | 1234       | 100     | true      | false             | TimedOut | Success       | false      | 0              |           |
-|          | 1234       | 100     | true      | false             | Success  | Success       | false      | 0              |           |
-|          | 1234       | 100     | false     | true              | Success  | Success       | false      | 0              |           |
-|          | 1234       | -10     | false     | true              | Success  | Success       | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | Failed   | Success       | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | TimedOut | Success       | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | Success  | Success       | false      | 0              |           |
-|          | 1234       | 100     | false     | true              | Success  | Failed        | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | Failed   | Failed        | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | TimedOut | Failed        | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | Success  | Failed        | false      | 0              |           |
-| 1234     | 5678       | 100     | false     | true              | Success  | Failed        | true       | 1              | Completed |
-|          | 1234       | 100     | false     | true              | Success  | TimedOut      | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | Failed   | TimedOut      | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | TimedOut | TimedOut      | false      | 0              |           |
-| 1234     | 5678       | 100     | false     | true              | Success  | TimedOut      | true       | 1              | Completed |
+| outputId | previousId | seconds | hasErrors | previousHasErrors | state    | previousState | numberOfBuilds |
+| 1234     | 1234       | 100     | false     | false             | Success  | Success       | 1              |
+|          | 1234       | -10     | false     | false             | Success  | Success       | 0              |
+|          | 1234       | 100     | true      | false             | Failed   | Success       | 0              |
+|          | 1234       | 100     | true      | false             | TimedOut | Success       | 0              |
+|          | 1234       | 100     | true      | false             | Success  | Success       | 0              |
+|          | 1234       | 100     | false     | true              | Success  | Success       | 0              |
+|          | 1234       | -10     | false     | true              | Success  | Success       | 0              |
+|          | 1234       | 100     | true      | true              | Failed   | Success       | 0              |
+|          | 1234       | 100     | true      | true              | TimedOut | Success       | 0              |
+|          | 1234       | 100     | true      | true              | Success  | Success       | 0              |
+|          | 1234       | 100     | false     | true              | Success  | Failed        | 0              |
+|          | 1234       | 100     | true      | true              | Failed   | Failed        | 0              |
+|          | 1234       | 100     | true      | true              | TimedOut | Failed        | 0              |
+|          | 1234       | 100     | true      | true              | Success  | Failed        | 0              |
+| 1234     | 5678       | 100     | false     | true              | Success  | Failed        | 1              |
+|          | 1234       | 100     | false     | true              | Success  | TimedOut      | 0              |
+|          | 1234       | 100     | true      | true              | Failed   | TimedOut      | 0              |
+|          | 1234       | 100     | true      | true              | TimedOut | TimedOut      | 0              |
+| 1234     | 5678       | 100     | false     | true              | Success  | TimedOut      | 1              |
 
 @FailedNewEvent
 Scenario Outline: Detect newly failed build
@@ -48,32 +47,31 @@ Scenario Outline: Detect newly failed build
 	And a previous build with errors or warnings '<previousHasErrors>'
 	And a previous build with a state of '<previousState>'
 	When the repository is polled
-	Then an event fires: '<eventFires>'
-	And the event type is '<eventType>'
+	Then an event fires: 'true'
 	And the event has <numberOfBuilds> builds
 	And the event has a build with an id of '<outputId>'
 
 Examples:
-| outputId | previousId | seconds | hasErrors | previousHasErrors | state    | previousState | eventFires | numberOfBuilds | eventType |
-|          | 1234       | 100     | false     | false             | Failed   | Success       | false      | 0              |           |
-|          | 1234       | -10     | true      | false             | Failed   | Success       | false      | 0              |           |
-| 1234     | 1234       | 100     | true      | false             | Failed   | Success       | true       | 1              | FailedNew |
-|          | 1234       | 100     | true      | false             | Success  | Success       | false      | 0              |           |
-|          | 1234       | 100     | false     | true              | Failed   | Failed        | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | Failed   | Failed        | false      | 0              |           |
-| 1234     | 5678       | 100     | true      | true              | Failed   | Failed        | true       | 1              | FailedNew |
-|          | 1234       | 100     | false     | true              | Failed   | TimedOut      | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | Failed   | TimedOut      | false      | 0              |           |
-| 1234     | 5678       | 100     | true      | true              | Failed   | TimedOut      | true       | 1              | FailedNew |
-|          | 1234       | 100     | false     | false             | TimedOut | Success       | false      | 0              |           |
-|          | 1234       | -10     | true      | false             | TimedOut | Success       | false      | 0              |           |
-| 1234     | 1234       | 100     | true      | false             | TimedOut | Success       | true       | 1              | FailedNew |
-|          | 1234       | 100     | false     | true              | TimedOut | Failed        | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | TimedOut | Failed        | false      | 0              |           |
-| 1234     | 5678       | 100     | true      | true              | TimedOut | Failed        | true       | 1              | FailedNew |
-|          | 1234       | 100     | false     | true              | TimedOut | TimedOut      | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | TimedOut | TimedOut      | false      | 0              |           |
-| 1234     | 5678       | 100     | true      | true              | TimedOut | TimedOut      | true       | 1              | FailedNew |
+| outputId | previousId | seconds | hasErrors | previousHasErrors | state    | previousState | numberOfBuilds |
+|          | 1234       | 100     | false     | false             | Failed   | Success       | 0              |
+|          | 1234       | -10     | true      | false             | Failed   | Success       | 0              |
+| 1234     | 1234       | 100     | true      | false             | Failed   | Success       | 1              |
+|          | 1234       | 100     | true      | false             | Success  | Success       | 0              |
+|          | 1234       | 100     | false     | true              | Failed   | Failed        | 0              |
+|          | 1234       | 100     | true      | true              | Failed   | Failed        | 0              |
+| 1234     | 5678       | 100     | true      | true              | Failed   | Failed        | 1              |
+|          | 1234       | 100     | false     | true              | Failed   | TimedOut      | 0              |
+|          | 1234       | 100     | true      | true              | Failed   | TimedOut      | 0              |
+| 1234     | 5678       | 100     | true      | true              | Failed   | TimedOut      | 1              |
+|          | 1234       | 100     | false     | false             | TimedOut | Success       | 0              |
+|          | 1234       | -10     | true      | false             | TimedOut | Success       | 0              |
+| 1234     | 1234       | 100     | true      | false             | TimedOut | Success       | 1              |
+|          | 1234       | 100     | false     | true              | TimedOut | Failed        | 0              |
+|          | 1234       | 100     | true      | true              | TimedOut | Failed        | 0              |
+| 1234     | 5678       | 100     | true      | true              | TimedOut | Failed        | 1              |
+|          | 1234       | 100     | false     | true              | TimedOut | TimedOut      | 0              |
+|          | 1234       | 100     | true      | true              | TimedOut | TimedOut      | 0              |
+| 1234     | 5678       | 100     | true      | true              | TimedOut | TimedOut      | 1              |
 
 @FailedEvent
 Scenario Outline: Detect failed build
@@ -85,33 +83,32 @@ Scenario Outline: Detect failed build
 	And a previous build with errors or warnings '<previousHasErrors>'
 	And a previous build with a state of '<previousState>'
 	When the repository is polled
-	Then an event fires: '<eventFires>'
-	And the event type is '<eventType>'
+	Then an event fires: 'true'
 	And the event has <numberOfBuilds> builds
 	And the event has a build with an id of '<outputId>'
 
 Examples:
-| outputId | previousId | seconds | hasErrors | previousHasErrors | state    | previousState | eventFires | numberOfBuilds | eventType |
-|          | 1234       | 100     | false     | false             | Failed   | Success       | false      | 0              |           |
-|          | 1234       | -10     | true      | true              | Failed   | Failed        | false      | 0              |           |
-| 1234     | 1234       | 100     | true      | true              | Failed   | Failed        | true       | 1              | Failed    |
-|          | 1234       | 100     | false     | true              | Failed   | Failed        | false      | 0              |           |
-|          | 1234       | 100     | true      | false             | Failed   | Success       | false      | 0              |           |
-|          | 5678       | 100     | true      | true              | Failed   | Failed        | false      | 0              |           |
-|          | 1234       | -10     | true      | true              | Failed   | TimedOut      | false      | 0              |           |
-| 1234     | 1234       | 100     | true      | true              | Failed   | TimedOut      | true       | 1              | Failed    |
-|          | 1234       | 100     | false     | true              | Failed   | TimedOut      | false      | 0              |           |
-|          | 5678       | 100     | true      | true              | Failed   | TimedOut      | false      | 0              |           |
-|          | 1234       | 100     | false     | false             | TimedOut | Success       | false      | 0              |           |
-|          | 1234       | -10     | true      | true              | TimedOut | Failed        | false      | 0              |           |
-| 1234     | 1234       | 100     | true      | true              | TimedOut | Failed        | true       | 1              | Failed    |
-|          | 1234       | 100     | false     | true              | TimedOut | Failed        | false      | 0              |           |
-|          | 1234       | 100     | true      | false             | TimedOut | Success       | false      | 0              |           |
-|          | 5678       | 100     | true      | true              | TimedOut | Failed        | false      | 0              |           |
-|          | 1234       | -10     | true      | true              | TimedOut | TimedOut      | false      | 0              |           |
-| 1234     | 1234       | 100     | true      | true              | TimedOut | TimedOut      | true       | 1              | Failed    |
-|          | 1234       | 100     | false     | true              | TimedOut | TimedOut      | false      | 0              |           |
-|          | 5678       | 100     | true      | true              | TimedOut | TimedOut      | false      | 0              |           |
+| outputId | previousId | seconds | hasErrors | previousHasErrors | state    | previousState | numberOfBuilds |
+|          | 1234       | 100     | false     | false             | Failed   | Success       | 0              |
+|          | 1234       | -10     | true      | true              | Failed   | Failed        | 0              |
+| 1234     | 1234       | 100     | true      | true              | Failed   | Failed        | 1              |
+|          | 1234       | 100     | false     | true              | Failed   | Failed        | 0              |
+|          | 1234       | 100     | true      | false             | Failed   | Success       | 0              |
+|          | 5678       | 100     | true      | true              | Failed   | Failed        | 0              |
+|          | 1234       | -10     | true      | true              | Failed   | TimedOut      | 0              |
+| 1234     | 1234       | 100     | true      | true              | Failed   | TimedOut      | 1              |
+|          | 1234       | 100     | false     | true              | Failed   | TimedOut      | 0              |
+|          | 5678       | 100     | true      | true              | Failed   | TimedOut      | 0              |
+|          | 1234       | 100     | false     | false             | TimedOut | Success       | 0              |
+|          | 1234       | -10     | true      | true              | TimedOut | Failed        | 0              |
+| 1234     | 1234       | 100     | true      | true              | TimedOut | Failed        | 1              |
+|          | 1234       | 100     | false     | true              | TimedOut | Failed        | 0              |
+|          | 1234       | 100     | true      | false             | TimedOut | Success       | 0              |
+|          | 5678       | 100     | true      | true              | TimedOut | Failed        | 0              |
+|          | 1234       | -10     | true      | true              | TimedOut | TimedOut      | 0              |
+| 1234     | 1234       | 100     | true      | true              | TimedOut | TimedOut      | 1              |
+|          | 1234       | 100     | false     | true              | TimedOut | TimedOut      | 0              |
+|          | 5678       | 100     | true      | true              | TimedOut | TimedOut      | 0              |
 
 @FixedEvent
 Scenario Outline: Detect fixed build
@@ -123,40 +120,39 @@ Scenario Outline: Detect fixed build
 	And a previous build with errors or warnings '<previousHasErrors>'
 	And a previous build with a state of '<previousState>'
 	When the repository is polled
-	Then an event fires: '<eventFires>'
-	And the event type is '<eventType>'
+	Then an event fires: 'true'
 	And the event has <numberOfBuilds> builds
 	And the event has a build with an id of '<outputId>'
 
 Examples:
-| outputId | previousId | seconds | hasErrors | previousHasErrors | state    | previousState | eventFires | numberOfBuilds | eventType |
-|          | 1234       | 100     | false     | false             | Success  | Success       | false      | 0              |           |
-|          | 1234       | -10     | true      | true              | Failed   | Failed        | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | Failed   | Failed        | false      | 0              |           |
-| 1234     | 1234       | 100     | false     | true              | Success  | Failed        | true       | 1              | Fixed     |
-|          | 1234       | 100     | true      | false             | Failed   | Success       | false      | 0              |           |
-|          | 5678       | 100     | false     | true              | Success  | Failed        | false      | 0              |           |
-|          | 1234       | 100     | false     | false             | Success  | Success       | false      | 0              |           |
-|          | 1234       | -10     | true      | true              | Failed   | Failed        | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | Failed   | Failed        | false      | 0              |           |
-| 1234     | 1234       | 100     | false     | true              | Success  | Failed        | true       | 1              | Fixed     |
-|          | 1234       | 100     | true      | false             | Failed   | Success       | false      | 0              |           |
-|          | 5678       | 100     | false     | true              | Success  | Failed        | false      | 0              |           |
-|          | 1234       | -10     | true      | true              | Failed   | TimedOut      | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | Failed   | TimedOut      | false      | 0              |           |
-| 1234     | 1234       | 100     | false     | true              | Success  | TimedOut      | true       | 1              | Fixed     |
-|          | 5678       | 100     | false     | true              | Success  | TimedOut      | false      | 0              |           |
-|          | 1234       | -10     | true      | true              | Failed   | TimedOut      | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | Failed   | TimedOut      | false      | 0              |           |
-| 1234     | 1234       | 100     | false     | true              | Success  | TimedOut      | true       | 1              | Fixed     |
-|          | 5678       | 100     | false     | true              | Success  | TimedOut      | false      | 0              |           |
-|          | 1234       | -10     | true      | true              | TimedOut | Failed        | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | TimedOut | Failed        | false      | 0              |           |
-|          | 1234       | 100     | true      | false             | TimedOut | Success       | false      | 0              |           |
-|          | 1234       | -10     | true      | true              | TimedOut | Failed        | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | TimedOut | Failed        | false      | 0              |           |
-|          | 1234       | 100     | true      | false             | TimedOut | Success       | false      | 0              |           |
-|          | 1234       | -10     | true      | true              | TimedOut | TimedOut      | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | TimedOut | TimedOut      | false      | 0              |           |
-|          | 1234       | -10     | true      | true              | TimedOut | TimedOut      | false      | 0              |           |
-|          | 1234       | 100     | true      | true              | TimedOut | TimedOut      | false      | 0              |           |
+| outputId | previousId | seconds | hasErrors | previousHasErrors | state    | previousState | numberOfBuilds |
+|          | 1234       | 100     | false     | false             | Success  | Success       | 0              |
+|          | 1234       | -10     | true      | true              | Failed   | Failed        | 0              |
+|          | 1234       | 100     | true      | true              | Failed   | Failed        | 0              |
+| 1234     | 1234       | 100     | false     | true              | Success  | Failed        | 1              |
+|          | 1234       | 100     | true      | false             | Failed   | Success       | 0              |
+|          | 5678       | 100     | false     | true              | Success  | Failed        | 0              |
+|          | 1234       | 100     | false     | false             | Success  | Success       | 0              |
+|          | 1234       | -10     | true      | true              | Failed   | Failed        | 0              |
+|          | 1234       | 100     | true      | true              | Failed   | Failed        | 0              |
+| 1234     | 1234       | 100     | false     | true              | Success  | Failed        | 1              |
+|          | 1234       | 100     | true      | false             | Failed   | Success       | 0              |
+|          | 5678       | 100     | false     | true              | Success  | Failed        | 0              |
+|          | 1234       | -10     | true      | true              | Failed   | TimedOut      | 0              |
+|          | 1234       | 100     | true      | true              | Failed   | TimedOut      | 0              |
+| 1234     | 1234       | 100     | false     | true              | Success  | TimedOut      | 1              |
+|          | 5678       | 100     | false     | true              | Success  | TimedOut      | 0              |
+|          | 1234       | -10     | true      | true              | Failed   | TimedOut      | 0              |
+|          | 1234       | 100     | true      | true              | Failed   | TimedOut      | 0              |
+| 1234     | 1234       | 100     | false     | true              | Success  | TimedOut      | 1              |
+|          | 5678       | 100     | false     | true              | Success  | TimedOut      | 0              |
+|          | 1234       | -10     | true      | true              | TimedOut | Failed        | 0              |
+|          | 1234       | 100     | true      | true              | TimedOut | Failed        | 0              |
+|          | 1234       | 100     | true      | false             | TimedOut | Success       | 0              |
+|          | 1234       | -10     | true      | true              | TimedOut | Failed        | 0              |
+|          | 1234       | 100     | true      | true              | TimedOut | Failed        | 0              |
+|          | 1234       | 100     | true      | false             | TimedOut | Success       | 0              |
+|          | 1234       | -10     | true      | true              | TimedOut | TimedOut      | 0              |
+|          | 1234       | 100     | true      | true              | TimedOut | TimedOut      | 0              |
+|          | 1234       | -10     | true      | true              | TimedOut | TimedOut      | 0              |
+|          | 1234       | 100     | true      | true              | TimedOut | TimedOut      | 0              |

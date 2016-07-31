@@ -67,7 +67,7 @@ namespace OctopusNotify.Tests.SingleItemEvents
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void DetectCompletedBuild(string outputId, string previousId, string seconds, string hasErrors, string previousHasErrors, string state, string previousState, string eventFires, string numberOfBuilds, string eventType, string[] exampleTags)
+        public virtual void DetectCompletedBuild(string outputId, string previousId, string seconds, string hasErrors, string previousHasErrors, string state, string previousState, string numberOfBuilds, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "CompletedEvent"};
@@ -95,12 +95,10 @@ this.ScenarioSetup(scenarioInfo);
 #line 13
  testRunner.When("the repository is polled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 14
- testRunner.Then(string.Format("an event fires: \'{0}\'", eventFires), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("an event fires: \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 15
- testRunner.And(string.Format("the event type is \'{0}\'", eventType), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 16
  testRunner.And(string.Format("the event has {0} builds", numberOfBuilds), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 17
+#line 16
  testRunner.And(string.Format("the event has a build with an id of \'{0}\'", outputId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -118,12 +116,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "Completed")]
         public virtual void DetectCompletedBuild_Variant0()
         {
-            this.DetectCompletedBuild("1234", "1234", "100", "false", "false", "Success", "Success", "true", "1", "Completed", ((string[])(null)));
+            this.DetectCompletedBuild("1234", "1234", "100", "false", "false", "Success", "Success", "1", ((string[])(null)));
 #line hidden
         }
         
@@ -139,12 +135,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectCompletedBuild_Variant1()
         {
-            this.DetectCompletedBuild("", "1234", "-10", "false", "false", "Success", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectCompletedBuild("", "1234", "-10", "false", "false", "Success", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -160,12 +154,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectCompletedBuild_Variant2()
         {
-            this.DetectCompletedBuild("", "1234", "100", "true", "false", "Failed", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectCompletedBuild("", "1234", "100", "true", "false", "Failed", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -181,12 +173,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectCompletedBuild_Variant3()
         {
-            this.DetectCompletedBuild("", "1234", "100", "true", "false", "TimedOut", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectCompletedBuild("", "1234", "100", "true", "false", "TimedOut", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -202,12 +192,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectCompletedBuild_Variant4()
         {
-            this.DetectCompletedBuild("", "1234", "100", "true", "false", "Success", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectCompletedBuild("", "1234", "100", "true", "false", "Success", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -223,12 +211,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectCompletedBuild_Variant5()
         {
-            this.DetectCompletedBuild("", "1234", "100", "false", "true", "Success", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectCompletedBuild("", "1234", "100", "false", "true", "Success", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -244,12 +230,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectCompletedBuild_Variant6()
         {
-            this.DetectCompletedBuild("", "1234", "-10", "false", "true", "Success", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectCompletedBuild("", "1234", "-10", "false", "true", "Success", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -265,12 +249,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectCompletedBuild_Variant7()
         {
-            this.DetectCompletedBuild("", "1234", "100", "true", "true", "Failed", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectCompletedBuild("", "1234", "100", "true", "true", "Failed", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -286,12 +268,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectCompletedBuild_Variant8()
         {
-            this.DetectCompletedBuild("", "1234", "100", "true", "true", "TimedOut", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectCompletedBuild("", "1234", "100", "true", "true", "TimedOut", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -307,12 +287,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectCompletedBuild_Variant9()
         {
-            this.DetectCompletedBuild("", "1234", "100", "true", "true", "Success", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectCompletedBuild("", "1234", "100", "true", "true", "Success", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -328,12 +306,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectCompletedBuild_Variant10()
         {
-            this.DetectCompletedBuild("", "1234", "100", "false", "true", "Success", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectCompletedBuild("", "1234", "100", "false", "true", "Success", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -349,12 +325,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectCompletedBuild_Variant11()
         {
-            this.DetectCompletedBuild("", "1234", "100", "true", "true", "Failed", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectCompletedBuild("", "1234", "100", "true", "true", "Failed", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -370,12 +344,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectCompletedBuild_Variant12()
         {
-            this.DetectCompletedBuild("", "1234", "100", "true", "true", "TimedOut", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectCompletedBuild("", "1234", "100", "true", "true", "TimedOut", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -391,12 +363,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectCompletedBuild_Variant13()
         {
-            this.DetectCompletedBuild("", "1234", "100", "true", "true", "Success", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectCompletedBuild("", "1234", "100", "true", "true", "Success", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -412,12 +382,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "Completed")]
         public virtual void DetectCompletedBuild_Variant14()
         {
-            this.DetectCompletedBuild("1234", "5678", "100", "false", "true", "Success", "Failed", "true", "1", "Completed", ((string[])(null)));
+            this.DetectCompletedBuild("1234", "5678", "100", "false", "true", "Success", "Failed", "1", ((string[])(null)));
 #line hidden
         }
         
@@ -433,12 +401,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectCompletedBuild_Variant15()
         {
-            this.DetectCompletedBuild("", "1234", "100", "false", "true", "Success", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectCompletedBuild("", "1234", "100", "false", "true", "Success", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -454,12 +420,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectCompletedBuild_Variant16()
         {
-            this.DetectCompletedBuild("", "1234", "100", "true", "true", "Failed", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectCompletedBuild("", "1234", "100", "true", "true", "Failed", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -475,12 +439,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectCompletedBuild_Variant17()
         {
-            this.DetectCompletedBuild("", "1234", "100", "true", "true", "TimedOut", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectCompletedBuild("", "1234", "100", "true", "true", "TimedOut", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -496,16 +458,14 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "Completed")]
         public virtual void DetectCompletedBuild_Variant18()
         {
-            this.DetectCompletedBuild("1234", "5678", "100", "false", "true", "Success", "TimedOut", "true", "1", "Completed", ((string[])(null)));
+            this.DetectCompletedBuild("1234", "5678", "100", "false", "true", "Success", "TimedOut", "1", ((string[])(null)));
 #line hidden
         }
         
-        public virtual void DetectNewlyFailedBuild(string outputId, string previousId, string seconds, string hasErrors, string previousHasErrors, string state, string previousState, string eventFires, string numberOfBuilds, string eventType, string[] exampleTags)
+        public virtual void DetectNewlyFailedBuild(string outputId, string previousId, string seconds, string hasErrors, string previousHasErrors, string state, string previousState, string numberOfBuilds, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "FailedNewEvent"};
@@ -514,31 +474,29 @@ this.ScenarioSetup(scenarioInfo);
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Detect newly failed build", @__tags);
-#line 42
+#line 41
 this.ScenarioSetup(scenarioInfo);
-#line 43
+#line 42
  testRunner.Given("a build with an id of \'1234\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 44
+#line 43
  testRunner.And(string.Format("a completed time of now plus \'{0}\' seconds", seconds), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 45
+#line 44
  testRunner.And(string.Format("has errors or warnings \'{0}\'", hasErrors), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 46
+#line 45
  testRunner.And(string.Format("has a state of \'{0}\'", state), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
+#line 46
  testRunner.And(string.Format("a previous build with an id of \'{0}\'", previousId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 48
+#line 47
  testRunner.And(string.Format("a previous build with errors or warnings \'{0}\'", previousHasErrors), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 49
+#line 48
  testRunner.And(string.Format("a previous build with a state of \'{0}\'", previousState), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 50
+#line 49
  testRunner.When("the repository is polled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 50
+ testRunner.Then("an event fires: \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 51
- testRunner.Then(string.Format("an event fires: \'{0}\'", eventFires), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 52
- testRunner.And(string.Format("the event type is \'{0}\'", eventType), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
  testRunner.And(string.Format("the event has {0} builds", numberOfBuilds), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 54
+#line 52
  testRunner.And(string.Format("the event has a build with an id of \'{0}\'", outputId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -556,12 +514,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectNewlyFailedBuild_Variant0()
         {
-            this.DetectNewlyFailedBuild("", "1234", "100", "false", "false", "Failed", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectNewlyFailedBuild("", "1234", "100", "false", "false", "Failed", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -577,12 +533,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectNewlyFailedBuild_Variant1()
         {
-            this.DetectNewlyFailedBuild("", "1234", "-10", "true", "false", "Failed", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectNewlyFailedBuild("", "1234", "-10", "true", "false", "Failed", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -598,12 +552,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "FailedNew")]
         public virtual void DetectNewlyFailedBuild_Variant2()
         {
-            this.DetectNewlyFailedBuild("1234", "1234", "100", "true", "false", "Failed", "Success", "true", "1", "FailedNew", ((string[])(null)));
+            this.DetectNewlyFailedBuild("1234", "1234", "100", "true", "false", "Failed", "Success", "1", ((string[])(null)));
 #line hidden
         }
         
@@ -619,12 +571,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectNewlyFailedBuild_Variant3()
         {
-            this.DetectNewlyFailedBuild("", "1234", "100", "true", "false", "Success", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectNewlyFailedBuild("", "1234", "100", "true", "false", "Success", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -640,12 +590,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectNewlyFailedBuild_Variant4()
         {
-            this.DetectNewlyFailedBuild("", "1234", "100", "false", "true", "Failed", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectNewlyFailedBuild("", "1234", "100", "false", "true", "Failed", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -661,12 +609,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectNewlyFailedBuild_Variant5()
         {
-            this.DetectNewlyFailedBuild("", "1234", "100", "true", "true", "Failed", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectNewlyFailedBuild("", "1234", "100", "true", "true", "Failed", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -682,12 +628,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "FailedNew")]
         public virtual void DetectNewlyFailedBuild_Variant6()
         {
-            this.DetectNewlyFailedBuild("1234", "5678", "100", "true", "true", "Failed", "Failed", "true", "1", "FailedNew", ((string[])(null)));
+            this.DetectNewlyFailedBuild("1234", "5678", "100", "true", "true", "Failed", "Failed", "1", ((string[])(null)));
 #line hidden
         }
         
@@ -703,12 +647,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectNewlyFailedBuild_Variant7()
         {
-            this.DetectNewlyFailedBuild("", "1234", "100", "false", "true", "Failed", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectNewlyFailedBuild("", "1234", "100", "false", "true", "Failed", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -724,12 +666,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectNewlyFailedBuild_Variant8()
         {
-            this.DetectNewlyFailedBuild("", "1234", "100", "true", "true", "Failed", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectNewlyFailedBuild("", "1234", "100", "true", "true", "Failed", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -745,12 +685,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "FailedNew")]
         public virtual void DetectNewlyFailedBuild_Variant9()
         {
-            this.DetectNewlyFailedBuild("1234", "5678", "100", "true", "true", "Failed", "TimedOut", "true", "1", "FailedNew", ((string[])(null)));
+            this.DetectNewlyFailedBuild("1234", "5678", "100", "true", "true", "Failed", "TimedOut", "1", ((string[])(null)));
 #line hidden
         }
         
@@ -766,12 +704,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectNewlyFailedBuild_Variant10()
         {
-            this.DetectNewlyFailedBuild("", "1234", "100", "false", "false", "TimedOut", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectNewlyFailedBuild("", "1234", "100", "false", "false", "TimedOut", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -787,12 +723,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectNewlyFailedBuild_Variant11()
         {
-            this.DetectNewlyFailedBuild("", "1234", "-10", "true", "false", "TimedOut", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectNewlyFailedBuild("", "1234", "-10", "true", "false", "TimedOut", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -808,12 +742,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "FailedNew")]
         public virtual void DetectNewlyFailedBuild_Variant12()
         {
-            this.DetectNewlyFailedBuild("1234", "1234", "100", "true", "false", "TimedOut", "Success", "true", "1", "FailedNew", ((string[])(null)));
+            this.DetectNewlyFailedBuild("1234", "1234", "100", "true", "false", "TimedOut", "Success", "1", ((string[])(null)));
 #line hidden
         }
         
@@ -829,12 +761,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectNewlyFailedBuild_Variant13()
         {
-            this.DetectNewlyFailedBuild("", "1234", "100", "false", "true", "TimedOut", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectNewlyFailedBuild("", "1234", "100", "false", "true", "TimedOut", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -850,12 +780,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectNewlyFailedBuild_Variant14()
         {
-            this.DetectNewlyFailedBuild("", "1234", "100", "true", "true", "TimedOut", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectNewlyFailedBuild("", "1234", "100", "true", "true", "TimedOut", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -871,12 +799,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "FailedNew")]
         public virtual void DetectNewlyFailedBuild_Variant15()
         {
-            this.DetectNewlyFailedBuild("1234", "5678", "100", "true", "true", "TimedOut", "Failed", "true", "1", "FailedNew", ((string[])(null)));
+            this.DetectNewlyFailedBuild("1234", "5678", "100", "true", "true", "TimedOut", "Failed", "1", ((string[])(null)));
 #line hidden
         }
         
@@ -892,12 +818,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectNewlyFailedBuild_Variant16()
         {
-            this.DetectNewlyFailedBuild("", "1234", "100", "false", "true", "TimedOut", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectNewlyFailedBuild("", "1234", "100", "false", "true", "TimedOut", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -913,12 +837,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectNewlyFailedBuild_Variant17()
         {
-            this.DetectNewlyFailedBuild("", "1234", "100", "true", "true", "TimedOut", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectNewlyFailedBuild("", "1234", "100", "true", "true", "TimedOut", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -934,16 +856,14 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "FailedNew")]
         public virtual void DetectNewlyFailedBuild_Variant18()
         {
-            this.DetectNewlyFailedBuild("1234", "5678", "100", "true", "true", "TimedOut", "TimedOut", "true", "1", "FailedNew", ((string[])(null)));
+            this.DetectNewlyFailedBuild("1234", "5678", "100", "true", "true", "TimedOut", "TimedOut", "1", ((string[])(null)));
 #line hidden
         }
         
-        public virtual void DetectFailedBuild(string outputId, string previousId, string seconds, string hasErrors, string previousHasErrors, string state, string previousState, string eventFires, string numberOfBuilds, string eventType, string[] exampleTags)
+        public virtual void DetectFailedBuild(string outputId, string previousId, string seconds, string hasErrors, string previousHasErrors, string state, string previousState, string numberOfBuilds, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "FailedEvent"};
@@ -952,31 +872,29 @@ this.ScenarioSetup(scenarioInfo);
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Detect failed build", @__tags);
-#line 79
+#line 77
 this.ScenarioSetup(scenarioInfo);
-#line 80
+#line 78
  testRunner.Given("a build with an id of \'1234\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 81
+#line 79
  testRunner.And(string.Format("a completed time of now plus \'{0}\' seconds", seconds), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 82
+#line 80
  testRunner.And(string.Format("has errors or warnings \'{0}\'", hasErrors), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 83
+#line 81
  testRunner.And(string.Format("has a state of \'{0}\'", state), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 84
+#line 82
  testRunner.And(string.Format("a previous build with an id of \'{0}\'", previousId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 85
+#line 83
  testRunner.And(string.Format("a previous build with errors or warnings \'{0}\'", previousHasErrors), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 86
+#line 84
  testRunner.And(string.Format("a previous build with a state of \'{0}\'", previousState), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 87
+#line 85
  testRunner.When("the repository is polled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 88
- testRunner.Then(string.Format("an event fires: \'{0}\'", eventFires), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 89
- testRunner.And(string.Format("the event type is \'{0}\'", eventType), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 90
+#line 86
+ testRunner.Then("an event fires: \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 87
  testRunner.And(string.Format("the event has {0} builds", numberOfBuilds), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 91
+#line 88
  testRunner.And(string.Format("the event has a build with an id of \'{0}\'", outputId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -994,12 +912,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFailedBuild_Variant0()
         {
-            this.DetectFailedBuild("", "1234", "100", "false", "false", "Failed", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectFailedBuild("", "1234", "100", "false", "false", "Failed", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1015,12 +931,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFailedBuild_Variant1()
         {
-            this.DetectFailedBuild("", "1234", "-10", "true", "true", "Failed", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectFailedBuild("", "1234", "-10", "true", "true", "Failed", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1036,12 +950,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "Failed")]
         public virtual void DetectFailedBuild_Variant2()
         {
-            this.DetectFailedBuild("1234", "1234", "100", "true", "true", "Failed", "Failed", "true", "1", "Failed", ((string[])(null)));
+            this.DetectFailedBuild("1234", "1234", "100", "true", "true", "Failed", "Failed", "1", ((string[])(null)));
 #line hidden
         }
         
@@ -1057,12 +969,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFailedBuild_Variant3()
         {
-            this.DetectFailedBuild("", "1234", "100", "false", "true", "Failed", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectFailedBuild("", "1234", "100", "false", "true", "Failed", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1078,12 +988,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFailedBuild_Variant4()
         {
-            this.DetectFailedBuild("", "1234", "100", "true", "false", "Failed", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectFailedBuild("", "1234", "100", "true", "false", "Failed", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1099,12 +1007,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFailedBuild_Variant5()
         {
-            this.DetectFailedBuild("", "5678", "100", "true", "true", "Failed", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectFailedBuild("", "5678", "100", "true", "true", "Failed", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1120,12 +1026,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFailedBuild_Variant6()
         {
-            this.DetectFailedBuild("", "1234", "-10", "true", "true", "Failed", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectFailedBuild("", "1234", "-10", "true", "true", "Failed", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1141,12 +1045,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "Failed")]
         public virtual void DetectFailedBuild_Variant7()
         {
-            this.DetectFailedBuild("1234", "1234", "100", "true", "true", "Failed", "TimedOut", "true", "1", "Failed", ((string[])(null)));
+            this.DetectFailedBuild("1234", "1234", "100", "true", "true", "Failed", "TimedOut", "1", ((string[])(null)));
 #line hidden
         }
         
@@ -1162,12 +1064,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFailedBuild_Variant8()
         {
-            this.DetectFailedBuild("", "1234", "100", "false", "true", "Failed", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectFailedBuild("", "1234", "100", "false", "true", "Failed", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1183,12 +1083,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFailedBuild_Variant9()
         {
-            this.DetectFailedBuild("", "5678", "100", "true", "true", "Failed", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectFailedBuild("", "5678", "100", "true", "true", "Failed", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1204,12 +1102,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFailedBuild_Variant10()
         {
-            this.DetectFailedBuild("", "1234", "100", "false", "false", "TimedOut", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectFailedBuild("", "1234", "100", "false", "false", "TimedOut", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1225,12 +1121,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFailedBuild_Variant11()
         {
-            this.DetectFailedBuild("", "1234", "-10", "true", "true", "TimedOut", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectFailedBuild("", "1234", "-10", "true", "true", "TimedOut", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1246,12 +1140,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "Failed")]
         public virtual void DetectFailedBuild_Variant12()
         {
-            this.DetectFailedBuild("1234", "1234", "100", "true", "true", "TimedOut", "Failed", "true", "1", "Failed", ((string[])(null)));
+            this.DetectFailedBuild("1234", "1234", "100", "true", "true", "TimedOut", "Failed", "1", ((string[])(null)));
 #line hidden
         }
         
@@ -1267,12 +1159,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFailedBuild_Variant13()
         {
-            this.DetectFailedBuild("", "1234", "100", "false", "true", "TimedOut", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectFailedBuild("", "1234", "100", "false", "true", "TimedOut", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1288,12 +1178,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFailedBuild_Variant14()
         {
-            this.DetectFailedBuild("", "1234", "100", "true", "false", "TimedOut", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectFailedBuild("", "1234", "100", "true", "false", "TimedOut", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1309,12 +1197,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFailedBuild_Variant15()
         {
-            this.DetectFailedBuild("", "5678", "100", "true", "true", "TimedOut", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectFailedBuild("", "5678", "100", "true", "true", "TimedOut", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1330,12 +1216,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFailedBuild_Variant16()
         {
-            this.DetectFailedBuild("", "1234", "-10", "true", "true", "TimedOut", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectFailedBuild("", "1234", "-10", "true", "true", "TimedOut", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1351,12 +1235,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "Failed")]
         public virtual void DetectFailedBuild_Variant17()
         {
-            this.DetectFailedBuild("1234", "1234", "100", "true", "true", "TimedOut", "TimedOut", "true", "1", "Failed", ((string[])(null)));
+            this.DetectFailedBuild("1234", "1234", "100", "true", "true", "TimedOut", "TimedOut", "1", ((string[])(null)));
 #line hidden
         }
         
@@ -1372,12 +1254,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFailedBuild_Variant18()
         {
-            this.DetectFailedBuild("", "1234", "100", "false", "true", "TimedOut", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectFailedBuild("", "1234", "100", "false", "true", "TimedOut", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1393,16 +1273,14 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFailedBuild_Variant19()
         {
-            this.DetectFailedBuild("", "5678", "100", "true", "true", "TimedOut", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectFailedBuild("", "5678", "100", "true", "true", "TimedOut", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
-        public virtual void DetectFixedBuild(string outputId, string previousId, string seconds, string hasErrors, string previousHasErrors, string state, string previousState, string eventFires, string numberOfBuilds, string eventType, string[] exampleTags)
+        public virtual void DetectFixedBuild(string outputId, string previousId, string seconds, string hasErrors, string previousHasErrors, string state, string previousState, string numberOfBuilds, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "FixedEvent"};
@@ -1411,31 +1289,29 @@ this.ScenarioSetup(scenarioInfo);
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Detect fixed build", @__tags);
-#line 117
+#line 114
 this.ScenarioSetup(scenarioInfo);
-#line 118
+#line 115
  testRunner.Given("a build with an id of \'1234\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 119
+#line 116
  testRunner.And(string.Format("a completed time of now plus \'{0}\' seconds", seconds), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 120
+#line 117
  testRunner.And(string.Format("has errors or warnings \'{0}\'", hasErrors), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 121
+#line 118
  testRunner.And(string.Format("has a state of \'{0}\'", state), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 122
+#line 119
  testRunner.And(string.Format("a previous build with an id of \'{0}\'", previousId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 123
+#line 120
  testRunner.And(string.Format("a previous build with errors or warnings \'{0}\'", previousHasErrors), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 124
+#line 121
  testRunner.And(string.Format("a previous build with a state of \'{0}\'", previousState), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 125
+#line 122
  testRunner.When("the repository is polled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 126
- testRunner.Then(string.Format("an event fires: \'{0}\'", eventFires), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 127
- testRunner.And(string.Format("the event type is \'{0}\'", eventType), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 128
+#line 123
+ testRunner.Then("an event fires: \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 124
  testRunner.And(string.Format("the event has {0} builds", numberOfBuilds), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 129
+#line 125
  testRunner.And(string.Format("the event has a build with an id of \'{0}\'", outputId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1453,12 +1329,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant0()
         {
-            this.DetectFixedBuild("", "1234", "100", "false", "false", "Success", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "100", "false", "false", "Success", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1474,12 +1348,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant1()
         {
-            this.DetectFixedBuild("", "1234", "-10", "true", "true", "Failed", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "-10", "true", "true", "Failed", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1495,12 +1367,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant2()
         {
-            this.DetectFixedBuild("", "1234", "100", "true", "true", "Failed", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "100", "true", "true", "Failed", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1516,12 +1386,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "Fixed")]
         public virtual void DetectFixedBuild_Variant3()
         {
-            this.DetectFixedBuild("1234", "1234", "100", "false", "true", "Success", "Failed", "true", "1", "Fixed", ((string[])(null)));
+            this.DetectFixedBuild("1234", "1234", "100", "false", "true", "Success", "Failed", "1", ((string[])(null)));
 #line hidden
         }
         
@@ -1537,12 +1405,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant4()
         {
-            this.DetectFixedBuild("", "1234", "100", "true", "false", "Failed", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "100", "true", "false", "Failed", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1558,12 +1424,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant5()
         {
-            this.DetectFixedBuild("", "5678", "100", "false", "true", "Success", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "5678", "100", "false", "true", "Success", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1579,12 +1443,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant6()
         {
-            this.DetectFixedBuild("", "1234", "100", "false", "false", "Success", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "100", "false", "false", "Success", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1600,12 +1462,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant7()
         {
-            this.DetectFixedBuild("", "1234", "-10", "true", "true", "Failed", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "-10", "true", "true", "Failed", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1621,12 +1481,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant8()
         {
-            this.DetectFixedBuild("", "1234", "100", "true", "true", "Failed", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "100", "true", "true", "Failed", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1642,12 +1500,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "Fixed")]
         public virtual void DetectFixedBuild_Variant9()
         {
-            this.DetectFixedBuild("1234", "1234", "100", "false", "true", "Success", "Failed", "true", "1", "Fixed", ((string[])(null)));
+            this.DetectFixedBuild("1234", "1234", "100", "false", "true", "Success", "Failed", "1", ((string[])(null)));
 #line hidden
         }
         
@@ -1663,12 +1519,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant10()
         {
-            this.DetectFixedBuild("", "1234", "100", "true", "false", "Failed", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "100", "true", "false", "Failed", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1684,12 +1538,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant11()
         {
-            this.DetectFixedBuild("", "5678", "100", "false", "true", "Success", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "5678", "100", "false", "true", "Success", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1705,12 +1557,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant12()
         {
-            this.DetectFixedBuild("", "1234", "-10", "true", "true", "Failed", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "-10", "true", "true", "Failed", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1726,12 +1576,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant13()
         {
-            this.DetectFixedBuild("", "1234", "100", "true", "true", "Failed", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "100", "true", "true", "Failed", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1747,12 +1595,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "Fixed")]
         public virtual void DetectFixedBuild_Variant14()
         {
-            this.DetectFixedBuild("1234", "1234", "100", "false", "true", "Success", "TimedOut", "true", "1", "Fixed", ((string[])(null)));
+            this.DetectFixedBuild("1234", "1234", "100", "false", "true", "Success", "TimedOut", "1", ((string[])(null)));
 #line hidden
         }
         
@@ -1768,12 +1614,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant15()
         {
-            this.DetectFixedBuild("", "5678", "100", "false", "true", "Success", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "5678", "100", "false", "true", "Success", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1789,12 +1633,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant16()
         {
-            this.DetectFixedBuild("", "1234", "-10", "true", "true", "Failed", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "-10", "true", "true", "Failed", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1810,12 +1652,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Failed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant17()
         {
-            this.DetectFixedBuild("", "1234", "100", "true", "true", "Failed", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "100", "true", "true", "Failed", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1831,12 +1671,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "Fixed")]
         public virtual void DetectFixedBuild_Variant18()
         {
-            this.DetectFixedBuild("1234", "1234", "100", "false", "true", "Success", "TimedOut", "true", "1", "Fixed", ((string[])(null)));
+            this.DetectFixedBuild("1234", "1234", "100", "false", "true", "Success", "TimedOut", "1", ((string[])(null)));
 #line hidden
         }
         
@@ -1852,12 +1690,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "Success")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant19()
         {
-            this.DetectFixedBuild("", "5678", "100", "false", "true", "Success", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "5678", "100", "false", "true", "Success", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1873,12 +1709,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant20()
         {
-            this.DetectFixedBuild("", "1234", "-10", "true", "true", "TimedOut", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "-10", "true", "true", "TimedOut", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1894,12 +1728,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant21()
         {
-            this.DetectFixedBuild("", "1234", "100", "true", "true", "TimedOut", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "100", "true", "true", "TimedOut", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1915,12 +1747,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant22()
         {
-            this.DetectFixedBuild("", "1234", "100", "true", "false", "TimedOut", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "100", "true", "false", "TimedOut", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1936,12 +1766,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant23()
         {
-            this.DetectFixedBuild("", "1234", "-10", "true", "true", "TimedOut", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "-10", "true", "true", "TimedOut", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1957,12 +1785,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Failed")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant24()
         {
-            this.DetectFixedBuild("", "1234", "100", "true", "true", "TimedOut", "Failed", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "100", "true", "true", "TimedOut", "Failed", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1978,12 +1804,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "Success")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant25()
         {
-            this.DetectFixedBuild("", "1234", "100", "true", "false", "TimedOut", "Success", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "100", "true", "false", "TimedOut", "Success", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -1999,12 +1823,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant26()
         {
-            this.DetectFixedBuild("", "1234", "-10", "true", "true", "TimedOut", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "-10", "true", "true", "TimedOut", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -2020,12 +1842,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant27()
         {
-            this.DetectFixedBuild("", "1234", "100", "true", "true", "TimedOut", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "100", "true", "true", "TimedOut", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -2041,12 +1861,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant28()
         {
-            this.DetectFixedBuild("", "1234", "-10", "true", "true", "TimedOut", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "-10", "true", "true", "TimedOut", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
         
@@ -2062,12 +1880,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousHasErrors", "true")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:state", "TimedOut")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:previousState", "TimedOut")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventFires", "false")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:numberOfBuilds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:eventType", "")]
         public virtual void DetectFixedBuild_Variant29()
         {
-            this.DetectFixedBuild("", "1234", "100", "true", "true", "TimedOut", "TimedOut", "false", "0", "", ((string[])(null)));
+            this.DetectFixedBuild("", "1234", "100", "true", "true", "TimedOut", "TimedOut", "0", ((string[])(null)));
 #line hidden
         }
     }
