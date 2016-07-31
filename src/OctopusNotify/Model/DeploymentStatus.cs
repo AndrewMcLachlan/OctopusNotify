@@ -1,5 +1,8 @@
 ﻿namespace OctopusNotify.Model
 {
+    /// <summary>
+    /// The status of a deployment.
+    /// </summary>
     public enum DeploymentStatus
     {
         Queued = 1,

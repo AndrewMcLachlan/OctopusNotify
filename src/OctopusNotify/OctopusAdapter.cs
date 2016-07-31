@@ -105,7 +105,7 @@ namespace OctopusNotify
                 results.AddRange(ManualStepDeployments(dashboard));
                 results.AddRange(GuidedFailureDeployments(dashboard));
 
-                OnDeployment(new DeploymentEventArgs { Items = results });
+                OnDeployment(new DeploymentEventArgs(results.OrderBy(r => r.EventTime)));
 
                 if (dashboard.Items.All(i => i.IsCurrent && !ErrorStates.Contains(i.State)))
                 {
@@ -160,14 +160,6 @@ namespace OctopusNotify
                               i.CompletedTime >= _lastElapsed
                         select i.ToDeploymentResult(dashboard, DeploymentStatus.Fixed);
 
-            if (items.Any())
-            {
-                OnDeploymentFixed(new DeploymentEventArgs
-                {
-                    Items = items.ToList()
-                });
-            }
-
             return items;
         }
 
@@ -184,14 +176,6 @@ namespace OctopusNotify
 
             // Get any first-time builds
             items = items.Union(dashboard.Items.Where(i => i.State == TaskState.Success && !i.HasWarningsOrErrors && i.CompletedTime >= _lastElapsed && !_failedBuilds.Any(p => i.ProjectId == p.ProjectId && i.EnvironmentId == p.EnvironmentId)).Select(i => i.ToDeploymentResult(dashboard, DeploymentStatus.Success)));
-
-            if (items.Any())
-            {
-                OnDeploymentSucceeded(new DeploymentEventArgs
-                {
-                    Items = items.ToList()
-                });
-            }
 
             return items;
         }
@@ -210,14 +194,6 @@ namespace OctopusNotify
             // Get any first-time builds
             items = items.Union(dashboard.Items.Where(i => ErrorStates.Contains(i.State) && i.HasWarningsOrErrors && i.CompletedTime >= _lastElapsed && !_failedBuilds.Any(p => i.ProjectId == p.ProjectId && i.EnvironmentId == p.EnvironmentId)).Select(i => i.ToDeploymentResult(dashboard, DeploymentStatus.FailedNew)));
 
-            if (items.Any())
-            {
-                OnDeploymentFailedNew(new DeploymentEventArgs
-                {
-                    Items = items.ToList()
-                });
-            }
-
             return items;
         }
 
@@ -232,14 +208,6 @@ namespace OctopusNotify
                               i.CompletedTime >= _lastElapsed
                         select i.ToDeploymentResult(dashboard, i.State.ToDeploymentStatus());
 
-            if (items.Any())
-            {
-                OnDeploymentFailed(new DeploymentEventArgs
-                {
-                    Items = items.ToList()
-                });
-            }
-
             return items;
         }
 
@@ -253,26 +221,19 @@ namespace OctopusNotify
 
             if (items.Any())
             {
-                var newItems = new List<DeploymentResult>();
+                var currentItems = new List<DeploymentResult>();
 
                 foreach (var item in items)
                 {
                     var interruptions = _repository.Interruptions.List(regardingDocumentId:item.TaskId, pendingOnly: true);
                     if (interruptions.Items.Any(i => i.Created >= _lastElapsed))
                     {
-                        newItems.Add(item);
+                        item.EventTime = interruptions.Items.OrderByDescending(i => i.Created).Select(i => i.Created).First();
+                        currentItems.Add(item);
                     }
                 }
 
-                if (newItems.Any())
-                {
-                    OnDeploymentGuidedFailure(new DeploymentEventArgs
-                    {
-                        Items = newItems,
-                    });
-                }
-
-                return newItems;
+                return currentItems;
             }
 
             return items;
@@ -288,26 +249,19 @@ namespace OctopusNotify
 
             if (items.Any())
             {
-                var newItems = new List<DeploymentResult>();
+                var currentItems = new List<DeploymentResult>();
 
                 foreach (var item in items)
                 {
                     var interruptions = _repository.Interruptions.List(regardingDocumentId: item.TaskId, pendingOnly: true);
                     if (interruptions.Items.Any(i => i.Created >= _lastElapsed))
                     {
-                        newItems.Add(item);
+                        item.EventTime = interruptions.Items.OrderByDescending(i => i.Created).Select(i => i.Created).First();
+                        currentItems.Add(item);
                     }
                 }
 
-                if (newItems.Any())
-                {
-                    OnDeploymentManualStep(new DeploymentEventArgs
-                    {
-                        Items = newItems,
-                    });
-                }
-
-                return newItems;
+                return currentItems;
             }
 
             return items;
@@ -342,42 +296,6 @@ namespace OctopusNotify
         private void OnDeployment(DeploymentEventArgs e)
         {
             DeploymentsChanged?.Invoke(this, e);
-        }
-
-        private void OnDeploymentSucceeded(DeploymentEventArgs e)
-        {
-            Log.Debug("On Deployment Succeeded, {count} items", e.Items.Count);
-            DeploymentSucceeded?.Invoke(this, e);
-        }
-
-        private void OnDeploymentFailed(DeploymentEventArgs e)
-        {
-            Log.Debug("On Deployment Failed, {count} items", e.Items.Count);
-            DeploymentFailed?.Invoke(this, e);
-        }
-
-        private void OnDeploymentFailedNew(DeploymentEventArgs e)
-        {
-            Log.Debug("On Deployment Failed (new), {count} items", e.Items.Count);
-            DeploymentFailedNew?.Invoke(this, e);
-        }
-
-        private void OnDeploymentFixed(DeploymentEventArgs e)
-        {
-            Log.Debug("On Deployment Fixed, {count} items", e.Items.Count);
-            DeploymentFixed?.Invoke(this, e);
-        }
-
-        private void OnDeploymentManualStep(DeploymentEventArgs e)
-        {
-            Log.Debug("On Deployment Manual Step, {count} items", e.Items.Count);
-            DeploymentManualStep?.Invoke(this, e);
-        }
-
-        private void OnDeploymentGuidedFailure(DeploymentEventArgs e)
-        {
-            Log.Debug("On Deployment Guided Failure, {count} items", e.Items.Count);
-            DeploymentGuidedFailure?.Invoke(this, e);
         }
 
         #endregion

@@ -1,21 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Octopus.Client.Model;
 using OctopusNotify.Model;
 
 namespace OctopusNotify
 {
     public class DeploymentEventArgs : EventArgs
     {
-        public List<DeploymentResult> Items { get; set; }
+        public IReadOnlyList<DeploymentResult> Items { get; private set; }
 
-        public DeploymentEventArgs()
+        public DeploymentEventArgs(IEnumerable<DeploymentResult> items)
         {
-            Items = new List<DeploymentResult>();
+            Items = items.ToList();
         }
-
     }
 }

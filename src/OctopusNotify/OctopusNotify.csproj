@@ -83,7 +83,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionTester.cs" />
-    <Compile Include="DashboardProcessor.cs" />
     <Compile Include="DeploymentEventArgs.cs" />
     <Compile Include="IDeploymentRepositoryAdapter.cs" />
     <Compile Include="Model\DeploymentEnvironment.cs" />
