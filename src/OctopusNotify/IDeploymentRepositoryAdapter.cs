@@ -1,4 +1,5 @@
 ﻿using System;
+using OctopusNotify.Model;
 
 namespace OctopusNotify
 {
@@ -21,6 +22,11 @@ namespace OctopusNotify
         /// Raised when the are new deployments.
         /// </summary>
         event EventHandler<DeploymentEventArgs> DeploymentsChanged;
+
+        /// <summary>
+        /// Raised when the are new deployments.
+        /// </summary>
+        event EventHandler<DeploymentSummaryEventArgs> DeploymentSummaryChanged;
 
         /// <summary>
         /// Raised when all deployments have succeeded.

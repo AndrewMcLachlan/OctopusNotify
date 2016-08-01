@@ -20,6 +20,7 @@ namespace OctopusNotify
         public event EventHandler ConnectionRestored;
 
         public event EventHandler<DeploymentEventArgs> DeploymentsChanged;
+        public event EventHandler<DeploymentSummaryEventArgs> DeploymentSummaryChanged;
 
         public event EventHandler ErrorsCleared;
         public event EventHandler ErrorsFound;
@@ -99,20 +100,22 @@ namespace OctopusNotify
 
                 OnDeployment(new DeploymentEventArgs(results.OrderBy(r => r.EventTime)));
 
-                if (dashboard.Items.All(i => i.IsCurrent && !ErrorStates.Contains(i.State)))
-                {
-                    OnErrorsCleared();
-                }
-                else if (dashboard.Items.Any(i => i.IsCurrent && ErrorStates.Contains(i.State)))
-                {
-                    OnErrorsFound();
-                }
-
                 _lastElapsed = now;
 
                 _failedBuilds = _failedBuilds.Intersect(dashboard.Items.Where(i => i.State != TaskState.Success), new DashboardItemResourceComparer())
                                              .Union(dashboard.Items.Where(i => ErrorStates.Contains(i.State)), new DashboardItemResourceComparer())
                                              .ToList();
+
+                if (_failedBuilds.Any())
+                {
+                    OnErrorsFound();
+                }
+                else
+                {
+                    OnErrorsCleared();
+                }
+
+                OnDeploymentSummaryChanged(new DeploymentSummaryEventArgs(dashboard.Items.Where(i => i.IsCurrent).GroupBy(i => i.State).ToDictionary(g => g.Key.ToDeploymentStatus(), g => g.Count())));
             }
             catch
             {
@@ -288,6 +291,11 @@ namespace OctopusNotify
         private void OnDeployment(DeploymentEventArgs e)
         {
             DeploymentsChanged?.Invoke(this, e);
+        }
+
+        private void OnDeploymentSummaryChanged(DeploymentSummaryEventArgs e)
+        {
+            DeploymentSummaryChanged?.Invoke(this, e);
         }
 
         #endregion

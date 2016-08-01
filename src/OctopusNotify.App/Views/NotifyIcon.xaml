@@ -38,7 +38,7 @@
         <tb:TaskbarIcon x:Name="NotifyIcon"
                         IconSource="{Binding Path=NotifyIcon}"
                         Visibility="Visible"
-                        ToolTipText="Octopus Notify (Disconnected)"
+                        ToolTipText="{Binding Path=StateSummary}"
                         MenuActivation="RightClick" Grid.ColumnSpan="2"
                         DoubleClickCommand="local:AppCommands.ShowSettings">
             <tb:TaskbarIcon.ContextMenu>

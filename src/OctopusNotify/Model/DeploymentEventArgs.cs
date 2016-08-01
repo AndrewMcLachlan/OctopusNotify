@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OctopusNotify.Model;
 
-namespace OctopusNotify
+namespace OctopusNotify.Model
 {
     public class DeploymentEventArgs : EventArgs
     {

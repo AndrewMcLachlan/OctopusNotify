@@ -18,9 +18,9 @@ namespace OctopusNotify.Stub
         private static bool _buildThreePreviousBroken;
         private static bool _buildThreeBroken;
 
-        private static TaskState _buildOneStatus;
-        private static TaskState _buildTwoStatus;
-        private static TaskState _buildThreeStatus;
+        private static TaskState _buildOneStatus = TaskState.Success;
+        private static TaskState _buildTwoStatus = TaskState.Success;
+        private static TaskState _buildThreeStatus = TaskState.Success;
 
         public static int deploymentCounter = 1;
 

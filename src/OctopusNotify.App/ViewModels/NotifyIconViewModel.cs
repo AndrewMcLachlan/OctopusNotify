@@ -133,6 +133,21 @@ namespace OctopusNotify.App.Models
         {
             OnNotification(e.Items.Where(i => ShouldShowNotification(i)).Select(i => i.ToNotification()));
         }
+
+        private void Adapter_DeploymentSummaryChanged(object sender, DeploymentSummaryEventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach(DeploymentStatus ds in e.Summary.Keys)
+            {
+                sb.AppendFormat("{0} {1}", e.Summary[ds], ds.ToDisplayString());
+                sb.AppendLine();
+            }
+
+            sb.Remove(sb.Length - 2, 2);
+
+            StateSummary = sb.ToString();
+        }
         #endregion
 
         #region Private Methods
@@ -145,11 +160,13 @@ namespace OctopusNotify.App.Models
             {
                 _adapter.StopPolling();
                 _adapter.DeploymentsChanged -= Adapter_DeploymentsChanged;
+                _adapter.DeploymentSummaryChanged -= Adapter_DeploymentSummaryChanged;
 
                 _adapter.ErrorsCleared -= Adapter_ErrorsCleared;
                 _adapter.ErrorsFound -= Adapter_ErrorsFound;
                 _adapter.ConnectionError -= Adapter_ConnectionError;
                 _adapter.ConnectionRestored -= Adapter_ConnectionRestored;
+
                 _adapter = null;
             }
 
@@ -158,6 +175,7 @@ namespace OctopusNotify.App.Models
                 _adapter = Container.Current.Resolve<IDeploymentRepositoryAdapter>();
 
                 _adapter.DeploymentsChanged += Adapter_DeploymentsChanged;
+                _adapter.DeploymentSummaryChanged += Adapter_DeploymentSummaryChanged;
 
                 _adapter.ErrorsCleared += Adapter_ErrorsCleared;
                 _adapter.ErrorsFound += Adapter_ErrorsFound;
@@ -180,7 +198,6 @@ namespace OctopusNotify.App.Models
             {
                 case NotifyIconState.Connected:
                     NotifyIcon = ConnectedNotifyIcon;
-                    StateSummary = "Octopus Notify (Connected)";
                     break;
                 case NotifyIconState.Disconnected:
                     NotifyIcon = DisconnectedNotifyIcon;
@@ -188,7 +205,6 @@ namespace OctopusNotify.App.Models
                     break;
                 case NotifyIconState.Error:
                     NotifyIcon = ErrorNotifyIcon;
-                    StateSummary = "Octopus Notify (Failed Deployments)";
                     break;
                 default:
                     throw new InvalidOperationException("Unknown icon type");

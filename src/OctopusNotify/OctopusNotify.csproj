@@ -83,11 +83,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionTester.cs" />
-    <Compile Include="DeploymentEventArgs.cs" />
+    <Compile Include="Model\DeploymentEventArgs.cs" />
     <Compile Include="IDeploymentRepositoryAdapter.cs" />
     <Compile Include="Model\DeploymentEnvironment.cs" />
     <Compile Include="Model\DeploymentResult.cs" />
     <Compile Include="Model\DeploymentStatus.cs" />
+    <Compile Include="Model\DeploymentSummaryEventArgs.cs" />
     <Compile Include="Model\Project.cs" />
     <Compile Include="OctopusAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

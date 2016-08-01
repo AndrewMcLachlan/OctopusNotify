@@ -121,6 +121,7 @@
     <Compile Include="Models\BalloonIcon.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\NotificationEventArgs.cs" />
+    <Compile Include="Utilities\DeploymentStatusExtensions.cs" />
     <Compile Include="Views\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
