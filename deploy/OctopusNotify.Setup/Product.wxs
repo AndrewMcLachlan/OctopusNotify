@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
-  <Product Id="4e196dc3-a51d-4aed-aeea-b857068079a1" Name="Octopus Notify" Language="1033" Version="0.2.0.0" Manufacturer="Andrew McLachlan" UpgradeCode="2c0dbe90-db26-4ea1-828f-bc8da386a14f">
+  <Product Id="088556d0-c8cd-438b-8923-c4cbc0dc03ee" Name="Octopus Notify" Language="1033" Version="0.3.0.0" Manufacturer="Andrew McLachlan" UpgradeCode="2c0dbe90-db26-4ea1-828f-bc8da386a14f">
 
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
