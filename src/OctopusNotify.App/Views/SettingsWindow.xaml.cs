@@ -7,9 +7,9 @@ using System.Windows.Input;
 using System.Windows.Navigation;
 using OctopusNotify.App.Properties;
 using OctopusNotify.App.Utilities;
-using OctopusNotify.App.Models;
+using OctopusNotify.App.ViewModels;
 
-namespace OctopusNotify.App
+namespace OctopusNotify.App.Views
 {
     /// <summary>
     /// Interaction logic for Settings.xaml
@@ -38,8 +38,6 @@ namespace OctopusNotify.App
             e.CanExecute = ((SettingsViewModel)DataContext).CanTest;
             e.Handled = true;
         }
-
-
 
         private void SaveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {

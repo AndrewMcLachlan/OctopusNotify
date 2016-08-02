@@ -1,11 +1,11 @@
-﻿<Window x:Class="OctopusNotify.App.SettingsWindow"
+﻿<Window x:Class="OctopusNotify.App.Views.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OctopusNotify.App"
         mc:Ignorable="d"
-        xmlns:vm="clr-namespace:OctopusNotify.App.Models"
+        xmlns:vm="clr-namespace:OctopusNotify.App.ViewModels"
         xmlns:comm="clr-namespace:OctopusNotify.App.Commands"
         xmlns:vr="clr-namespace:OctopusNotify.App.ValidationRules"
         Closing="Window_Closing"
@@ -23,7 +23,7 @@
             <GroupBox Header="Server Settings" Margin="10,10,10,10">
                 <StackPanel>
                     <Label x:Name="ServerUrlLabel" Content="Server URL:" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="ServerUrlText" Height="23" TextWrapping="NoWrap" Margin="10,0,10,0" VerticalAlignment="Top" Validation.Error="Validation_Error" Width="221" MaxWidth="221" Validation.ErrorTemplate="{x:Null}">
+                    <TextBox x:Name="ServerUrlText" Padding="0,3" VerticalContentAlignment="Center" TextWrapping="NoWrap" Margin="10,0,10,0" VerticalAlignment="Top" Validation.Error="Validation_Error" Width="221" MaxWidth="221" Validation.ErrorTemplate="{x:Null}">
                         <Binding Path="ServerUrl"
                          Mode="TwoWay"
                          UpdateSourceTrigger="PropertyChanged"
@@ -44,7 +44,7 @@
                             </Hyperlink>
                     </TextBlock>-->
                     </StackPanel>
-                    <TextBox x:Name="ApiKeyText" Height="23" Margin="10,0,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" Validation.Error="Validation_Error" TextChanged="ApiKeyText_TextChanged" Width="221" MaxWidth="221">
+                    <TextBox x:Name="ApiKeyText" Padding="0,2" VerticalContentAlignment="Center" Margin="10,0,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" Validation.Error="Validation_Error" TextChanged="ApiKeyText_TextChanged" Width="221" MaxWidth="221">
                     </TextBox>
                     <Label x:Name="label" Content="Existing keys are not shown for security reasons" FontSize="11" Margin="0,0,0,0" HorizontalAlignment="Center" />
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
@@ -65,7 +65,7 @@
                     <CheckBox Content="Alert on all successful builds" Margin="10,10,10,10" IsChecked="{Binding AlertOnSuccessfulBuild}" />
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                         <Label x:Name="IntervalLabel" Content="Poll Octopus every" />
-                        <TextBox x:Name="IntervalTime" Height="23" TextWrapping="NoWrap" VerticalAlignment="Top" Width="32" Text="{Binding IntervalTime }" PreviewTextInput="IntervalTime_PreviewTextInput" DataObject.Pasting="IntervalTime_Pasting">
+                        <TextBox x:Name="IntervalTime" Margin="0,1" TextWrapping="NoWrap" VerticalContentAlignment="Center" Width="32" Text="{Binding IntervalTime }" PreviewTextInput="IntervalTime_PreviewTextInput" DataObject.Pasting="IntervalTime_Pasting">
                         </TextBox>
                         <Label x:Name="IntervalLabel2" Content="seconds" />
                     </StackPanel>

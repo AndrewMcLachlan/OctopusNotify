@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OctopusNotify.App.Models;
+using OctopusNotify.App.ViewModels;
 using TechTalk.SpecFlow;
 
 namespace OctopusNotify.App.Tests.Settings

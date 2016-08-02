@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using OctopusNotify.App.Properties;
 using OctopusNotify.App.Utilities;
 using Container = OctopusNotify.App.Ioc.Container;
 
-namespace OctopusNotify.App.Models
+namespace OctopusNotify.App.ViewModels
 {
 
     public class SettingsViewModel : ViewModel

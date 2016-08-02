@@ -14,9 +14,6 @@ namespace OctopusNotify.App
     {
         public void App_Startup(object sender, StartupEventArgs e)
         {
-
-            Log.Logger = new LoggerConfiguration().ReadFrom.AppSettings().CreateLogger();
-
             bool created;
             Mutex mutex = new Mutex(true, "b300f8b3-e9af-466f-a4a6-9f4cb545b5ad", out created);
             if (!created)
@@ -24,6 +21,8 @@ namespace OctopusNotify.App
                 Current.Shutdown();
                 return;
             }
+
+            Log.Logger = new LoggerConfiguration().ReadFrom.AppSettings().CreateLogger();
 
             if (!Settings.Default.Upgraded)
             {
@@ -34,6 +33,7 @@ namespace OctopusNotify.App
 
             Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
+            Container.Current = new AppContainer();
             Container.Current.Configure();
         }
     }

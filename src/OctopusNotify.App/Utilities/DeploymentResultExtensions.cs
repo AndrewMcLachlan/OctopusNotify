@@ -2,9 +2,10 @@
 using System.Drawing;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using OctopusNotify.App.Models;
+using OctopusNotify.App.ViewModels;
 using OctopusNotify.App.Properties;
 using OctopusNotify.Model;
+using OctopusNotify.App.Models;
 
 namespace OctopusNotify.App.Utilities
 {

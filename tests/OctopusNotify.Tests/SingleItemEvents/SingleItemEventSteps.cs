@@ -6,6 +6,7 @@ using Moq;
 using Octopus.Client;
 using Octopus.Client.Model;
 using Octopus.Client.Repositories;
+using OctopusNotify.Model;
 using TechTalk.SpecFlow;
 
 namespace OctopusNotify.Tests

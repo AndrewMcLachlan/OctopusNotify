@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using OctopusNotify.App.Views;
 
 namespace OctopusNotify.App.Commands
 {
@@ -23,9 +24,14 @@ namespace OctopusNotify.App.Commands
             }
 
             _window = new SettingsWindow();
+            _window.Closed += Window_Closed;
             _window.Show();
-            _window = null;
             CommandManager.InvalidateRequerySuggested();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            _window = null;
         }
 
         private void OnCanExceuteChanged()

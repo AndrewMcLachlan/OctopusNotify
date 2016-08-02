@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using OctopusNotify.App.Views;
 
 namespace OctopusNotify.App.Commands
 {

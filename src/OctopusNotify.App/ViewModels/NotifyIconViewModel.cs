@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Practices.Unity;
@@ -14,7 +12,7 @@ using OctopusNotify.App.Properties;
 using OctopusNotify.App.Utilities;
 using OctopusNotify.Model;
 
-namespace OctopusNotify.App.Models
+namespace OctopusNotify.App.ViewModels
 {
     public class NotifyIconViewModel : ViewModel
     {
@@ -25,7 +23,6 @@ namespace OctopusNotify.App.Models
 
         private IDeploymentRepositoryAdapter _adapter;
 
-        private NotifyIconState _iconState;
         private ImageSource _notifyIcon;
         private string _stateSummary;
 
@@ -37,18 +34,6 @@ namespace OctopusNotify.App.Models
         #endregion
 
         #region Properties
-        public NotifyIconState IconState
-        {
-            get
-            {
-                return _iconState;
-            }
-            set
-            {
-                Set(ref _iconState, value);
-            }
-        }
-
         public ImageSource NotifyIcon
         {
             get
@@ -87,9 +72,6 @@ namespace OctopusNotify.App.Models
             if (String.IsNullOrEmpty(Settings.Default.ServerUrl.ToString()))
             {
                 AppCommands.ShowSettings.Execute(null);
-                //SettingsWindow window = new SettingsWindow();
-                //window.ShowDialog();
-                //window = null;
             }
 
             Container.Current.Configured += Container_Configured;

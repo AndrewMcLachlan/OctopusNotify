@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OctopusNotify.App.Models
+namespace OctopusNotify.App.ViewModels
 {
     public abstract class ViewModel : INotifyPropertyChanged
     {
