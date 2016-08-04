@@ -19,38 +19,32 @@ namespace OctopusNotify.App.Views
 
         private void Break1_Click(object sender, RoutedEventArgs e)
         {
-            StubDashboardRepository.BuildOneBroken = true;
             StubDashboardRepository.BuildOneLastUpdate = DateTime.Now;
             Build1Status.Fill = new SolidColorBrush(Colors.Red);
         }
 
         private void Break2_Click(object sender, RoutedEventArgs e)
         {
-            StubDashboardRepository.BuildTwoBroken = true;
             Build2Status.Fill = new SolidColorBrush(Colors.Red);
         }
 
         private void Break3_Click(object sender, RoutedEventArgs e)
         {
-            StubDashboardRepository.BuildThreeBroken = true;
             Build3Status.Fill = new SolidColorBrush(Colors.Red);
         }
 
         private void Success1_Click(object sender, RoutedEventArgs e)
         {
-            StubDashboardRepository.BuildOneBroken = false;
             Build1Status.Fill = new SolidColorBrush(Colors.Green);
         }
 
         private void Success2_Click(object sender, RoutedEventArgs e)
         {
-            StubDashboardRepository.BuildTwoBroken = false;
             Build2Status.Fill = new SolidColorBrush(Colors.Green);
         }
 
         private void Success3_Click(object sender, RoutedEventArgs e)
         {
-            StubDashboardRepository.BuildThreeBroken = false;
             Build3Status.Fill = new SolidColorBrush(Colors.Green);
         }
 

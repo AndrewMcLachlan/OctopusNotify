@@ -94,6 +94,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryException.cs" />
     <Compile Include="Stub\StubEnvironmentRepository.cs" />
+    <Compile Include="Stub\StubInterruptionRepository.cs" />
     <Compile Include="Stub\StubProjectRepository.cs" />
     <Compile Include="Stub\StubDashboardRepository.cs" />
     <Compile Include="Stub\StubOctopusRepository.cs" />

@@ -76,6 +76,12 @@
       <DependentUpon>ConnectionEvents.feature</DependentUpon>
     </Compile>
     <Compile Include="ConnectionEvents\ConnectionEventsSteps.cs" />
+    <Compile Include="MultiItemEvents\MultiItemEvents.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MultiItemEvents.feature</DependentUpon>
+    </Compile>
+    <Compile Include="MultiItemEvents\MultiItemEventsSteps.cs" />
     <Compile Include="SingleItemEvents\FixedEventSteps.cs" />
     <Compile Include="SingleItemEvents\FailedEventSteps.cs" />
     <Compile Include="SingleItemEvents\FailedNewEventSteps.cs" />
@@ -93,6 +99,10 @@
     <None Include="ConnectionEvents\ConnectionEvents.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ConnectionEvents.feature.cs</LastGenOutput>
+    </None>
+    <None Include="MultiItemEvents\MultiItemEvents.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>MultiItemEvents.feature.cs</LastGenOutput>
     </None>
     <None Include="SingleItemEvents\SingleItemEvents.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

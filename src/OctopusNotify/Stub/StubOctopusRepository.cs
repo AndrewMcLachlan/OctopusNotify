@@ -134,7 +134,7 @@ namespace OctopusNotify.Stub
         {
             get
             {
-                throw new NotImplementedException();
+                return new StubInterruptionRepository();
             }
         }
 

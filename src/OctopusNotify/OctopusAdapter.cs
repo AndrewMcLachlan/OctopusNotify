@@ -115,7 +115,7 @@ namespace OctopusNotify
                     OnErrorsCleared();
                 }
 
-                OnDeploymentSummaryChanged(new DeploymentSummaryEventArgs(dashboard.Items.Where(i => i.IsCurrent).GroupBy(i => i.State).ToDictionary(g => g.Key.ToDeploymentStatus(), g => g.Count())));
+                OnDeploymentSummaryChanged(new DeploymentSummaryEventArgs(GetDeploymentSummary(dashboard)));
             }
             catch
             {
@@ -127,7 +127,6 @@ namespace OctopusNotify
                 return;
             }
         }
-
         #endregion
 
         #region Private Methods
@@ -223,7 +222,7 @@ namespace OctopusNotify
                     var interruptions = _repository.Interruptions.List(regardingDocumentId:item.TaskId, pendingOnly: true);
                     if (interruptions.Items.Any(i => i.Created >= _lastElapsed))
                     {
-                        item.EventTime = interruptions.Items.OrderByDescending(i => i.Created).Select(i => i.Created).First();
+                        item.EventTime = interruptions.Items.Where(i => i.Created >= _lastElapsed).OrderByDescending(i => i.Created).Select(i => i.Created).First();
                         currentItems.Add(item);
                     }
                 }
@@ -251,7 +250,7 @@ namespace OctopusNotify
                     var interruptions = _repository.Interruptions.List(regardingDocumentId: item.TaskId, pendingOnly: true);
                     if (interruptions.Items.Any(i => i.Created >= _lastElapsed))
                     {
-                        item.EventTime = interruptions.Items.OrderByDescending(i => i.Created).Select(i => i.Created).First();
+                        item.EventTime = interruptions.Items.Where(i => i.Created >= _lastElapsed).OrderByDescending(i => i.Created).Select(i => i.Created).First();
                         currentItems.Add(item);
                     }
                 }
@@ -260,6 +259,25 @@ namespace OctopusNotify
             }
 
             return items;
+        }
+
+        private Dictionary<DeploymentStatus, int> GetDeploymentSummary(DashboardResource dashboard)
+        {
+            var results = dashboard.Items.Where(i => i.IsCurrent && (i.IsCompleted || !i.HasPendingInterruptions)).GroupBy(i => i.State).ToDictionary(g => g.Key.ToDeploymentStatus(), g => g.Count());
+
+            int manualSteps = dashboard.Items.Count(i => i.IsCurrent && !i.IsCompleted && i.HasPendingInterruptions && !i.HasWarningsOrErrors);
+            if (manualSteps > 0)
+            {
+                results.Add(DeploymentStatus.ManualStep, manualSteps);
+            }
+
+            int guidedFailures = dashboard.Items.Count(i => i.IsCurrent && !i.IsCompleted && i.HasPendingInterruptions && i.HasWarningsOrErrors);
+            if (guidedFailures > 0)
+            {
+                results.Add(DeploymentStatus.GuidedFailure, guidedFailures);
+            }
+
+            return results;
         }
         #endregion
 
