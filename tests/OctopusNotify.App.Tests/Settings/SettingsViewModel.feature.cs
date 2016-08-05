@@ -152,9 +152,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 31
  testRunner.Then("the property changed event at index \'0\' fired with name \'AlertOnFailedBuild\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 32
- testRunner.And("the property changed event at index \'1\' fired with name \'AlertOnNewFailedBuild\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 33
- testRunner.And("the number of fired events will be 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("the number of fired events will be 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -167,15 +165,15 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should trigger property changed event for AlertOnNewFailedBuild", new string[] {
                         "NotifyChange"});
-#line 36
+#line 35
 this.ScenarioSetup(scenarioInfo);
-#line 37
+#line 36
  testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 38
+#line 37
  testRunner.When("the AlertOnNewFailedBuild property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 39
+#line 38
  testRunner.Then("the property changed event at index \'0\' fired with name \'AlertOnNewFailedBuild\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 40
+#line 39
  testRunner.And("the number of fired events will be 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -189,15 +187,15 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should trigger property changed event for AlertOnFixedBuild", new string[] {
                         "NotifyChange"});
-#line 43
+#line 42
 this.ScenarioSetup(scenarioInfo);
-#line 44
+#line 43
  testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 45
+#line 44
  testRunner.When("the AlertOnFixedBuild property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 46
+#line 45
  testRunner.Then("the property changed event at index \'0\' fired with name \'AlertOnFixedBuild\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 47
+#line 46
  testRunner.And("the number of fired events will be 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -211,40 +209,152 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should trigger property changed event for AlertOnSuccessfulBuild", new string[] {
                         "NotifyChange"});
-#line 50
+#line 49
 this.ScenarioSetup(scenarioInfo);
-#line 51
+#line 50
  testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 52
+#line 51
  testRunner.When("the AlertOnSuccessfulBuild property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 53
+#line 52
  testRunner.Then("the property changed event at index \'0\' fired with name \'AlertOnSuccessfulBuild\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 54
- testRunner.Then("the property changed event at index \'1\' fired with name \'AlertOnFixedBuild\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 55
- testRunner.And("the number of fired events will be 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 53
+ testRunner.And("the number of fired events will be 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Should trigger property changed event for IntervalTime")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Should trigger property changed event for AlertOnGuidedFailure")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings View Model")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NotifyChange")]
-        public virtual void ShouldTriggerPropertyChangedEventForIntervalTime()
+        public virtual void ShouldTriggerPropertyChangedEventForAlertOnGuidedFailure()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should trigger property changed event for IntervalTime", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should trigger property changed event for AlertOnGuidedFailure", new string[] {
                         "NotifyChange"});
-#line 58
+#line 56
 this.ScenarioSetup(scenarioInfo);
-#line 59
+#line 57
  testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 58
+ testRunner.When("the AlertOnGuidedFailure property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 59
+ testRunner.Then("the property changed event at index \'0\' fired with name \'AlertOnGuidedFailure\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 60
- testRunner.When("the IntervalTime property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 61
- testRunner.Then("the property changed event at index \'0\' fired with name \'IntervalTime\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 62
  testRunner.And("the number of fired events will be 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Should trigger property changed event for AlertOnManualStep")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings View Model")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NotifyChange")]
+        public virtual void ShouldTriggerPropertyChangedEventForAlertOnManualStep()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should trigger property changed event for AlertOnManualStep", new string[] {
+                        "NotifyChange"});
+#line 63
+this.ScenarioSetup(scenarioInfo);
+#line 64
+ testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 65
+ testRunner.When("the AlertOnManualStep property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 66
+ testRunner.Then("the property changed event at index \'0\' fired with name \'AlertOnManualStep\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 67
+ testRunner.And("the number of fired events will be 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Should trigger property changed event for PollingInterval")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings View Model")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NotifyChange")]
+        public virtual void ShouldTriggerPropertyChangedEventForPollingInterval()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should trigger property changed event for PollingInterval", new string[] {
+                        "NotifyChange"});
+#line 70
+this.ScenarioSetup(scenarioInfo);
+#line 71
+ testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 72
+ testRunner.When("the PollingInterval property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 73
+ testRunner.Then("the property changed event at index \'0\' fired with name \'PollingInterval\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 74
+ testRunner.And("the number of fired events will be 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Should trigger property changed event for BalloonTimeout")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings View Model")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NotifyChange")]
+        public virtual void ShouldTriggerPropertyChangedEventForBalloonTimeout()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should trigger property changed event for BalloonTimeout", new string[] {
+                        "NotifyChange"});
+#line 77
+this.ScenarioSetup(scenarioInfo);
+#line 78
+ testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 79
+ testRunner.When("the BalloonTimeout property is changed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 80
+ testRunner.Then("the property changed event at index \'0\' fired with name \'BalloonTimeout\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 81
+ testRunner.And("the number of fired events will be 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Should set the failure alerts when never is selected")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings View Model")]
+        public virtual void ShouldSetTheFailureAlertsWhenNeverIsSelected()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should set the failure alerts when never is selected", ((string[])(null)));
+#line 83
+this.ScenarioSetup(scenarioInfo);
+#line 84
+ testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 85
+ testRunner.And("the AlertOnFailedBuild property is set to \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 86
+ testRunner.And("the AlertOnNewFailedBuild property is set to \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 87
+ testRunner.When("the DisableFailedBuildAlerts property is set to \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 88
+ testRunner.Then("the AlertOnFailedBuild property is set to \'false\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 89
+ testRunner.And("the AlertOnNewFailedBuild property is set to \'false\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Should set the success alerts when never is selected")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings View Model")]
+        public virtual void ShouldSetTheSuccessAlertsWhenNeverIsSelected()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should set the success alerts when never is selected", ((string[])(null)));
+#line 91
+this.ScenarioSetup(scenarioInfo);
+#line 92
+ testRunner.Given("a SettingsViewModel instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 93
+ testRunner.And("the AlertOnSuccessfulBuild property is set to \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 94
+ testRunner.And("the AlertOnFixedBuild property is set to \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 95
+ testRunner.When("the DisableSuccessfulBuildAlerts property is set to \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 96
+ testRunner.Then("the AlertOnSuccessfulBuild property is set to \'false\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 97
+ testRunner.And("the AlertOnFixedBuild property is set to \'false\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

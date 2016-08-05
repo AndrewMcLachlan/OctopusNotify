@@ -8,8 +8,9 @@
         xmlns:vm="clr-namespace:OctopusNotify.App.ViewModels"
         xmlns:comm="clr-namespace:OctopusNotify.App.Commands"
         xmlns:vr="clr-namespace:OctopusNotify.App.ValidationRules"
+        xmlns:conv="clr-namespace:OctopusNotify.App.ValueConverters"
         Closing="Window_Closing"
-        Title="Settings" Height="378.058" Width="557.094" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterScreen">
+        Title="Settings" Height="378.058" Width="675.811" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:SettingsViewModel />
     </Window.DataContext>
@@ -17,6 +18,9 @@
         <CommandBinding Command="ApplicationCommands.Save" CanExecute="CommandBinding_CanExecute" Executed="SaveCommandBinding_Executed" />
         <CommandBinding Command="local:AppCommands.Test" CanExecute="Test_CanExecute" Executed="TestCommandBinding_Executed" />
     </Window.CommandBindings>
+    <Window.Resources>
+        <conv:InvertBooleanConverter x:Key="InvertBoolean" />
+    </Window.Resources>
 
     <StackPanel>
         <StackPanel Orientation="Horizontal">
@@ -37,8 +41,8 @@
                         </Binding>
                     </TextBox>
                     <StackPanel Orientation="Horizontal" Margin="5,10,0,0">
-                    <Label x:Name="APiKeyLabel" Content="API Key:"  VerticalAlignment="Top" />
-                    <!--<TextBlock x:Name="textBlock2" Margin="5,0,0,0" VerticalAlignment="Center">
+                        <Label x:Name="APiKeyLabel" Content="API Key:"  VerticalAlignment="Top" />
+                        <!--<TextBlock x:Name="textBlock2" Margin="5,0,0,0" VerticalAlignment="Center">
                             <Hyperlink NavigateUri="{Binding ApiKeyUri}" RequestNavigate="Hyperlink_RequestNavigate">
                                 How do I get an API key?
                             </Hyperlink>
@@ -57,19 +61,49 @@
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="Alert Settings" Margin="10,10,10,10" Width="250">
-                <StackPanel>
-                    <CheckBox Content="Alert on new failed build" Margin="10,10,10,10" IsChecked="{Binding AlertOnNewFailedBuild}" />
-                    <CheckBox Content="Alert on all failed builds" Margin="10,10,10,10" IsChecked="{Binding AlertOnFailedBuild }" />
-                    <CheckBox Content="Alert on fixed build" Margin="10,10,10,10" IsChecked="{Binding AlertOnFixedBuild}" />
-                    <CheckBox Content="Alert on all successful builds" Margin="10,10,10,10" IsChecked="{Binding AlertOnSuccessfulBuild}" />
-                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <Label x:Name="IntervalLabel" Content="Poll Octopus every" />
-                        <TextBox x:Name="IntervalTime" Margin="0,1" TextWrapping="NoWrap" VerticalContentAlignment="Center" Width="32" Text="{Binding IntervalTime }" PreviewTextInput="IntervalTime_PreviewTextInput" DataObject.Pasting="IntervalTime_Pasting">
-                        </TextBox>
-                        <Label x:Name="IntervalLabel2" Content="seconds" />
+            <GroupBox Header="Alert Settings" Margin="10,10,10,10" Width="376">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel Margin="5,5,10,0" Grid.Column="0">
+                        <Label x:Name="FailureLabel" Content="Alert on Failed Build:" Margin="0,0,0,0" />
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton Content="All" IsChecked="{Binding AlertOnFailedBuild}" Margin="5,0,0,0" />
+                            <RadioButton Content="First failure" IsChecked="{Binding AlertOnNewFailedBuild}" Margin="10,0,0,0" />
+                            <RadioButton Content="Never" IsChecked="{Binding DisableFailedBuildAlerts }" Margin="10,0,0,0" />
+                        </StackPanel>
+                        <Label x:Name="SuccessLabel" Content="Alert on Successful Build:" Margin="0,5,0,0" />
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton Content="All" IsChecked="{Binding AlertOnSuccessfulBuild}" Margin="5,0,0,0" />
+                            <RadioButton Content="Build is fixed" IsChecked="{Binding AlertOnFixedBuild}" Margin="10,0,0,0" />
+                            <RadioButton Content="Never" IsChecked="{Binding DisableSuccessfulBuildAlerts }" Margin="10,0,0,0" />
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <CheckBox x:Name="AlertOnGuidedFailure" IsChecked="{Binding AlertOnGuidedFailure}" Margin="10,32,0,0" Content="Alert on Guided Failure" />
+                        <CheckBox x:Name="AlertOnManualStep" IsChecked="{Binding AlertOnManualStep}" Margin="10,30,0,0" Content="Alert on Manual Step" />
+                    </StackPanel>
+                    <StackPanel Margin="0,10,0,0" Grid.Row="1" Grid.ColumnSpan="2">
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label x:Name="IntervalLabel" Content="Poll Octopus every" />
+                            <TextBox x:Name="IntervalTime" Margin="0,1" TextWrapping="NoWrap" VerticalContentAlignment="Center" Width="32" Text="{Binding PollingInterval }" PreviewTextInput="IntervalTime_PreviewTextInput" DataObject.Pasting="IntervalTime_Pasting">
+                            </TextBox>
+                            <Label x:Name="IntervalLabel2" Content="seconds" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                            <Label x:Name="BalloonTimeoutLabel" Content="Show notifications for" />
+                            <TextBox x:Name="BalloonTimeout" Margin="0,1" TextWrapping="NoWrap" VerticalContentAlignment="Center" Width="32" Text="{Binding BalloonTimeout }" PreviewTextInput="IntervalTime_PreviewTextInput" DataObject.Pasting="IntervalTime_Pasting">
+                            </TextBox>
+                            <Label x:Name="BalloonTimeoutLabel2" Content="seconds" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
             </GroupBox>
         </StackPanel>
         <GroupBox Header="Application Settings" Margin="10,0,10,10">

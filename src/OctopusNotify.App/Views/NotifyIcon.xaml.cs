@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using OctopusNotify.App.Models;
+using OctopusNotify.App.Properties;
 using OctopusNotify.App.ViewModels;
 
 namespace OctopusNotify.App.Views
@@ -126,7 +123,7 @@ namespace OctopusNotify.App.Views
             Hardcodet.Wpf.TaskbarNotification.TaskbarIcon.AddBalloonShowingHandler(balloon, NotifyIcon_BalloonShowing);
             Hardcodet.Wpf.TaskbarNotification.TaskbarIcon.AddBalloonClosingHandler(balloon, NotifyIcon_BalloonClosing);
 
-            NotifyIcon.ShowCustomBalloon(balloon, System.Windows.Controls.Primitives.PopupAnimation.Slide, 10000);
+            NotifyIcon.ShowCustomBalloon(balloon, System.Windows.Controls.Primitives.PopupAnimation.Slide, Settings.Default.BalloonTimeout * 1000);
         }
         #endregion
     }

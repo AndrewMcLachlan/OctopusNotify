@@ -197,8 +197,8 @@ namespace OctopusNotify.App.ViewModels
         {
             return (item.Status == DeploymentStatus.Success && Settings.Default.AlertOnSuccessfulBuild) ||
                   ((item.Status == DeploymentStatus.Failed || item.Status == DeploymentStatus.TimedOut) && Settings.Default.AlertOnFailedBuild) ||
-                  ((item.Status == DeploymentStatus.FailedNew || item.Status == DeploymentStatus.TimedOutNew) && Settings.Default.AlertOnNewFailedBuild) ||
-                   (item.Status == DeploymentStatus.Fixed && Settings.Default.AlertOnFixedBuild) ||
+                  ((item.Status == DeploymentStatus.FailedNew || item.Status == DeploymentStatus.TimedOutNew) && (Settings.Default.AlertOnNewFailedBuild || Settings.Default.AlertOnFailedBuild)) ||
+                   (item.Status == DeploymentStatus.Fixed && (Settings.Default.AlertOnFixedBuild || Settings.Default.AlertOnSuccessfulBuild)) ||
                    (item.Status == DeploymentStatus.ManualStep && Settings.Default.AlertOnManualStep) ||
                    (item.Status == DeploymentStatus.GuidedFailure && Settings.Default.AlertOnGuidedFailure);
         }

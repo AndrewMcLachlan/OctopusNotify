@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OctopusNotify.App"
+        xmlns:local="clr-namespace:OctopusNotify.App.MarkupExtensions"
         mc:Ignorable="d"
         Title="AboutWindow" Height="278" Width="450" AllowsTransparency="True" WindowStyle="None" ShowInTaskbar="False" ResizeMode="NoResize" ScrollViewer.VerticalScrollBarVisibility="Disabled" WindowStartupLocation="CenterScreen" Deactivated="About_Deactivated" Activated="About_Activated" Opacity="1" Background="Transparent" MouseUp="About_MouseUp">
     <Border CornerRadius="10" BorderThickness="2">

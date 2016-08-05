@@ -123,6 +123,7 @@
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\NotificationEventArgs.cs" />
     <Compile Include="Utilities\DeploymentStatusExtensions.cs" />
+    <Compile Include="ValueConverters\InvertBooleanConverter.cs" />
     <Compile Include="Views\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
@@ -133,7 +134,7 @@
     <Compile Include="Commands\ShowAboutWindowCommand.cs" />
     <Compile Include="Commands\ShowSettingsCommand.cs" />
     <Compile Include="Commands\ShowStubWindowCommand.cs" />
-    <Compile Include="IconExtension.cs" />
+    <Compile Include="MarkupExtensions\IconExtension.cs" />
     <Compile Include="Utilities\DispatcherHelper.cs" />
     <Compile Include="Ioc\Container.cs" />
     <Compile Include="Views\Stub.xaml.cs">

@@ -142,5 +142,17 @@ namespace OctopusNotify.App.Properties {
                 this["AlertOnGuidedFailure"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int BalloonTimeout {
+            get {
+                return ((int)(this["BalloonTimeout"]));
+            }
+            set {
+                this["BalloonTimeout"] = value;
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 
-namespace OctopusNotify.App
+namespace OctopusNotify.App.MarkupExtensions
 {
     public class IconExtension : MarkupExtension
     {

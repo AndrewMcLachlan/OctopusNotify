@@ -28,7 +28,11 @@ namespace OctopusNotify.App.ViewModels
         private bool _alertOnFixedBuild;
         private bool _alertOnSuccessfulBuild;
 
-        private int _intervalTime;
+        private bool _alertOnGuidedFailure;
+        private bool _alertOnManualStep;
+
+        private int _pollingInterval;
+        private int _balloonTimeout;
         #endregion
 
         #region Properties
@@ -56,50 +60,78 @@ namespace OctopusNotify.App.ViewModels
             set { Set(ref _runOnStartup, value); }
         }
 
+        public bool DisableFailedBuildAlerts
+        {
+            get { return !_alertOnFailedBuild && !_alertOnNewFailedBuild; }
+            set
+            {
+                if (value)
+                {
+                    AlertOnFailedBuild = false;
+                    AlertOnNewFailedBuild = false;
+                }
+            }
+        }
+
+        public bool DisableSuccessfulBuildAlerts
+        {
+            get { return !_alertOnSuccessfulBuild && !_alertOnFixedBuild; }
+            set
+            {
+                if (value)
+                {
+                    AlertOnSuccessfulBuild = false;
+                    AlertOnFixedBuild = false;
+                }
+            }
+        }
+
         public bool AlertOnFailedBuild
         {
             get { return _alertOnFailedBuild; }
-            set
-            {
-                Set(ref _alertOnFailedBuild, value);
-                if (value) AlertOnNewFailedBuild = value;
-            }
+            set { Set(ref _alertOnFailedBuild, value); }
         }
 
         public bool AlertOnNewFailedBuild
         {
             get { return _alertOnNewFailedBuild; }
-            set
-            {
-                Set(ref _alertOnNewFailedBuild, value);
-                if (!value) AlertOnFailedBuild = value;
-            }
+            set { Set(ref _alertOnNewFailedBuild, value); }
         }
 
         public bool AlertOnFixedBuild
         {
             get { return _alertOnFixedBuild; }
-            set
-            {
-                Set(ref _alertOnFixedBuild, value);
-                if (!value) AlertOnSuccessfulBuild = value;
-            }
+            set { Set(ref _alertOnFixedBuild, value); }
         }
 
         public bool AlertOnSuccessfulBuild
         {
             get { return _alertOnSuccessfulBuild; }
-            set
-            {
-                Set(ref _alertOnSuccessfulBuild, value);
-                if (value) AlertOnFixedBuild = value;
-            }
+            set { Set(ref _alertOnSuccessfulBuild, value); }
         }
 
-        public int IntervalTime
+        public bool AlertOnGuidedFailure
         {
-            get { return _intervalTime; }
-            set { Set(ref _intervalTime, value); }
+            get { return _alertOnGuidedFailure; }
+            set { Set(ref _alertOnGuidedFailure, value); }
+        }
+
+        public bool AlertOnManualStep
+        {
+            get { return _alertOnManualStep; }
+            set { Set(ref _alertOnManualStep, value); }
+        }
+
+        public int PollingInterval
+        {
+            get { return _pollingInterval; }
+            set { Set(ref _pollingInterval, value); }
+        }
+
+        public int BalloonTimeout
+        {
+            get { return _balloonTimeout; }
+            set { Set(ref _balloonTimeout, value); }
         }
 
         public Uri ApiKeyUri
@@ -118,12 +150,19 @@ namespace OctopusNotify.App.ViewModels
         {
             ServerUrl = String.IsNullOrWhiteSpace(Settings.Default.ServerUrl) ? null : new Uri(Settings.Default.ServerUrl);
 
+            AlertOnNewFailedBuild = Settings.Default.AlertOnNewFailedBuild ^ Settings.Default.AlertOnFailedBuild;
             AlertOnFailedBuild = Settings.Default.AlertOnFailedBuild;
-            AlertOnNewFailedBuild = Settings.Default.AlertOnNewFailedBuild;
-            AlertOnFixedBuild = Settings.Default.AlertOnFixedBuild;
+            AlertOnFixedBuild = Settings.Default.AlertOnFixedBuild ^ Settings.Default.AlertOnSuccessfulBuild;
             AlertOnSuccessfulBuild = Settings.Default.AlertOnSuccessfulBuild;
 
-            IntervalTime = Settings.Default.PollingInterval;
+            DisableFailedBuildAlerts = !AlertOnFailedBuild && !AlertOnNewFailedBuild;
+            DisableSuccessfulBuildAlerts = !AlertOnSuccessfulBuild && !AlertOnFixedBuild;
+
+            AlertOnGuidedFailure = Settings.Default.AlertOnGuidedFailure;
+            AlertOnManualStep = Settings.Default.AlertOnManualStep;
+
+            PollingInterval = Settings.Default.PollingInterval;
+            BalloonTimeout = Settings.Default.BalloonTimeout;
 
             RunOnStartup = GetRunOnStartup();
 
@@ -154,7 +193,11 @@ namespace OctopusNotify.App.ViewModels
             Settings.Default.AlertOnFixedBuild = AlertOnFixedBuild;
             Settings.Default.AlertOnSuccessfulBuild = AlertOnSuccessfulBuild;
 
-            Settings.Default.PollingInterval = IntervalTime;
+            Settings.Default.AlertOnGuidedFailure = AlertOnGuidedFailure;
+            Settings.Default.AlertOnManualStep = AlertOnManualStep;
+
+            Settings.Default.PollingInterval = PollingInterval;
+            Settings.Default.BalloonTimeout = BalloonTimeout;
 
             Settings.Default.Save();
 
@@ -201,7 +244,7 @@ namespace OctopusNotify.App.ViewModels
         public void Validate()
         {
             CanTest = ServerUrl != null && !String.IsNullOrEmpty(ServerUrl.ToString());
-            IsValid = ServerUrl != null && !String.IsNullOrEmpty(ServerUrl.ToString()) && IntervalTime > 0;
+            IsValid = ServerUrl != null && !String.IsNullOrEmpty(ServerUrl.ToString()) && PollingInterval > 0;
         }
         #endregion
     }
