@@ -69,6 +69,8 @@ namespace OctopusNotify.App.ViewModels
 
         public NotifyIconViewModel()
         {
+            NotifyIcon = DisconnectedNotifyIcon;
+
             if (String.IsNullOrEmpty(Settings.Default.ServerUrl.ToString()))
             {
                 AppCommands.ShowSettings.Execute(null);
