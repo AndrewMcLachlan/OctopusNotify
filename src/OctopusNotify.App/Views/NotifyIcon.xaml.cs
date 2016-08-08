@@ -123,7 +123,7 @@ namespace OctopusNotify.App.Views
             Hardcodet.Wpf.TaskbarNotification.TaskbarIcon.AddBalloonShowingHandler(balloon, NotifyIcon_BalloonShowing);
             Hardcodet.Wpf.TaskbarNotification.TaskbarIcon.AddBalloonClosingHandler(balloon, NotifyIcon_BalloonClosing);
 
-            NotifyIcon.ShowCustomBalloon(balloon, System.Windows.Controls.Primitives.PopupAnimation.Slide, Settings.Default.BalloonTimeout * 1000);
+            NotifyIcon.ShowCustomBalloon(balloon, System.Windows.Controls.Primitives.PopupAnimation.Slide, Math.Max(Settings.Default.BalloonTimeout, 1) * 1000);
         }
         #endregion
     }

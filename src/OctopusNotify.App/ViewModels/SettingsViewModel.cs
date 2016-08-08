@@ -244,7 +244,7 @@ namespace OctopusNotify.App.ViewModels
         public void Validate()
         {
             CanTest = ServerUrl != null && !String.IsNullOrEmpty(ServerUrl.ToString());
-            IsValid = ServerUrl != null && !String.IsNullOrEmpty(ServerUrl.ToString()) && PollingInterval > 0;
+            IsValid = ServerUrl != null && !String.IsNullOrEmpty(ServerUrl.ToString()) && PollingInterval > 0 && BalloonTimeout > 0;
         }
         #endregion
     }

@@ -90,22 +90,22 @@ namespace OctopusNotify.App.Views
             _apiKeyChanged = true;
         }
 
-        private void IntervalTime_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void Time_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !ValidateIntervalTime(e.Text);
+            e.Handled = !ValidateTime(e.Text);
         }
 
-        private bool ValidateIntervalTime(string text)
+        private bool ValidateTime(string text)
         {
             return PositiveInteger.IsMatch(text);
         }
 
-        private void IntervalTime_Pasting(object sender, DataObjectPastingEventArgs e)
+        private void Time_Pasting(object sender, DataObjectPastingEventArgs e)
         {
             if (e.DataObject.GetDataPresent(typeof(string)))
             {
                 string text = (string)e.DataObject.GetData(typeof(string));
-                if (!ValidateIntervalTime(text))
+                if (!ValidateTime(text))
                 {
                     e.CancelCommand();
                 }

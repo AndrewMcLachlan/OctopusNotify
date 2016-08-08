@@ -61,7 +61,7 @@ namespace OctopusNotify
 
         public void StartPolling(double interval)
         {
-            _pollingTimer.Interval = interval;
+            _pollingTimer.Interval = Math.Max(interval, 1000);
             _pollingTimer.Start();
             Task.Factory.StartNew(() => Poll());
         }

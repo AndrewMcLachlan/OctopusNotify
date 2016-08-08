@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OctopusNotify.App"
         mc:Ignorable="d"
-        Title="Stub" Height="376.802" Width="617.508">
+        Title="Stub" Height="376.802" Width="801.508">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Width" Value="75" />
@@ -74,14 +74,16 @@
                 <Ellipse Height="10" Width="10" Fill="Green" Name="Build1Status" />
             </Canvas>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Width="530" Height="30" Grid.Column="1" Grid.Row="0">
+        <StackPanel Orientation="Horizontal" Height="30" Grid.Column="1" Grid.Row="0" Margin="10,0,0,0">
             <Button x:Name="Queued1" Content="Queued" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Left}" Command="Replace" CommandParameter="1|Queued" />
             <Button x:Name="Executing1" Content="Executing" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="1|Executing" />
             <Button x:Name="Failed1" Content="Failed" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="1|Failed" />
-            <Button x:Name="Canceled1" Content="Cancelled" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="1|Canceled" />
-            <Button x:Name="TimedOut1" Content="TimedOut" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="1|TimedOut" />
+            <Button x:Name="Cancelled1" Content="Cancelled" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="1|Cancelled" />
+            <Button x:Name="TimedOut1" Content="Timed Out" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="1|TimedOut" />
             <Button x:Name="Success1" Content="Success" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle }" Command="Replace" CommandParameter="1|Success" />
-            <Button x:Name="Cancelling1" Content="Cancelling" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Right}" Command="Replace" CommandParameter="1|Cancelling" />
+            <Button x:Name="Cancelling1" Content="Cancelling" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="1|Cancelling" />
+            <Button x:Name="ManualStep1" Content="Manual Step" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="1|ManualStep" />
+            <Button x:Name="GuidedFailure1" Content="Guided Failure" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Style="{StaticResource Right}" Command="Replace" CommandParameter="1|GuidedFailure" />
         </StackPanel>
 
         <StackPanel Grid.Column="0" Grid.Row="1">
@@ -90,14 +92,16 @@
                 <Ellipse Height="10" Width="10" Fill="Green" Name="Build2Status" />
             </Canvas>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Width="530" Height="30" Grid.Column="1" Grid.Row="1">
+        <StackPanel Orientation="Horizontal" Height="30" Grid.Column="1" Grid.Row="1" Margin="10,0,0,0">
             <Button x:Name="Queued2" Content="Queued" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Left}" Command="Replace" CommandParameter="2|Queued" />
             <Button x:Name="Executing2" Content="Executing" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="2|Executing" />
             <Button x:Name="Failed2" Content="Failed" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="2|Failed" />
-            <Button x:Name="Canceled2" Content="Cancelled" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="2|Canceled" />
-            <Button x:Name="TimedOut2" Content="TimedOut" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="2|TimedOut" />
+            <Button x:Name="Cancelled2" Content="Cancelled" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="2|Cancelled" />
+            <Button x:Name="TimedOut2" Content="Timed Out" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="2|TimedOut" />
             <Button x:Name="Success2" Content="Success" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle }" Command="Replace" CommandParameter="2|Success" />
-            <Button x:Name="Cancelling2" Content="Cancelling" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Right}" Command="Replace" CommandParameter="2|Cancelling" />
+            <Button x:Name="Cancelling2" Content="Cancelling" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="2|Cancelling" />
+            <Button x:Name="ManualStep2" Content="Manual Step" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="2|ManualStep" />
+            <Button x:Name="GuidedFailure2" Content="Guided Failure" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Style="{StaticResource Right}" Command="Replace" CommandParameter="2|GuidedFailure" />
         </StackPanel>
 
         <StackPanel Grid.Column="0" Grid.Row="2">
@@ -106,9 +110,16 @@
                 <Ellipse Height="10" Width="10" Fill="Green" Name="Build3Status" />
             </Canvas>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Width="150" Height="30" Grid.Column="1" Grid.Row="2">
-            <Button x:Name="Break3" Content="Break" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Left}" Click="Break3_Click" />
-            <Button x:Name="Success3" Content="Success" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Style="{StaticResource Right}" Click="Success3_Click" />
+        <StackPanel Orientation="Horizontal" Height="30" Grid.Column="1" Grid.Row="2" Margin="10,0,0,0">
+            <Button x:Name="Queued3" Content="Queued" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Left}" Command="Replace" CommandParameter="3|Queued" />
+            <Button x:Name="Executing3" Content="Executing" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="3|Executing" />
+            <Button x:Name="Failed3" Content="Failed" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="3|Failed" />
+            <Button x:Name="Cancelled3" Content="Cancelled" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="3|Cancelled" />
+            <Button x:Name="TimedOut3" Content="Timed Out" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="3|TimedOut" />
+            <Button x:Name="Success3" Content="Success" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle }" Command="Replace" CommandParameter="3|Success" />
+            <Button x:Name="Cancelling3" Content="Cancelling" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="3|Cancelling" />
+            <Button x:Name="ManualStep3" Content="Manual Step" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Style="{StaticResource Middle}" Command="Replace" CommandParameter="3|ManualStep" />
+            <Button x:Name="GuidedFailure3" Content="Guided Failure" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Style="{StaticResource Right}" Command="Replace" CommandParameter="3|GuidedFailure" />
         </StackPanel>
 
     </Grid>

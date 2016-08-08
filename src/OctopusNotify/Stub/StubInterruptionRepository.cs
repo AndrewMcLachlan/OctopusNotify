@@ -7,6 +7,10 @@ namespace OctopusNotify.Stub
 {
     internal class StubInterruptionRepository : IInterruptionRepository
     {
+        public static DateTime BuildOneLastUpdate { get; internal set; }
+        public static DateTime BuildThreeLastUpdate { get; internal set; }
+        public static DateTime BuildTwoLastUpdate { get; internal set; }
+
         public InterruptionResource Get(string idOrHref)
         {
             return new InterruptionResource
@@ -31,7 +35,9 @@ namespace OctopusNotify.Stub
                     TaskId = regardingDocumentId,
                     Id = regardingDocumentId,
                     IsPending = true,
-                    Created = DateTime.Now,
+                    Created = regardingDocumentId == "1" ? BuildOneLastUpdate :
+                              regardingDocumentId == "2" ? BuildTwoLastUpdate :
+                              BuildThreeLastUpdate,
                 }
             },
             new LinkCollection());

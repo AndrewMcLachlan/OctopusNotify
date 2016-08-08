@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using Octopus.Client.Model;
+using OctopusNotify.Model;
 using OctopusNotify.Stub;
 
 namespace OctopusNotify.App.Views
@@ -64,7 +65,7 @@ namespace OctopusNotify.App.Views
 
             string buildNum = split[0];
 
-            TaskState state = (TaskState)Enum.Parse(typeof(TaskState), status);
+            DeploymentStatus state = (DeploymentStatus)Enum.Parse(typeof(DeploymentStatus), status);
 
             if (buildNum == "1")
             {

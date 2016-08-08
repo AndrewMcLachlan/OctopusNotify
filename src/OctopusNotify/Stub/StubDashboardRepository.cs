@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Octopus.Client.Model;
 using Octopus.Client.Repositories;
+using OctopusNotify.Model;
 
 namespace OctopusNotify.Stub
 {
@@ -11,13 +12,13 @@ namespace OctopusNotify.Stub
         private static readonly TaskState[] Completed = new[] { TaskState.Canceled, TaskState.Failed, TaskState.Success, TaskState.TimedOut };
         private static readonly TaskState[] Errors = new[] { TaskState.Failed, TaskState.TimedOut };
 
-        private static TaskState _buildOneStatus = TaskState.Success;
-        private static TaskState _buildTwoStatus = TaskState.Success;
-        private static TaskState _buildThreeStatus = TaskState.Success;
+        private static DeploymentStatus _buildOneStatus = DeploymentStatus.Success;
+        private static DeploymentStatus _buildTwoStatus = DeploymentStatus.Success;
+        private static DeploymentStatus _buildThreeStatus = DeploymentStatus.Success;
 
         public static int deploymentCounter = 1;
 
-        public static TaskState BuildOneStatus
+        public static DeploymentStatus BuildOneStatus
         {
             get
             {
@@ -27,10 +28,11 @@ namespace OctopusNotify.Stub
             {
                 _buildOneStatus = value;
                 BuildOneLastUpdate = DateTime.Now;
+                StubInterruptionRepository.BuildOneLastUpdate = DateTime.Now;
             }
         }
 
-        public static TaskState BuildTwoStatus
+        public static DeploymentStatus BuildTwoStatus
         {
             get
             {
@@ -40,10 +42,11 @@ namespace OctopusNotify.Stub
             {
                 _buildTwoStatus = value;
                 BuildTwoLastUpdate = DateTime.Now;
+                StubInterruptionRepository.BuildTwoLastUpdate = DateTime.Now;
             }
         }
 
-        public static TaskState BuildThreeStatus
+        public static DeploymentStatus BuildThreeStatus
         {
             get
             {
@@ -53,6 +56,7 @@ namespace OctopusNotify.Stub
             {
                 _buildThreeStatus = value;
                 BuildThreeLastUpdate = DateTime.Now;
+                StubInterruptionRepository.BuildThreeLastUpdate = DateTime.Now;
             }
         }
 
@@ -66,8 +70,8 @@ namespace OctopusNotify.Stub
             DashboardItemResource build2 = GetBuild("2", BuildTwoStatus, BuildTwoLastUpdate);
             DashboardItemResource build3 = GetBuild("3", BuildThreeStatus, BuildThreeLastUpdate);
 
-            DashboardItemResource build4 = GetBuild("3", TaskState.Executing, DateTime.Now, true);
-            DashboardItemResource build5 = GetBuild("3", TaskState.Executing, DateTime.Now, true, true);
+            //DashboardItemResource build4 = GetBuild("3", TaskState.Executing, DateTime.Now, true);
+            //DashboardItemResource build5 = GetBuild("3", TaskState.Executing, DateTime.Now, true, true);
 
             return new DashboardResource
             {
@@ -88,8 +92,8 @@ namespace OctopusNotify.Stub
                     build1,
                     build2,
                     build3,
-                    build4,
-                    build5,
+                    //build4,
+                   // build5,
                 },
                 PreviousItems = new List<DashboardItemResource>
                 {
@@ -97,8 +101,27 @@ namespace OctopusNotify.Stub
             };
         }
 
-        private DashboardItemResource GetBuild(string projectId, TaskState state, DateTime lastUpdate, bool hasPendingInterruptions = false, bool hasErrorOrWarning = false)
+        private DashboardItemResource GetBuild(string projectId, DeploymentStatus status, DateTime lastUpdate, bool hasPendingInterruptions = false, bool hasErrorOrWarning = false)
         {
+            TaskState state;
+
+            if (status == DeploymentStatus.GuidedFailure)
+            {
+                state = TaskState.Executing;
+                hasErrorOrWarning = true;
+                hasPendingInterruptions = true;
+            }
+            else if (status == DeploymentStatus.ManualStep)
+            {
+                state = TaskState.Executing;
+                hasErrorOrWarning = false;
+                hasPendingInterruptions = true;
+            }
+            else
+            {
+                state = (TaskState)(int)status;
+            }
+
             bool isCompleted = Completed.Contains(state);
             bool error = Errors.Contains(state) || hasErrorOrWarning;
 
@@ -112,6 +135,7 @@ namespace OctopusNotify.Stub
                     ErrorMessage = error ? "AN ERROR HAS OCURRED!" : null,
                     State = state,
                     ProjectId = projectId,
+                    TaskId = projectId,
                     EnvironmentId = "1",
                     DeploymentId = deploymentCounter.ToString(),
                     ReleaseVersion = "1.2.30." + deploymentCounter.ToString(),
