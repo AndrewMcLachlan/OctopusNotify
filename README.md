@@ -27,7 +27,7 @@ Thanks to Philipp Sumi and [Notify Icon for WPF](http://www.hardcodet.net/wpf-no
 
 Thanks to [DrWalks](https://github.com/DrWalks) for testing.
 
-Thanks to the [Octopus Deploy](https://octopusdeploy.com) team for making a great release manager!
+Thanks to the [Octopus Deploy](https://octopusdeploy.com) team for making a great deployment automation server!
 
 ## Licence
 
