@@ -150,9 +150,9 @@ namespace OctopusNotify.App.ViewModels
         {
             ServerUrl = String.IsNullOrWhiteSpace(Settings.Default.ServerUrl) ? null : new Uri(Settings.Default.ServerUrl);
 
-            AlertOnNewFailedBuild = Settings.Default.AlertOnNewFailedBuild ^ Settings.Default.AlertOnFailedBuild;
+            AlertOnNewFailedBuild = Settings.Default.AlertOnNewFailedBuild && !Settings.Default.AlertOnFailedBuild;
             AlertOnFailedBuild = Settings.Default.AlertOnFailedBuild;
-            AlertOnFixedBuild = Settings.Default.AlertOnFixedBuild ^ Settings.Default.AlertOnSuccessfulBuild;
+            AlertOnFixedBuild = Settings.Default.AlertOnFixedBuild && !Settings.Default.AlertOnSuccessfulBuild;
             AlertOnSuccessfulBuild = Settings.Default.AlertOnSuccessfulBuild;
 
             DisableFailedBuildAlerts = !AlertOnFailedBuild && !AlertOnNewFailedBuild;
