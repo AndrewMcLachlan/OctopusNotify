@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Media.Animation;
@@ -14,8 +15,21 @@ namespace OctopusNotify.App.Views
         public AboutWindow()
         {
             InitializeComponent();
-            Version version = Assembly.GetExecutingAssembly().GetName().Version;
-            Version.Text = String.Format("Version {0}.{1}", version.Major, version.Minor);
+
+            Version version = new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion);
+
+            string formatText;
+
+            if (version.Build > 0)
+            {
+                formatText = "Version {0}.{1}.{2}";
+            }
+            else
+            {
+                formatText = "Version {0}.{1}";
+            }
+
+            Version.Text = String.Format(formatText, version.Major, version.Minor, version.Build, version.Revision);
             Opacity = 0;
         }
         #endregion

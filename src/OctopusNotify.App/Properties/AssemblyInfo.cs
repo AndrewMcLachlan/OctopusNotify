@@ -53,7 +53,7 @@ using System.Windows.Markup;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("0.4.*")]
-[assembly: AssemblyFileVersion("0.4.0.0")]
+[assembly: AssemblyFileVersion("0.4.2.0")]
 
 #if STUB
 [assembly: XmlnsDefinition("test-mode", "Namespace")]
