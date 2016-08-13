@@ -1,10 +1,13 @@
-# Octopus Notify
+<a href="https://www.andrewmclachlan.com/products/octopus-notify">
+  <img alt="Octopus Notify Logo" src="https://www.andrewmclachlan.com/content/images/octopusnotify/logo.64.png" align="right" />
+</a>
+# Octopus Notify ![version-0.4.2](https://img.shields.io/badge/version-0.4.2-2f93e0.svg?style=plastic)
 
 A simple system tray application to provide notifications from an Octopus Deploy server.
 
 ## Features
 
-Octopus Notify connnects to Octopus Deploy and displays popup notifications for different events:
+Octopus Notify connects to Octopus Deploy and displays popup notifications for different events:
 * A build is successful
 * A build fails for the first time
 * A build is fixed
@@ -31,4 +34,4 @@ Thanks to the [Octopus Deploy](https://octopusdeploy.com) team for making a grea
 
 ## Licence
 
-Release under the [MIT licence](https://github.com/AndrewMcLachlan/OctopusNotify/blob/master/LICENSE). 
+Released under the [MIT licence](https://github.com/AndrewMcLachlan/OctopusNotify/blob/master/LICENSE).
