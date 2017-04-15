@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Octopus.Client.Editors;
 using Octopus.Client.Model;
 using Octopus.Client.Repositories;
 
@@ -12,32 +13,42 @@ namespace OctopusNotify.Stub
             throw new NotImplementedException();
         }
 
+        public EnvironmentEditor CreateOrModify(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public EnvironmentEditor CreateOrModify(string name, string description)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(EnvironmentResource resource)
         {
             throw new NotImplementedException();
         }
 
-        public List<EnvironmentResource> FindAll()
+        public List<EnvironmentResource> FindAll(string path = null, object pathParameters = null)
         {
             throw new NotImplementedException();
         }
 
-        public EnvironmentResource FindByName(string name)
+        public EnvironmentResource FindByName(string name, string path = null, object pathParameters = null)
         {
             throw new NotImplementedException();
         }
 
-        public List<EnvironmentResource> FindByNames(IEnumerable<string> names)
+        public List<EnvironmentResource> FindByNames(IEnumerable<string> names, string path = null, object pathParameters = null)
         {
             throw new NotImplementedException();
         }
 
-        public List<EnvironmentResource> FindMany(Func<EnvironmentResource, bool> search)
+        public List<EnvironmentResource> FindMany(Func<EnvironmentResource, bool> search, string path = null, object pathParameters = null)
         {
             throw new NotImplementedException();
         }
 
-        public EnvironmentResource FindOne(Func<EnvironmentResource, bool> search)
+        public EnvironmentResource FindOne(Func<EnvironmentResource, bool> search, string path = null, object pathParameters = null)
         {
             throw new NotImplementedException();
         }
@@ -47,13 +58,18 @@ namespace OctopusNotify.Stub
             throw new NotImplementedException();
         }
 
-        public List<ReferenceDataItem> GetAll()
+        public List<EnvironmentResource> Get(params string[] ids)
         {
-            return new List<ReferenceDataItem>
+            throw new NotImplementedException();
+        }
+
+        public List<EnvironmentResource> GetAll()
+        {
+            return new List<EnvironmentResource>
             {
-                new ReferenceDataItem("1", "AsmProj-ST"),
-                new ReferenceDataItem("2", "AsmProj-SIT"),
-                new ReferenceDataItem("3", "AsmProj-UAT"),
+                new EnvironmentResource { Id = "1", Name = "AsmProj-ST" },
+                new EnvironmentResource { Id = "2", Name ="AsmProj-SIT" },
+                new EnvironmentResource { Id = "3", Name = "AsmProj-UAT" },
             };
         }
 
@@ -67,7 +83,7 @@ namespace OctopusNotify.Stub
             throw new NotImplementedException();
         }
 
-        public void Paginate(Func<ResourceCollection<EnvironmentResource>, bool> getNextPage)
+        public void Paginate(Func<ResourceCollection<EnvironmentResource>, bool> getNextPage, string path = null, object pathParameters = null)
         {
             throw new NotImplementedException();
         }

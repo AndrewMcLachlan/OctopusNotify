@@ -21,6 +21,11 @@ namespace OctopusNotify.Stub
             };
         }
 
+        public List<InterruptionResource> Get(params string[] ids)
+        {
+            throw new NotImplementedException();
+        }
+
         public UserResource GetResponsibleUser(InterruptionResource interruption)
         {
             throw new NotImplementedException();

@@ -257,5 +257,27 @@ namespace OctopusNotify.Stub
                 throw new NotImplementedException();
             }
         }
+
+        public IActionTemplateRepository ActionTemplates => throw new NotImplementedException();
+
+        public ICertificateConfigurationRepository CertificateConfiguration => throw new NotImplementedException();
+
+        public ICommunityActionTemplateRepository CommunityActionTemplates => throw new NotImplementedException();
+
+        public IFeaturesConfigurationRepository FeaturesConfiguration => throw new NotImplementedException();
+
+        public IMachinePolicyRepository MachinePolicies => throw new NotImplementedException();
+
+        public IProxyRepository Proxies => throw new NotImplementedException();
+
+        public ISchedulerRepository Schedulers => throw new NotImplementedException();
+
+        public ISubscriptionRepository Subscriptions => throw new NotImplementedException();
+
+        public ITagSetRepository TagSets => throw new NotImplementedException();
+
+        public ITenantRepository Tenants => throw new NotImplementedException();
+
+        public IProjectTriggerRepository ProjectTriggers => throw new NotImplementedException();
     }
 }

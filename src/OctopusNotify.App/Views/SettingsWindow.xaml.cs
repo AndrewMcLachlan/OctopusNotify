@@ -61,13 +61,13 @@ namespace OctopusNotify.App.Views
             var dc = ((SettingsViewModel)DataContext);
             dc.Test(_apiKeyChanged ? ApiKeyText.Text : Settings.Default.ApiKey.Decrypt()).ContinueWith(t =>
             {
-                if (t.Result)
+                if (t.Result.Item1)
                 {
-                    DispatcherHelper.Run(Dispatcher, () => MessageBox.Show(this, "Connection succeeded!", "Test", MessageBoxButton.OK, MessageBoxImage.Information));
+                    DispatcherHelper.Run(Dispatcher, () => MessageBox.Show(this, t.Result.Item2, "Test", MessageBoxButton.OK, MessageBoxImage.Information));
                 }
                 else
                 {
-                    DispatcherHelper.Run(Dispatcher, () => MessageBox.Show(this, "Connection failed", "Error", MessageBoxButton.OK, MessageBoxImage.Warning));
+                    DispatcherHelper.Run(Dispatcher, () => MessageBox.Show(this, t.Result.Item2, "Error", MessageBoxButton.OK, MessageBoxImage.Warning));
                 }
             });
             e.Handled = true;
