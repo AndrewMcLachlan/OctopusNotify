@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OctopusNotify.App.MarkupExtensions"
+        xmlns:vm="clr-namespace:OctopusNotify.App.ViewModels"
         mc:Ignorable="d"
         Title="AboutWindow" Height="278" Width="450" AllowsTransparency="True" WindowStyle="None" ShowInTaskbar="False" ResizeMode="NoResize" ScrollViewer.VerticalScrollBarVisibility="Disabled" WindowStartupLocation="CenterScreen" Deactivated="About_Deactivated" Activated="About_Activated" Opacity="1" Background="Transparent" MouseUp="About_MouseUp">
+    <Window.DataContext>
+        <vm:AboutViewModel />
+    </Window.DataContext>
+
     <Border CornerRadius="10" BorderThickness="2">
         <Border.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -21,7 +26,8 @@
             <TextBlock Foreground="White" Canvas.Left="177" Canvas.Top="10" FontSize="60" FontWeight="ExtraBold">Octopus</TextBlock>
             <TextBlock Foreground="White" Canvas.Left="177" Canvas.Top="74" FontSize="56" FontWeight="Light">Notify</TextBlock>
             <TextBlock Foreground="White" x:Name="Version" Canvas.Left="177" Canvas.Top="160">v1.2.3.4</TextBlock>
-            <TextBlock Foreground="White" Canvas.Left="10" Canvas.Top="244" Width="430" TextAlignment="Center" HorizontalAlignment="Center" FontSize="14">Copyright © Andrew McLachlan 2016</TextBlock>
+            <TextBlock Foreground="White" Canvas.Left="10" Canvas.Top="226" Width="430" TextAlignment="Center" HorizontalAlignment="Center" FontSize="14">Copyright © Andrew McLachlan 2016</TextBlock>
+            <TextBlock Foreground="White" Canvas.Left="10" Canvas.Top="250" Width="430" TextAlignment="Center" HorizontalAlignment="Center" FontSize="10">Using WPF NotifyIcon <Hyperlink Foreground="White" NavigateUri="{Binding WpfIconUri }" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock Text="{Binding WpfIconLinkDisplay}" /></Hyperlink></TextBlock>
         </Canvas>
     </Border>
 </Window>

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Media.Animation;
+using System.Windows.Navigation;
 
 namespace OctopusNotify.App.Views
 {
@@ -11,6 +12,10 @@ namespace OctopusNotify.App.Views
     /// </summary>
     public partial class AboutWindow : Window
     {
+        #region Fields
+        private bool _deactivate = true;
+        #endregion
+
         #region Constructors
         public AboutWindow()
         {
@@ -37,6 +42,11 @@ namespace OctopusNotify.App.Views
         #region Event Handlers
         private void About_Deactivated(object sender, EventArgs e)
         {
+            if (!_deactivate)
+            {
+                _deactivate = true;
+                return;
+            }
             AnimateClose();
         }
 
@@ -49,6 +59,13 @@ namespace OctopusNotify.App.Views
         private void About_Activated(object sender, EventArgs e)
         {
             AnimateOpen();
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            _deactivate = false;
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
         #endregion
 

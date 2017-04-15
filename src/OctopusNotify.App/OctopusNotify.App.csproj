@@ -124,6 +124,7 @@
     <Compile Include="Models\NotificationEventArgs.cs" />
     <Compile Include="Utilities\DeploymentStatusExtensions.cs" />
     <Compile Include="ValueConverters\InvertBooleanConverter.cs" />
+    <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="Views\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
