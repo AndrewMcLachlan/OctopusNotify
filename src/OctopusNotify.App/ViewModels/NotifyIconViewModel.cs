@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Practices.Unity;
@@ -69,7 +70,7 @@ namespace OctopusNotify.App.ViewModels
 
         public NotifyIconViewModel()
         {
-            NotifyIcon = DisconnectedNotifyIcon;
+            SetIconState(NotifyIconState.Disconnected);
 
             if (String.IsNullOrEmpty(Settings.Default.ServerUrl.ToString()))
             {
@@ -78,7 +79,7 @@ namespace OctopusNotify.App.ViewModels
 
             Container.Current.Configured += Container_Configured;
 
-            CreateAdapter();
+            CreateAdapter().NoWait();
         }
         #endregion
 
@@ -90,7 +91,7 @@ namespace OctopusNotify.App.ViewModels
         /// <param name="e"></param>
         private void Container_Configured(object sender, EventArgs e)
         {
-            CreateAdapter();
+            CreateAdapter().NoWait();
         }
 
         private void Adapter_ConnectionError(object sender, EventArgs e)
@@ -138,7 +139,7 @@ namespace OctopusNotify.App.ViewModels
         /// <summary>
         /// Creates the adapter and starts listening for deployment events.
         /// </summary>
-        private void CreateAdapter()
+        private async Task CreateAdapter()
         {
             if (_adapter != null)
             {
@@ -152,10 +153,21 @@ namespace OctopusNotify.App.ViewModels
                 _adapter.ConnectionRestored -= Adapter_ConnectionRestored;
 
                 _adapter = null;
+                SetIconState(NotifyIconState.Disconnected);
             }
 
             try
             {
+                IConnectionTester tester = Container.Current.Resolve<IConnectionTester>();
+                (bool, string) testResult = await tester.Test();
+
+                if (!testResult.Item1)
+                {
+                    _adapter = null;
+                    SetIconState(NotifyIconState.Disconnected);
+                    return;
+                }
+
                 _adapter = Container.Current.Resolve<IDeploymentRepositoryAdapter>();
 
                 _adapter.DeploymentsChanged += Adapter_DeploymentsChanged;

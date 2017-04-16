@@ -10,7 +10,7 @@
         xmlns:vr="clr-namespace:OctopusNotify.App.ValidationRules"
         xmlns:conv="clr-namespace:OctopusNotify.App.ValueConverters"
         Closing="Window_Closing"
-        Title="Settings" Height="385.058" Width="675.811" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterScreen">
+        Title="Settings" Height="385.058" Width="685.811" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:SettingsViewModel />
     </Window.DataContext>

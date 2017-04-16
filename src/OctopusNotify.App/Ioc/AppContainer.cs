@@ -32,6 +32,15 @@ namespace OctopusNotify.App.Ioc
             {
                 new InjectionConstructor(new ResolvedParameter<IOctopusRepository>(name), Settings.Default.PollingInterval * 1000d)
             });
+
+#if STUB
+            UnityContainer.RegisterType<IConnectionTester, StubConnectionTester>();
+#else
+            UnityContainer.RegisterType<IConnectionTester, ConnectionTester>(new[]
+            {
+                new InjectionConstructor(Settings.Default.ServerUrl, Settings.Default.ApiKey.Decrypt())
+            });
+#endif
         }
     }
 }

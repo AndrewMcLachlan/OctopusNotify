@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security;
 using System.Threading.Tasks;
 using Octopus.Client;
 using Octopus.Client.Exceptions;
@@ -12,8 +13,22 @@ namespace OctopusNotify
     /// <remarks>
     /// Currently this does not use IoC.
     /// </remarks>
-    public class ConnectionTester
+    public class ConnectionTester : IConnectionTester
     {
+        private Uri _configuredUri;
+        private string _configuredApiKey;
+
+        /// <summary>
+        /// Initializs a new instance of the <see cref=""/> class.
+        /// </summary>
+        /// <param name="configuredUri">The current Octopus URI.</param>
+        /// <param name="configuredApiKey">The current Octopus API key</param>
+        public ConnectionTester(string configuredUri, string configuredApiKey)
+        {
+            Uri.TryCreate(configuredUri, UriKind.RelativeOrAbsolute, out _configuredUri);
+            _configuredApiKey = configuredApiKey;
+        }
+
         /// <summary>
         /// Tests the connection.
         /// </summary>
@@ -52,6 +67,16 @@ namespace OctopusNotify
             {
                 return (false, ex.Message);
             }
+        }
+
+        public Task<(bool, string)> Test()
+        {
+            return Test(_configuredUri, _configuredApiKey);
+        }
+
+        public Task<(bool, string)> Test(Uri url, string userName, SecureString password)
+        {
+            throw new NotImplementedException();
         }
 
         private string GetMessageFromException(Exception exception)
