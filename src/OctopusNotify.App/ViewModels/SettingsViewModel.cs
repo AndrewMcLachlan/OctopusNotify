@@ -171,9 +171,9 @@ namespace OctopusNotify.App.ViewModels
         #endregion
 
         #region Public Methods
-        public async Task<bool> Test(string apiKey)
+        public async Task<(bool, string)> Test(string apiKey)
         {
-            ConnectionTester tester = new ConnectionTester();
+            IConnectionTester tester = Container.Current.Resolve<IConnectionTester>();
             return await tester.Test(ServerUrl, apiKey);
         }
 
