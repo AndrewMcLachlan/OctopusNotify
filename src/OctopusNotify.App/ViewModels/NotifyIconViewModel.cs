@@ -153,7 +153,6 @@ namespace OctopusNotify.App.ViewModels
                 _adapter.ConnectionRestored -= Adapter_ConnectionRestored;
 
                 _adapter = null;
-                SetIconState(NotifyIconState.Disconnected);
             }
 
             try
