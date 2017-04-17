@@ -3,6 +3,7 @@ using System.Threading;
 using System.Windows;
 using OctopusNotify.App.Ioc;
 using OctopusNotify.App.Properties;
+using OctopusNotify.App.Views;
 using Serilog;
 
 namespace OctopusNotify.App
@@ -12,12 +13,16 @@ namespace OctopusNotify.App
     /// </summary>
     public partial class App : Application
     {
+        private Mutex _mutex;
+
         public void App_Startup(object sender, StartupEventArgs e)
         {
             bool created;
-            Mutex mutex = new Mutex(true, "b300f8b3-e9af-466f-a4a6-9f4cb545b5ad", out created);
+            _mutex = new Mutex(true, "b300f8b3-e9af-466f-a4a6-9f4cb545b5ad", out created);
             if (!created)
             {
+                _mutex.Dispose();
+                _mutex = null;
                 Current.Shutdown();
                 return;
             }
@@ -35,6 +40,16 @@ namespace OctopusNotify.App
 
             Container.Current = new AppContainer();
             Container.Current.Configure();
+
+            NotifyIconWindow window = new NotifyIconWindow();
+        }
+
+        private void App_Exit(object sender, ExitEventArgs e)
+        {
+            if (_mutex != null)
+            {
+                _mutex.ReleaseMutex();
+            }
         }
     }
 }
