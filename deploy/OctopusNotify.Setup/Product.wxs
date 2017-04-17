@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?if $(var.Platform) = x64 ?>
+<?define Win64 = "yes" ?>
+<?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
+<?else ?>
+<?define Win64 = "no" ?>
+<?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
+<?endif ?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
-  <Product Id="*" Name="Octopus Notify" Language="1033" Version="0.4.2.0" Manufacturer="Andrew McLachlan" UpgradeCode="2c0dbe90-db26-4ea1-828f-bc8da386a14f">
+  <Product Id="*" Name="Octopus Notify" Language="1033" Version="0.5.0.0" Manufacturer="Andrew McLachlan" UpgradeCode="2c0dbe90-db26-4ea1-828f-bc8da386a14f">
 
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
@@ -36,7 +43,7 @@
 
   <Fragment>
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="ProgramFilesFolder">
+      <Directory Id="$(var.PlatformProgramFilesFolder)">
         <Directory Id="INSTALLFOLDER" Name="Octopus Notify" />
       </Directory>
       <Directory Id="ProgramMenuFolder">
@@ -62,7 +69,7 @@
         <File Id="Serilog.dll" Name="Serilog.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\Serilog.dll"/>
         <File Id="Serilog.Settings.AppSettings.dll" Name="Serilog.Settings.AppSettings.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\Serilog.Settings.AppSettings.dll"/>
         <File Id="Serilog.Sinks.File.dll" Name="Serilog.Sinks.File.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\Serilog.Sinks.File.dll"/>
-
+        <File Id="System.ValueTuple.dll" Name="System.ValueTuple.dll" DiskId="1" Source="$(var.OctopusNotify.App.TargetDir)\System.ValueTuple.dll"/>
       </Component>
     </ComponentGroup>
   </Fragment>
