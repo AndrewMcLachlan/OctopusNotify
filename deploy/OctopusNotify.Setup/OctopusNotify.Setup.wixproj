@@ -1,12 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask
+  TaskName="GetFileVersion"
+  TaskFactory="CodeTaskFactory"
+  AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+
+    <ParameterGroup>
+      <AssemblyPath ParameterType="System.String" Required="true" />
+      <Version ParameterType="System.String" Output="true" />
+    </ParameterGroup>
+    <Task>
+	  <Using Namespace="System" />
+      <Using Namespace="System.Diagnostics" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+      Log.LogMessage("Getting version details of assembly at: " + this.AssemblyPath, MessageImportance.High);
+      System.Version tempVersion = new Version(FileVersionInfo.GetVersionInfo(this.AssemblyPath).FileVersion);
+	  Log.LogMessage("Version:" + tempVersion);
+	  string formatText;
+
+	  if (tempVersion.Build > 0)
+	  {
+	    formatText = "{0}.{1}.{2}";
+	  }
+	  else
+	  {
+	    formatText = "{0}.{1}";
+	  }
+	  this.Version = String.Format(formatText, tempVersion.Major, tempVersion.Minor, tempVersion.Build, tempVersion.Revision);
+    ]]>
+      </Code>
+    </Task>
+  </UsingTask>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>3.10</ProductVersion>
     <ProjectGuid>455315bc-fc55-432d-8785-900556de693a</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>OctopusNotify.$(Platform)</OutputName>
+    <OutputName>OctopusNotify</OutputName>
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
@@ -62,10 +94,22 @@
   <Import Project="$(WixTargetsPath)" />
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.
-	Other similar extension points exist, see Wix.targets.
+	Other similar extension points exist, see Wix.targets.-->
 	<Target Name="BeforeBuild">
+    <GetFileVersion AssemblyPath="$(SolutionDir)OctopusNotify.App\bin\$(Configuration)\OctopusNotify.exe">
+      <Output TaskParameter="Version" PropertyName="AssemblyFileVersion" />
+    </GetFileVersion>
+    <CreateProperty Value="$(OutputName).$(AssemblyFileVersion)_$(Platform)">
+      <Output TaskParameter="Value" PropertyName="TargetName"/>
+    </CreateProperty>
+    <CreateProperty Value="$(TargetName)$(TargetExt)">
+      <Output TaskParameter="Value" PropertyName="TargetFileName"/>
+    </CreateProperty>
+    <CreateProperty Value="$(TargetDir)$(TargetFileName)">
+      <Output TaskParameter="Value" PropertyName="TargetPath"/>
+    </CreateProperty>
 	</Target>
-	<Target Name="AfterBuild">
+	<!--<Target Name="AfterBuild">
 	</Target>
 	-->
 </Project>
