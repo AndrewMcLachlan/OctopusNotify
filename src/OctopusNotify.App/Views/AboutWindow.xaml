@@ -22,7 +22,7 @@
             <SolidColorBrush Color="Black" Opacity="0.5" />
         </Border.BorderBrush>
             <Canvas ScrollViewer.VerticalScrollBarVisibility="Disabled">
-            <Image Source="{local:Icon Source=../App.ico,Size=256}" Canvas.Left="20" Canvas.Top="26" Height="128" Width="128" />
+            <Image Source="{local:Icon Source=/App.ico,Size=256}" Canvas.Left="20" Canvas.Top="26" Height="128" Width="128" />
             <TextBlock Foreground="White" Canvas.Left="177" Canvas.Top="10" FontSize="60" FontWeight="ExtraBold">Octopus</TextBlock>
             <TextBlock Foreground="White" Canvas.Left="177" Canvas.Top="74" FontSize="56" FontWeight="Light">Notify</TextBlock>
             <TextBlock Foreground="White" x:Name="Version" Canvas.Left="177" Canvas.Top="160">v1.2.3.4</TextBlock>

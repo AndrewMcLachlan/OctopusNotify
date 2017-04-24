@@ -25,7 +25,7 @@ namespace OctopusNotify.App.MarkupExtensions
             set
             {
                 // Have to make full pack URI from short form, so System.Uri recognizes it.
-                _source = "pack://application:,,," + value;
+                _source = "pack://application:,,,/OctopusNotify;component" + value;
             }
         }
 
