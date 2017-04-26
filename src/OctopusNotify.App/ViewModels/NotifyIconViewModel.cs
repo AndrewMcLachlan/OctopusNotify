@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Practices.Unity;
@@ -26,6 +27,7 @@ namespace OctopusNotify.App.ViewModels
 
         private ImageSource _notifyIcon;
         private string _stateSummary;
+        private bool _signedIn;
 
         private BlockingCollection<DeploymentResult> _notificationQueue = new BlockingCollection<DeploymentResult>();
         #endregion
@@ -37,26 +39,20 @@ namespace OctopusNotify.App.ViewModels
         #region Properties
         public ImageSource NotifyIcon
         {
-            get
-            {
-                return _notifyIcon;
-            }
-            set
-            {
-                Set(ref _notifyIcon, value);
-            }
+            get => _notifyIcon;
+            set => Set(ref _notifyIcon, value);
         }
 
         public string StateSummary
         {
-            get
-            {
-                return _stateSummary;
-            }
-            set
-            {
-                Set(ref _stateSummary, value);
-            }
+            get => _stateSummary;
+            set => Set(ref _stateSummary, value);
+        }
+
+        public bool SignedIn
+        {
+            get => _signedIn;
+            set => Set(ref _signedIn, value);
         }
         #endregion
 
@@ -74,7 +70,10 @@ namespace OctopusNotify.App.ViewModels
 
             if (String.IsNullOrEmpty(Settings.Default.ServerUrl.ToString()))
             {
-                AppCommands.ShowSettings.Execute(null);
+#if DEBUG
+                if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+#endif
+                    AppCommands.ShowSettings.Execute(null);
             }
 
             Container.Current.Configured += Container_Configured;
@@ -91,7 +90,7 @@ namespace OctopusNotify.App.ViewModels
         /// <param name="e"></param>
         private void Container_Configured(object sender, EventArgs e)
         {
-            CreateAdapter().NoWait();
+            //CreateAdapter().NoWait();
         }
 
         private void Adapter_ConnectionError(object sender, EventArgs e)
@@ -133,6 +132,19 @@ namespace OctopusNotify.App.ViewModels
 
             StateSummary = sb.ToString();
         }
+
+        private void Adapter_SignedIn(object sender, EventArgs e)
+        {
+            _adapter.StartPolling();
+            SignedIn = true;
+        }
+
+        private void Adapter_SignedOut(object sender, EventArgs e)
+        {
+            _adapter.StopPolling();
+            SetIconState(NotifyIconState.Disconnected);
+            SignedIn = false;
+        }
         #endregion
 
         #region Private Methods
@@ -141,10 +153,10 @@ namespace OctopusNotify.App.ViewModels
         /// </summary>
         private async Task CreateAdapter()
         {
-            if (_adapter != null)
+            /*if (_adapter != null)
             {
                 _adapter.StopPolling();
-                _adapter.DeploymentsChanged -= Adapter_DeploymentsChanged;
+                /*_adapter.DeploymentsChanged -= Adapter_DeploymentsChanged;
                 _adapter.DeploymentSummaryChanged -= Adapter_DeploymentSummaryChanged;
 
                 _adapter.ErrorsCleared -= Adapter_ErrorsCleared;
@@ -152,20 +164,20 @@ namespace OctopusNotify.App.ViewModels
                 _adapter.ConnectionError -= Adapter_ConnectionError;
                 _adapter.ConnectionRestored -= Adapter_ConnectionRestored;
 
-                _adapter = null;
-            }
+                _adapter = null;* /
+            }*/
 
             try
             {
-                IConnectionTester tester = Container.Current.Resolve<IConnectionTester>();
+                /*IConnectionTester tester = Container.Current.Resolve<IConnectionTester>();
                 (bool, string) testResult = await tester.Test();
 
                 if (!testResult.Item1)
                 {
-                    _adapter = null;
+                    //_adapter = null;
                     SetIconState(NotifyIconState.Disconnected);
                     return;
-                }
+                }*/
 
                 _adapter = Container.Current.Resolve<IDeploymentRepositoryAdapter>();
 
@@ -177,6 +189,9 @@ namespace OctopusNotify.App.ViewModels
 
                 _adapter.ConnectionError += Adapter_ConnectionError;
                 _adapter.ConnectionRestored += Adapter_ConnectionRestored;
+
+                _adapter.SignedIn += Adapter_SignedIn;
+                _adapter.SignedOut += Adapter_SignedOut;
 
                 _adapter.StartPolling();
             }

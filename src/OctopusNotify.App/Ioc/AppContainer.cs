@@ -28,10 +28,12 @@ namespace OctopusNotify.App.Ioc
                 new InjectionConstructor(new ResolvedParameter<OctopusServerEndpoint>())
             });
 
-            UnityContainer.RegisterType<IDeploymentRepositoryAdapter, OctopusAdapter>(new[]
+            UnityContainer.RegisterInstance<IDeploymentRepositoryAdapter>(new OctopusAdapter(UnityContainer.Resolve<IOctopusRepository>(name), Settings.Default.PollingInterval * 1000d));
+
+            /*UnityContainer.RegisterType<IDeploymentRepositoryAdapter, OctopusAdapter>(new ContainerControlledLifetimeManager(), new[]
             {
                 new InjectionConstructor(new ResolvedParameter<IOctopusRepository>(name), Settings.Default.PollingInterval * 1000d)
-            });
+            });*/
 
 #if STUB
             UnityContainer.RegisterType<IConnectionTester, StubConnectionTester>();

@@ -9,6 +9,7 @@
         xmlns:vm="clr-namespace:OctopusNotify.App.ViewModels"
         xmlns:test="test-mode"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:conv="clr-namespace:OctopusNotify.App.ValueConverters"
         x:Name="Window"
         mc:Ignorable="d mc test"
         Title="Octopus Notify" Height="350" Width="525" StateChanged="Window_StateChanged" Closing="Window_Closing" Icon="/App.ico">
@@ -17,18 +18,18 @@
         <vm:NotifyIconViewModel />
     </Window.DataContext>
 
-    <mc:AlternateContent>
-        <mc:Choice Requires="test">
-            <Window.Resources>
+    <Window.Resources>
+        <conv:BooleanToVisibility x:Key="ToVisibility" />
+        <conv:BooleanToCollapsed x:Key="ToCollapsed" />
+        <mc:AlternateContent>
+            <mc:Choice Requires="test">
                 <Visibility x:Key="DebugVisible">Visible</Visibility>
-            </Window.Resources>
-        </mc:Choice>
-        <mc:Fallback>
-            <Window.Resources>
+            </mc:Choice>
+            <mc:Fallback>
                 <Visibility x:Key="DebugVisible">Collapsed</Visibility>
-            </Window.Resources>
-        </mc:Fallback>
-    </mc:AlternateContent>
+            </mc:Fallback>
+        </mc:AlternateContent>
+    </Window.Resources>
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -40,11 +41,14 @@
                         Visibility="Visible"
                         ToolTipText="{Binding Path=StateSummary}"
                         MenuActivation="RightClick" Grid.ColumnSpan="2"
-                        DoubleClickCommand="local:AppCommands.ShowSettings">
+                        DoubleClickCommand="local:AppCommands.ShowSettings"
+                        >
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Open" Command="local:AppCommands.ShowMainWindow" FontWeight="Bold" Visibility="Collapsed" />
-                    <MenuItem Header="Settings..." Command="local:AppCommands.ShowSettings" FontWeight="Bold"  />
+                    <MenuItem Header="Settings..." Command="local:AppCommands.ShowSettings" FontWeight="Bold" />
+                    <MenuItem Header="Sign in..." Command="local:AppCommands.SignIn" Visibility="{Binding Path=SignedIn,Converter={StaticResource ToCollapsed}}" />
+                    <MenuItem Header="Sign out" Command="local:AppCommands.SignOut" Visibility="{Binding Path=SignedIn,Converter={StaticResource ToVisibility}}" />
                     <MenuItem Header="Open Octopus..." Command="local:AppCommands.LaunchOctopus" />
                     <Separator />
                     <MenuItem Header="Test..." Command="local:AppCommands.ShowStub" Visibility="{StaticResource DebugVisible}"  />
