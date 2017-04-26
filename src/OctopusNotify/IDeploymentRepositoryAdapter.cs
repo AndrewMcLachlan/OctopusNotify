@@ -39,6 +39,28 @@ namespace OctopusNotify
         event EventHandler ErrorsFound;
 
         /// <summary>
+        /// Raised when a user is signed in.
+        /// </summary>
+        event EventHandler SignedIn;
+
+        /// <summary>
+        /// Raised when a user is signed out.
+        /// </summary>
+        event EventHandler SignedOut;
+
+        /// <summary>
+        /// Signs in a user.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        bool SignIn(string userName, string password);
+
+        /// <summary>
+        /// Signs out a user.
+        /// </summary>
+        void SignOut();
+
+        /// <summary>
         /// Start polling with the default interval.
         /// </summary>
         void StartPolling();

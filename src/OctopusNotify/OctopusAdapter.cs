@@ -24,6 +24,9 @@ namespace OctopusNotify
 
         public event EventHandler ErrorsCleared;
         public event EventHandler ErrorsFound;
+
+        public event EventHandler SignedIn;
+        public event EventHandler SignedOut;
         #endregion
 
         #region Fields
@@ -54,6 +57,32 @@ namespace OctopusNotify
         #endregion
 
         #region Public Methods
+        public bool SignIn(string userName, string password)
+        {
+            try
+            {
+                _repository.Users.SignIn(new LoginCommand
+                {
+                    Username = userName,
+                    Password = password,
+                    RememberMe = false,
+                });
+                OnSignedIn();
+                var user2 = _repository.Users.GetCurrent();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public void SignOut()
+        {
+            _repository.Users.SignOut();
+            OnSignedOut();
+        }
+
         public void StartPolling()
         {
             StartPolling(_pollingInterval);
@@ -316,6 +345,15 @@ namespace OctopusNotify
             DeploymentSummaryChanged?.Invoke(this, e);
         }
 
+        private void OnSignedIn()
+        {
+            SignedIn?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void OnSignedOut()
+        {
+            SignedOut?.Invoke(this, EventArgs.Empty);
+        }
         #endregion
 
         #region Dispose
