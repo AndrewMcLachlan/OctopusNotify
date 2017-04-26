@@ -20,5 +20,9 @@ namespace OctopusNotify.App
         public static ShowAboutWindowCommand ShowAbout { get; } = new ShowAboutWindowCommand();
 
         public static ReportIssueCommand ReportIssue { get; } = new ReportIssueCommand();
+
+        public static SignInCommand SignIn { get; } = new SignInCommand();
+
+        public static SignOutCommand SignOut { get; } = new SignOutCommand();
     }
 }

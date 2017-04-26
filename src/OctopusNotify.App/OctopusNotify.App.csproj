@@ -118,11 +118,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\SignOutCommand.cs" />
+    <Compile Include="Commands\SignInCommand.cs" />
     <Compile Include="Ioc\AppContainer.cs" />
     <Compile Include="Models\BalloonIcon.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\NotificationEventArgs.cs" />
     <Compile Include="Utilities\DeploymentStatusExtensions.cs" />
+    <Compile Include="ValueConverters\BooleanToCollapsed.cs" />
+    <Compile Include="ValueConverters\BooleanToVisibility.cs" />
     <Compile Include="ValueConverters\InvertBooleanConverter.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="Views\AboutWindow.xaml.cs">
@@ -138,6 +142,9 @@
     <Compile Include="MarkupExtensions\IconExtension.cs" />
     <Compile Include="Utilities\DispatcherHelper.cs" />
     <Compile Include="Ioc\Container.cs" />
+    <Compile Include="Views\Signin.xaml.cs">
+      <DependentUpon>Signin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Stub.xaml.cs">
       <DependentUpon>Stub.xaml</DependentUpon>
     </Compile>
@@ -185,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Balloon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Signin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -255,6 +266,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Close_Highlight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CloseSimple.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
