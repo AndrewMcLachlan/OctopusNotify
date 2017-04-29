@@ -7,6 +7,11 @@
              Startup="App_Startup"
              Exit="App_Exit">
     <Application.Resources>
-        <sys:Boolean x:Key="TestMode">true</sys:Boolean>
+        <ResourceDictionary>
+            <sys:Boolean x:Key="TestMode">true</sys:Boolean>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="StylesDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

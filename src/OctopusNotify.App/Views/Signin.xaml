@@ -5,92 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OctopusNotify.App.Views"
         mc:Ignorable="d"
-        Title="Signin" Height="300" Width="400" AllowsTransparency="True" WindowStyle="None" ShowInTaskbar="False" ResizeMode="NoResize" ScrollViewer.VerticalScrollBarVisibility="Disabled" WindowStartupLocation="CenterScreen" Opacity="1" Background="Transparent"
+        Title="Signin" Height="300" Width="400" ShowInTaskbar="False" ResizeMode="NoResize" ScrollViewer.VerticalScrollBarVisibility="Disabled" WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown"
-        FocusManager.FocusedElement="{Binding ElementName=UserName}">
+        FocusManager.FocusedElement="{Binding ElementName=UserName}"
+        Style="{StaticResource FancyWindow}">
 
-    <Window.Resources>
-        <Style x:Key="ActionButton" TargetType="Button">
-            <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="2" Padding="7" BorderThickness="0,0,0,3" Name="border">
-                            <Border.BorderBrush>
-                                <SolidColorBrush Color="#FF4cae4c" />
-                            </Border.BorderBrush>
-                            <Border.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#FF4cb64c" Offset="0"/>
-                                    <GradientStop Color="#FF2FE093" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
-                            <ContentPresenter />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="#FF398439" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="WindowButton" TargetType="Button">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Name="border" BorderThickness="1" Padding="3">
-                            <Border.BorderBrush>
-                                <SolidColorBrush Color="Transparent" />
-                            </Border.BorderBrush>
-                            <ContentPresenter />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="#FFFF9999" />
-                                <Setter TargetName="border" Property="Background" Value="#FF8DBBDD" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-
-    <Border CornerRadius="10" BorderThickness="2">
-        <Border.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF194A70" Offset="0"/>
-                <GradientStop Color="#FF2F93E0" Offset="1"/>
-            </LinearGradientBrush>
-        </Border.Background>
-        <Border.BorderBrush>
-            <SolidColorBrush Color="Black" Opacity="0.5" />
-        </Border.BorderBrush>
-        <Canvas ScrollViewer.VerticalScrollBarVisibility="Disabled">
-            <Button Name="CloseButton" IsCancel="True" HorizontalAlignment="Right" Style="{StaticResource WindowButton}" Click="Close_Click" Canvas.Top="10" Canvas.Right="10">
-                <Image Source="../Images/CloseSimple.png" Height="16" Width="16" />
-            </Button>
-            <StackPanel Margin="30,0" Width="335">
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,20">
-                    <TextBlock Foreground="White" FontSize="30" FontWeight="ExtraBold">Octopus</TextBlock>
-                    <TextBlock Foreground="White" FontSize="30" FontWeight="Light" Margin="5,0,0,0">Notify</TextBlock>
-                </StackPanel>
-                <Label Content="User name" Foreground="White" FontSize="16" />
-                <TextBox x:Name="UserName" Text="" FontSize="16" Padding="5" TabIndex="1"  />
-                <Label Content="Password" Foreground="White" FontSize="16" Margin="0,20,0,0" />
-                <PasswordBox Name="Password" Padding="5" FontSize="16" TabIndex="2" />
-
-                <Button Name="SignIn" HorizontalAlignment="Right" Margin="0,20,0,0" Click="SignIn_Click" IsDefault="True" TabIndex="3" Style="{StaticResource ActionButton}">Sign In</Button>
+    <Canvas ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        <Button Name="CloseButton" IsCancel="True" HorizontalAlignment="Right" Style="{StaticResource WindowButton}" Click="Close_Click" Canvas.Top="10" Canvas.Right="10">
+            <Image Source="../Images/CloseSimple.png" Height="16" Width="16" />
+        </Button>
+        <StackPanel Margin="30,0" Width="335">
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,20">
+                <TextBlock Foreground="White" FontSize="30" FontWeight="ExtraBold">Octopus</TextBlock>
+                <TextBlock Foreground="White" FontSize="30" FontWeight="Light" Margin="5,0,0,0">Notify</TextBlock>
             </StackPanel>
-        </Canvas>
-    </Border>
+            <Label Content="User name" Foreground="White" FontSize="16" />
+            <TextBox x:Name="UserName" Text="" FontSize="16" Padding="5" TabIndex="1"  />
+            <Label Content="Password" Foreground="White" FontSize="16" Margin="0,20,0,0" />
+            <PasswordBox Name="Password" Padding="5" FontSize="16" TabIndex="2" />
+
+            <Button Name="SignIn" HorizontalAlignment="Right" Margin="0,20,0,0" Click="SignIn_Click" IsDefault="True" TabIndex="3" Style="{StaticResource ActionButton}">Sign In</Button>
+        </StackPanel>
+    </Canvas>
 </Window>
 
