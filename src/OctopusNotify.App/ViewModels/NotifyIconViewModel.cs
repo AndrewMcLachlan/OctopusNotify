@@ -54,9 +54,21 @@ namespace OctopusNotify.App.ViewModels
             get => _signedIn;
             set => Set(ref _signedIn, value);
         }
-        #endregion
 
-        #region Constructors
+        public Visibility DebugVisible
+        {
+            get
+            {
+#if STUB
+                return Visibility.Visible;
+#else
+                return Visibility.Collapsed;
+#endif
+            }
+        }
+#endregion
+
+#region Constructors
         static NotifyIconViewModel()
         {
             DisconnectedNotifyIcon = new BitmapImage(new Uri("pack://application:,,,/OctopusNotify;component/NotifyIcons/Disconnected.ico"));
@@ -68,7 +80,7 @@ namespace OctopusNotify.App.ViewModels
         {
             SetIconState(NotifyIconState.Disconnected);
 
-            if (String.IsNullOrEmpty(Settings.Default.ServerUrl.ToString()))
+            if (Settings.Default.ServerUrl == null || String.IsNullOrEmpty(Settings.Default.ServerUrl.ToString()))
             {
 #if DEBUG
                 if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject()))
@@ -76,13 +88,19 @@ namespace OctopusNotify.App.ViewModels
                     AppCommands.ShowSettings.Execute(null);
             }
 
-            Container.Current.Configured += Container_Configured;
-
-            CreateAdapter().NoWait();
+#if DEBUG
+            if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+            {
+#endif
+                Container.Current.Configured += Container_Configured;
+                CreateAdapter();
+#if DEBUG
+            }
+#endif
         }
-        #endregion
+#endregion
 
-        #region Event Handlers
+#region Event Handlers
         /// <summary>
         /// Handles changes to IOC configuration.
         /// </summary>
@@ -145,13 +163,13 @@ namespace OctopusNotify.App.ViewModels
             SetIconState(NotifyIconState.Disconnected);
             SignedIn = false;
         }
-        #endregion
+#endregion
 
-        #region Private Methods
+#region Private Methods
         /// <summary>
         /// Creates the adapter and starts listening for deployment events.
         /// </summary>
-        private async Task CreateAdapter()
+        private void CreateAdapter()
         {
             /*if (_adapter != null)
             {
@@ -235,6 +253,6 @@ namespace OctopusNotify.App.ViewModels
         {
             Notification?.Invoke(this, new NotificationEventArgs(notifications));
         }
-        #endregion
+#endregion
     }
 }

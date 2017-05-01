@@ -11,7 +11,7 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:conv="clr-namespace:OctopusNotify.App.ValueConverters"
         x:Name="Window"
-        mc:Ignorable="d mc test"
+        mc:Ignorable="d test"
         Title="Octopus Notify" Height="350" Width="525" StateChanged="Window_StateChanged" Closing="Window_Closing" Icon="/App.ico">
 
     <Window.DataContext>
@@ -21,14 +21,6 @@
     <Window.Resources>
         <conv:BooleanToVisibility x:Key="ToVisibility" />
         <conv:BooleanToCollapsed x:Key="ToCollapsed" />
-        <mc:AlternateContent>
-            <mc:Choice Requires="test">
-                <Visibility x:Key="DebugVisible">Visible</Visibility>
-            </mc:Choice>
-            <mc:Fallback>
-                <Visibility x:Key="DebugVisible">Collapsed</Visibility>
-            </mc:Fallback>
-        </mc:AlternateContent>
     </Window.Resources>
     <Grid>
 
@@ -51,7 +43,7 @@
                     <MenuItem Header="Sign out" Command="local:AppCommands.SignOut" Visibility="{Binding Path=SignedIn,Converter={StaticResource ToVisibility}}" />
                     <MenuItem Header="Open Octopus..." Command="local:AppCommands.LaunchOctopus" />
                     <Separator />
-                    <MenuItem Header="Test..." Command="local:AppCommands.ShowStub" Visibility="{StaticResource DebugVisible}"  />
+                    <MenuItem Header="Test..." Command="local:AppCommands.ShowStub" Visibility="{Binding DebugVisible}"  />
                     <MenuItem Header="Report Issue..." Command="local:AppCommands.ReportIssue" />
                     <MenuItem Header="About..." Command="local:AppCommands.ShowAbout" />
                     <Separator />
