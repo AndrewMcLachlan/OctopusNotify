@@ -19,6 +19,8 @@ namespace OctopusNotify.App.ViewModels
 
         #region Fields
         private Uri _serverUrl;
+        private bool _useApiKey;
+        private bool _canSetApiKey;
         private bool _isValid;
         private bool _canTest;
         private bool _runOnStartup;
@@ -38,31 +40,47 @@ namespace OctopusNotify.App.ViewModels
         #region Properties
         public Uri ServerUrl
         {
-            get { return _serverUrl; }
-            set { Set(ref _serverUrl, value); }
+            get => _serverUrl;
+            set => Set(ref _serverUrl, value);
+        }
+
+        public bool UseApiKey
+        {
+            get => _useApiKey;
+            set
+            {
+                Set(ref _useApiKey, value);
+                CanSetApiKey = value;
+            }
+        }
+
+        public bool CanSetApiKey
+        {
+            get => _canSetApiKey;
+            set => Set(ref _canSetApiKey, value);
         }
 
         public bool IsValid
         {
-            get { return _isValid; }
-            set { Set(ref _isValid, value); }
+            get => _isValid;
+            set => Set(ref _isValid, value);
         }
 
         public bool CanTest
         {
-            get { return _canTest; }
-            set { Set(ref _canTest, value); }
+            get => _canTest;
+            set => Set(ref _canTest, value);
         }
 
         public bool RunOnStartup
         {
-            get { return _runOnStartup; }
-            set { Set(ref _runOnStartup, value); }
+            get => _runOnStartup;
+            set => Set(ref _runOnStartup, value);
         }
 
         public bool DisableFailedBuildAlerts
         {
-            get { return !_alertOnFailedBuild && !_alertOnNewFailedBuild; }
+            get => !_alertOnFailedBuild && !_alertOnNewFailedBuild;
             set
             {
                 if (value)
@@ -75,7 +93,7 @@ namespace OctopusNotify.App.ViewModels
 
         public bool DisableSuccessfulBuildAlerts
         {
-            get { return !_alertOnSuccessfulBuild && !_alertOnFixedBuild; }
+            get => !_alertOnSuccessfulBuild && !_alertOnFixedBuild;
             set
             {
                 if (value)
@@ -88,50 +106,55 @@ namespace OctopusNotify.App.ViewModels
 
         public bool AlertOnFailedBuild
         {
-            get { return _alertOnFailedBuild; }
-            set { Set(ref _alertOnFailedBuild, value); }
+            get => _alertOnFailedBuild;
+            set => Set(ref _alertOnFailedBuild, value);
         }
 
         public bool AlertOnNewFailedBuild
         {
-            get { return _alertOnNewFailedBuild; }
-            set { Set(ref _alertOnNewFailedBuild, value); }
+            get => _alertOnNewFailedBuild;
+            set => Set(ref _alertOnNewFailedBuild, value);
         }
 
         public bool AlertOnFixedBuild
         {
-            get { return _alertOnFixedBuild; }
-            set { Set(ref _alertOnFixedBuild, value); }
+            get => _alertOnFixedBuild;
+            set => Set(ref _alertOnFixedBuild, value);
         }
 
         public bool AlertOnSuccessfulBuild
         {
-            get { return _alertOnSuccessfulBuild; }
-            set { Set(ref _alertOnSuccessfulBuild, value); }
+            get => _alertOnSuccessfulBuild;
+            set => Set(ref _alertOnSuccessfulBuild, value);
         }
 
         public bool AlertOnGuidedFailure
         {
-            get { return _alertOnGuidedFailure; }
-            set { Set(ref _alertOnGuidedFailure, value); }
+            get => _alertOnGuidedFailure;
+            set => Set(ref _alertOnGuidedFailure, value);
         }
 
         public bool AlertOnManualStep
         {
-            get { return _alertOnManualStep; }
-            set { Set(ref _alertOnManualStep, value); }
+            get => _alertOnManualStep;
+            set => Set(ref _alertOnManualStep, value);
         }
 
         public int PollingInterval
         {
-            get { return _pollingInterval; }
-            set { Set(ref _pollingInterval, value); }
+            get => _pollingInterval;
+            set => Set(ref _pollingInterval, value);
         }
 
         public int BalloonTimeout
         {
-            get { return _balloonTimeout; }
-            set { Set(ref _balloonTimeout, value); }
+            get => _balloonTimeout;
+            set => Set(ref _balloonTimeout, value);
+        }
+
+        public string InitialApiKey
+        {
+            get; set;
         }
 
         public Uri ApiKeyUri
@@ -139,7 +162,7 @@ namespace OctopusNotify.App.ViewModels
             get
             {
                 return String.IsNullOrEmpty(ConfigurationManager.AppSettings["doc:HowToCreateApiKey"]) ?
-                    new Uri("http://docs.octopusdeploy.com/display/OD/How+to+create+an+API+key") :
+                    new Uri("https://octopus.com/docs/how-to/how-to-create-an-api-key") :
                     new Uri(ConfigurationManager.AppSettings["doc:HowToCreateApiKey"]);
             }
         }
@@ -164,7 +187,15 @@ namespace OctopusNotify.App.ViewModels
             PollingInterval = Settings.Default.PollingInterval;
             BalloonTimeout = Settings.Default.BalloonTimeout;
 
+            UseApiKey = Settings.Default.UseApiKey;
+
             RunOnStartup = GetRunOnStartup();
+
+            if (!String.IsNullOrEmpty(Settings.Default.ApiKey))
+            {
+                UseApiKey = true;
+                InitialApiKey = "●●●●●●●●●●●●";
+            }
 
             Validate();
         }

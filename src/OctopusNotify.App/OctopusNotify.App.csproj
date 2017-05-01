@@ -142,6 +142,9 @@
     <Compile Include="MarkupExtensions\IconExtension.cs" />
     <Compile Include="Utilities\DispatcherHelper.cs" />
     <Compile Include="Ioc\Container.cs" />
+    <Compile Include="Views\SettingsWindow2.xaml.cs">
+      <DependentUpon>SettingsWindow2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Signin.xaml.cs">
       <DependentUpon>Signin.xaml</DependentUpon>
     </Compile>
@@ -196,6 +199,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Balloon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsWindow2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -273,6 +280,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\CloseSimple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Server.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Application.png" />
+    <Resource Include="Images\Notification.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

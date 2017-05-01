@@ -21,6 +21,7 @@ namespace OctopusNotify.App.Views
 
         private int _validationErrorCount = 0;
         private bool _apiKeyChanged = false;
+        private bool _visualTextChange = false;
 
         public SettingsWindow()
         {
@@ -87,7 +88,8 @@ namespace OctopusNotify.App.Views
 
         private void ApiKeyText_TextChanged(object sender, TextChangedEventArgs e)
         {
-            _apiKeyChanged = true;
+            _apiKeyChanged = true ^ _visualTextChange;
+            _visualTextChange = false;
         }
 
         private void Time_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -120,6 +122,33 @@ namespace OctopusNotify.App.Views
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
+        }
+
+        private void ApiKeyText_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (ApiKeyText.Text == ((SettingsViewModel)DataContext).InitialApiKey)
+            {
+                _visualTextChange = true;
+                ApiKeyText.Text = String.Empty;
+                e.Handled = true;
+            }
+
+        }
+
+        private void ApiKeyText_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrEmpty(ApiKeyText.Text))
+            {
+                _visualTextChange = true;
+                ApiKeyText.Text = ((SettingsViewModel)DataContext).InitialApiKey;
+                e.Handled = true;
+            }
+
+        }
+
+        private void ApiKeyText_KeyUp(object sender, KeyEventArgs e)
+        {
+
         }
     }
 }

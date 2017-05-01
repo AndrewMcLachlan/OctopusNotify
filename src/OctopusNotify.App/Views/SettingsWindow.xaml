@@ -48,7 +48,7 @@
                             </Hyperlink>
                     </TextBlock>-->
                     </StackPanel>
-                    <TextBox x:Name="ApiKeyText" Padding="0,2" VerticalContentAlignment="Center" Margin="10,0,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" Validation.Error="Validation_Error" TextChanged="ApiKeyText_TextChanged" Width="221" MaxWidth="221">
+                    <TextBox x:Name="ApiKeyText" Padding="0,2" VerticalContentAlignment="Center" Margin="10,0,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" Validation.Error="Validation_Error" TextChanged="ApiKeyText_TextChanged" GotFocus="ApiKeyText_GotFocus" LostFocus="ApiKeyText_LostFocus" KeyUp="ApiKeyText_KeyUp" Width="221" MaxWidth="221" Text="{Binding Path=InitialApiKey, Mode=OneWay}">
                     </TextBox>
                     <Label x:Name="label" Content="Existing keys are not shown for security reasons" FontSize="11" Margin="0,0,0,0" HorizontalAlignment="Center" />
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,10">

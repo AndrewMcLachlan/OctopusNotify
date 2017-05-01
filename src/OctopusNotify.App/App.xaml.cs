@@ -32,6 +32,10 @@ namespace OctopusNotify.App
             if (!Settings.Default.Upgraded)
             {
                 Settings.Default.Upgrade();
+                if (!String.IsNullOrEmpty(Settings.Default.ApiKey))
+                {
+                    Settings.Default.UseApiKey = true;
+                }
                 Settings.Default.Upgraded = true;
                 Settings.Default.Save();
             }

@@ -6,7 +6,7 @@ namespace OctopusNotify.App.Commands
 {
     public class ShowSettingsCommand : ICommand
     {
-        private SettingsWindow _window;
+        private SettingsWindow2 _window;
 
         public event EventHandler CanExecuteChanged;
 
@@ -23,7 +23,7 @@ namespace OctopusNotify.App.Commands
                 return;
             }
 
-            _window = new SettingsWindow();
+            _window = new SettingsWindow2();
             _window.Closed += Window_Closed;
             _window.Show();
             CommandManager.InvalidateRequerySuggested();
