@@ -17,8 +17,7 @@ namespace OctopusNotify.App
 
         public void App_Startup(object sender, StartupEventArgs e)
         {
-            bool created;
-            _mutex = new Mutex(true, "b300f8b3-e9af-466f-a4a6-9f4cb545b5ad", out created);
+            _mutex = new Mutex(true, "b300f8b3-e9af-466f-a4a6-9f4cb545b5ad", out bool created);
             if (!created)
             {
                 _mutex.Dispose();

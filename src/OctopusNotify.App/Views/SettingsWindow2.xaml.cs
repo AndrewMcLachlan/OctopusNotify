@@ -88,7 +88,10 @@ namespace OctopusNotify.App.Views
 
         private void ApiKeyText_TextChanged(object sender, TextChangedEventArgs e)
         {
-            _apiKeyChanged = true ^ _visualTextChange;
+            //if (ViewModel != null)
+            //{
+            ((SettingsViewModel)DataContext).ApiKeyChanged = !_visualTextChange;
+            //}
             _visualTextChange = false;
         }
 
@@ -137,7 +140,7 @@ namespace OctopusNotify.App.Views
 
         private void ApiKeyText_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrEmpty(ApiKeyText.Text))
+            if (String.IsNullOrEmpty(ApiKeyText.Text) && (!((SettingsViewModel)DataContext)?.ApiKeyChanged ?? false))
             {
                 _visualTextChange = true;
                 ApiKeyText.Text = ((SettingsViewModel)DataContext).InitialApiKey;

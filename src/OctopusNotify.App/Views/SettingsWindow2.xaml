@@ -11,6 +11,7 @@
         Title="Settings" Height="500" Width="809" ResizeMode="CanResizeWithGrip" ShowInTaskbar="True" WindowStartupLocation="CenterScreen" Padding="0" Margin="0"
         Closing="Window_Closing">
     <Window.Resources>
+        <conv:PassthroughConverter x:Key="PassthroughConverter" />
         <Style x:Key="Header" TargetType="TextBlock">
             <Setter Property="Typography.Capitals" Value="Normal" />
             <Setter Property="FontWeight" Value="Bold" />
@@ -150,7 +151,13 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,10">
                             <Label x:Name="APiKeyLabel" Content="API Key:"  Width="75" />
-                            <TextBox x:Name="ApiKeyText" IsEnabled="{Binding CanSetApiKey}" Padding="0,3" VerticalAlignment="Top" TextWrapping="NoWrap" Validation.Error="Validation_Error" TextChanged="ApiKeyText_TextChanged" GotFocus="ApiKeyText_GotFocus" LostFocus="ApiKeyText_LostFocus" KeyUp="ApiKeyText_KeyUp" Width="221" MaxWidth="221" Text="{Binding Path=InitialApiKey, Mode=OneWay}">
+                            <TextBox x:Name="ApiKeyText" IsEnabled="{Binding CanSetApiKey}" Padding="0,3" VerticalAlignment="Top" TextWrapping="NoWrap" Validation.Error="Validation_Error" TextChanged="ApiKeyText_TextChanged" GotFocus="ApiKeyText_GotFocus" LostFocus="ApiKeyText_LostFocus" KeyUp="ApiKeyText_KeyUp" Width="221" MaxWidth="221" Text="{Binding ApiKey}">
+                                <!--<TextBox.Text>
+                                    <MultiBinding Converter="{StaticResource PassthroughConverter}">
+                                        <Binding Path="InitialApiKey" Mode="OneTime" />
+                                        <Binding Path="ApiKey" Mode="TwoWay" />
+                                    </MultiBinding>
+                                </TextBox.Text>-->
                             </TextBox>
                             <TextBlock x:Name="textBlock" TextWrapping="Wrap"  Margin="10,0,0,0">
                             <Hyperlink NavigateUri="{Binding ApiKeyUri}" RequestNavigate="Hyperlink_RequestNavigate">

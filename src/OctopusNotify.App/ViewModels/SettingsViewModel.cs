@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using OctopusNotify.App.Properties;
@@ -18,38 +19,57 @@ namespace OctopusNotify.App.ViewModels
         #endregion
 
         #region Fields
-        private Uri _serverUrl;
-        private bool _useApiKey;
+        //private Uri _serverUrl;
+        //private bool _useApiKey;
         private bool _canSetApiKey;
         private bool _isValid;
         private bool _canTest;
         private bool _runOnStartup;
 
-        private bool _alertOnFailedBuild;
-        private bool _alertOnNewFailedBuild;
-        private bool _alertOnFixedBuild;
-        private bool _alertOnSuccessfulBuild;
+        //private bool _alertOnFailedBuild;
+      //  private bool _alertOnNewFailedBuild;
+    //    private bool _alertOnFixedBuild;
+  //      private bool _alertOnSuccessfulBuild;
+//
+       // private bool _alertOnGuidedFailure;
+        //private bool _alertOnManualStep;
 
-        private bool _alertOnGuidedFailure;
-        private bool _alertOnManualStep;
-
-        private int _pollingInterval;
-        private int _balloonTimeout;
+        //private int _pollingInterval;
+        //private int _balloonTimeout;
         #endregion
 
         #region Properties
         public Uri ServerUrl
         {
-            get => _serverUrl;
-            set => Set(ref _serverUrl, value);
+            get => String.IsNullOrWhiteSpace(Settings.Default.ServerUrl) ? null : new Uri(Settings.Default.ServerUrl);
+            set
+            {
+                Settings.Default.ServerUrl = value?.ToString();
+                SaveAndNotify();
+            }
+        }
+
+        public string ApiKey
+        {
+            get
+            {
+                return ApiKeyChanged ? Settings.Default.ApiKey.Decrypt() : InitialApiKey;
+            }
+            set
+            {
+                if (!ApiKeyChanged) return;
+                Settings.Default.ApiKey = value?.Encrypt();
+                Settings.Default.Save();
+            }
         }
 
         public bool UseApiKey
         {
-            get => _useApiKey;
+            get => Settings.Default.UseApiKey;
             set
             {
-                Set(ref _useApiKey, value);
+                Settings.Default.UseApiKey = value;
+                SaveAndNotify();
                 CanSetApiKey = value;
             }
         }
@@ -57,30 +77,50 @@ namespace OctopusNotify.App.ViewModels
         public bool CanSetApiKey
         {
             get => _canSetApiKey;
-            set => Set(ref _canSetApiKey, value);
+            set => Set(ref _canSetApiKey, value, false);
         }
 
         public bool IsValid
         {
             get => _isValid;
-            set => Set(ref _isValid, value);
+            set => Set(ref _isValid, value, false);
         }
 
         public bool CanTest
         {
             get => _canTest;
-            set => Set(ref _canTest, value);
+            set => Set(ref _canTest, value, false);
         }
 
         public bool RunOnStartup
         {
-            get => _runOnStartup;
-            set => Set(ref _runOnStartup, value);
+            get
+            {
+                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(StartupRegistryPath, false))
+                {
+                    return key.GetValue(RegistryValueName) != null;
+                }
+            }
+            set
+            {
+                Set(ref _runOnStartup, value);
+                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(StartupRegistryPath, true))
+                {
+                    if (_runOnStartup)
+                    {
+                        key.SetValue(RegistryValueName, Assembly.GetExecutingAssembly().Location);
+                    }
+                    else
+                    {
+                        key.DeleteValue(RegistryValueName, false);
+                    }
+                }
+            }
         }
 
         public bool DisableFailedBuildAlerts
         {
-            get => !_alertOnFailedBuild && !_alertOnNewFailedBuild;
+            get => !AlertOnFailedBuild && !AlertOnNewFailedBuild;
             set
             {
                 if (value)
@@ -93,7 +133,7 @@ namespace OctopusNotify.App.ViewModels
 
         public bool DisableSuccessfulBuildAlerts
         {
-            get => !_alertOnSuccessfulBuild && !_alertOnFixedBuild;
+            get => !AlertOnSuccessfulBuild && !AlertOnFixedBuild;
             set
             {
                 if (value)
@@ -106,50 +146,90 @@ namespace OctopusNotify.App.ViewModels
 
         public bool AlertOnFailedBuild
         {
-            get => _alertOnFailedBuild;
-            set => Set(ref _alertOnFailedBuild, value);
+            get => Settings.Default.AlertOnFailedBuild;
+            set
+            {
+                Settings.Default.AlertOnFailedBuild = value;
+                SaveAndNotify();
+            }
         }
 
         public bool AlertOnNewFailedBuild
         {
-            get => _alertOnNewFailedBuild;
-            set => Set(ref _alertOnNewFailedBuild, value);
+            get => Settings.Default.AlertOnNewFailedBuild && !Settings.Default.AlertOnFailedBuild;
+            set
+            {
+                if (value)
+                {
+                    Settings.Default.AlertOnFailedBuild = false;
+                }
+                Settings.Default.AlertOnNewFailedBuild = value;
+                SaveAndNotify();
+            }
         }
 
         public bool AlertOnFixedBuild
         {
-            get => _alertOnFixedBuild;
-            set => Set(ref _alertOnFixedBuild, value);
+            get => Settings.Default.AlertOnFixedBuild && !Settings.Default.AlertOnSuccessfulBuild;
+            set
+            {
+                if (value)
+                {
+                    Settings.Default.AlertOnSuccessfulBuild = false;
+                }
+                Settings.Default.AlertOnFixedBuild = value;
+                SaveAndNotify();
+            }
         }
 
         public bool AlertOnSuccessfulBuild
         {
-            get => _alertOnSuccessfulBuild;
-            set => Set(ref _alertOnSuccessfulBuild, value);
+            get => Settings.Default.AlertOnSuccessfulBuild;
+            set
+            {
+                Settings.Default.AlertOnSuccessfulBuild = value;
+                SaveAndNotify();
+            }
         }
 
         public bool AlertOnGuidedFailure
         {
-            get => _alertOnGuidedFailure;
-            set => Set(ref _alertOnGuidedFailure, value);
+            get => Settings.Default.AlertOnGuidedFailure;
+            set
+            {
+                Settings.Default.AlertOnGuidedFailure = value;
+                SaveAndNotify();
+            }
         }
 
         public bool AlertOnManualStep
         {
-            get => _alertOnManualStep;
-            set => Set(ref _alertOnManualStep, value);
+            get => Settings.Default.AlertOnManualStep;
+            set
+            {
+                Settings.Default.AlertOnManualStep = value;
+                SaveAndNotify();
+            }
         }
 
         public int PollingInterval
         {
-            get => _pollingInterval;
-            set => Set(ref _pollingInterval, value);
+            get => Settings.Default.PollingInterval;
+            set
+            {
+                Settings.Default.PollingInterval = value;
+                SaveAndNotify();
+            }
         }
 
         public int BalloonTimeout
         {
-            get => _balloonTimeout;
-            set => Set(ref _balloonTimeout, value);
+            get => Settings.Default.BalloonTimeout;
+            set
+            {
+                Settings.Default.BalloonTimeout = value;
+                SaveAndNotify();
+            }
         }
 
         public string InitialApiKey
@@ -166,30 +246,35 @@ namespace OctopusNotify.App.ViewModels
                     new Uri(ConfigurationManager.AppSettings["doc:HowToCreateApiKey"]);
             }
         }
+
+        public bool ApiKeyChanged
+        {
+            get;set;
+        }
         #endregion
 
         #region Constructors
         public SettingsViewModel()
         {
-            ServerUrl = String.IsNullOrWhiteSpace(Settings.Default.ServerUrl) ? null : new Uri(Settings.Default.ServerUrl);
-
-            AlertOnNewFailedBuild = Settings.Default.AlertOnNewFailedBuild && !Settings.Default.AlertOnFailedBuild;
-            AlertOnFailedBuild = Settings.Default.AlertOnFailedBuild;
-            AlertOnFixedBuild = Settings.Default.AlertOnFixedBuild && !Settings.Default.AlertOnSuccessfulBuild;
-            AlertOnSuccessfulBuild = Settings.Default.AlertOnSuccessfulBuild;
+            //ServerUrl = String.IsNullOrWhiteSpace(Settings.Default.ServerUrl) ? null : new Uri(Settings.Default.ServerUrl);
+            //
+            //AlertOnNewFailedBuild = Settings.Default.AlertOnNewFailedBuild && !Settings.Default.AlertOnFailedBuild;
+            //AlertOnFailedBuild = Settings.Default.AlertOnFailedBuild;
+            //AlertOnFixedBuild = Settings.Default.AlertOnFixedBuild && !Settings.Default.AlertOnSuccessfulBuild;
+            //AlertOnSuccessfulBuild = Settings.Default.AlertOnSuccessfulBuild;
 
             DisableFailedBuildAlerts = !AlertOnFailedBuild && !AlertOnNewFailedBuild;
             DisableSuccessfulBuildAlerts = !AlertOnSuccessfulBuild && !AlertOnFixedBuild;
 
-            AlertOnGuidedFailure = Settings.Default.AlertOnGuidedFailure;
-            AlertOnManualStep = Settings.Default.AlertOnManualStep;
+            //AlertOnGuidedFailure = Settings.Default.AlertOnGuidedFailure;
+            //AlertOnManualStep = Settings.Default.AlertOnManualStep;
 
-            PollingInterval = Settings.Default.PollingInterval;
-            BalloonTimeout = Settings.Default.BalloonTimeout;
+            //PollingInterval = Settings.Default.PollingInterval;
+            //BalloonTimeout = Settings.Default.BalloonTimeout;
 
-            UseApiKey = Settings.Default.UseApiKey;
+            //UseApiKey = Settings.Default.UseApiKey;
 
-            RunOnStartup = GetRunOnStartup();
+            //RunOnStartup = GetRunOnStartup();
 
             if (!String.IsNullOrEmpty(Settings.Default.ApiKey))
             {
@@ -217,7 +302,7 @@ namespace OctopusNotify.App.ViewModels
 
         public void Save()
         {
-            Settings.Default.ServerUrl = _serverUrl == null ? null : _serverUrl.ToString();
+            //Settings.Default.ServerUrl = _serverUrl == null ? null : _serverUrl.ToString();
 
             Settings.Default.AlertOnFailedBuild = AlertOnFailedBuild;
             Settings.Default.AlertOnNewFailedBuild = AlertOnNewFailedBuild;
@@ -239,14 +324,11 @@ namespace OctopusNotify.App.ViewModels
         #endregion
 
         #region Private Methods
-        protected override void OnPropertyChanged(string propertyName)
+        protected void SaveAndNotify([CallerMemberName]string propertyName = null, bool validate = true)
         {
-            if (propertyName != nameof(IsValid) && propertyName != nameof(CanTest))
-            {
-                Validate();
-            }
-
-            base.OnPropertyChanged(propertyName);
+            Settings.Default.Save();
+            Container.Current.Configure();
+            OnPropertyChanged(propertyName, validate);
         }
 
         private bool GetRunOnStartup()
@@ -272,7 +354,7 @@ namespace OctopusNotify.App.ViewModels
             }
         }
 
-        public void Validate()
+        public override void Validate()
         {
             CanTest = ServerUrl != null && !String.IsNullOrEmpty(ServerUrl.ToString());
             IsValid = ServerUrl != null && !String.IsNullOrEmpty(ServerUrl.ToString()) && PollingInterval > 0 && BalloonTimeout > 0;

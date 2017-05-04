@@ -12,17 +12,26 @@ namespace OctopusNotify.App.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void Set<T>(ref T field, T value, [CallerMemberName]string propertyName = null)
+        protected void Set<T>(ref T field, T value, bool validate = false, [CallerMemberName]string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return;
 
             field = value;
-            OnPropertyChanged(propertyName);
+            OnPropertyChanged(propertyName, validate);
         }
 
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected virtual void OnPropertyChanged(string propertyName, bool validate = false)
         {
+            if (validate)
+            {
+                Validate();
+            }
+
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public virtual void Validate()
+        {
         }
     }
 }
