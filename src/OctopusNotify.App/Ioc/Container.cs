@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Practices.Unity;
 using Octopus.Client;
 using OctopusNotify.App.Properties;
@@ -32,6 +33,11 @@ namespace OctopusNotify.App.Ioc
         {
             RegisterTypes();
             OnConfigured();
+        }
+
+        public Task ConfigureAsync()
+        {
+            return Task.Factory.StartNew(() => Configure());
         }
 
         public virtual T Resolve<T>()

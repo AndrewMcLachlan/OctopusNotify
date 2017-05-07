@@ -39,12 +39,12 @@ namespace OctopusNotify.App.ViewModels
         #endregion
 
         #region Properties
-        public Uri ServerUrl
+        public string ServerUrl
         {
-            get => String.IsNullOrWhiteSpace(Settings.Default.ServerUrl) ? null : new Uri(Settings.Default.ServerUrl);
+            get => Settings.Default.ServerUrl; // String.IsNullOrWhiteSpace(Settings.Default.ServerUrl) ? null : new Uri(Settings.Default.ServerUrl);
             set
             {
-                Settings.Default.ServerUrl = value?.ToString();
+                Settings.Default.ServerUrl = value;// value?.ToString();
                 SaveAndNotify();
             }
         }
@@ -60,6 +60,7 @@ namespace OctopusNotify.App.ViewModels
                 if (!ApiKeyChanged) return;
                 Settings.Default.ApiKey = value?.Encrypt();
                 Settings.Default.Save();
+                Container.Current.Configure();
             }
         }
 
@@ -69,9 +70,24 @@ namespace OctopusNotify.App.ViewModels
             set
             {
                 Settings.Default.UseApiKey = value;
+                if (!value)
+                {
+                    TempApiKey = Settings.Default.ApiKey.Decrypt();
+                    Settings.Default.ApiKey = null;
+                }
+                else if (!String.IsNullOrWhiteSpace(TempApiKey))
+                {
+                    Settings.Default.ApiKey = TempApiKey.Encrypt();
+                    TempApiKey = null;
+                }
                 SaveAndNotify();
                 CanSetApiKey = value;
             }
+        }
+
+        public string TempApiKey
+        {
+            get; set;
         }
 
         public bool CanSetApiKey
@@ -290,7 +306,7 @@ namespace OctopusNotify.App.ViewModels
         public async Task<(bool, string)> Test(string apiKey)
         {
             IConnectionTester tester = Container.Current.Resolve<IConnectionTester>();
-            return await tester.Test(ServerUrl, apiKey);
+            return await tester.Test(new Uri(ServerUrl), apiKey);
         }
 
         public void Save(string apiKey)
@@ -327,7 +343,7 @@ namespace OctopusNotify.App.ViewModels
         protected void SaveAndNotify([CallerMemberName]string propertyName = null, bool validate = true)
         {
             Settings.Default.Save();
-            Container.Current.Configure();
+            Container.Current.ConfigureAsync();
             OnPropertyChanged(propertyName, validate);
         }
 

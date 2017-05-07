@@ -109,6 +109,7 @@ namespace OctopusNotify.App.ViewModels
         private void Container_Configured(object sender, EventArgs e)
         {
             //CreateAdapter().NoWait();
+            CreateAdapter();
         }
 
         private void Adapter_ConnectionError(object sender, EventArgs e)
@@ -171,10 +172,10 @@ namespace OctopusNotify.App.ViewModels
         /// </summary>
         private void CreateAdapter()
         {
-            /*if (_adapter != null)
+            if (_adapter != null)
             {
                 _adapter.StopPolling();
-                /*_adapter.DeploymentsChanged -= Adapter_DeploymentsChanged;
+                _adapter.DeploymentsChanged -= Adapter_DeploymentsChanged;
                 _adapter.DeploymentSummaryChanged -= Adapter_DeploymentSummaryChanged;
 
                 _adapter.ErrorsCleared -= Adapter_ErrorsCleared;
@@ -182,8 +183,8 @@ namespace OctopusNotify.App.ViewModels
                 _adapter.ConnectionError -= Adapter_ConnectionError;
                 _adapter.ConnectionRestored -= Adapter_ConnectionRestored;
 
-                _adapter = null;* /
-            }*/
+                _adapter = null;
+            }
 
             try
             {

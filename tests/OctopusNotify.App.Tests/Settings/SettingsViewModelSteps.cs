@@ -70,7 +70,7 @@ namespace OctopusNotify.App.Tests.Settings
         [When(@"the ServerURL property is changed")]
         public void WhenTheServerURLPropertyIsChanged()
         {
-            model.ServerUrl = new Uri("http://test.com/" + Guid.NewGuid().ToString());
+            model.ServerUrl = "http://test.com/" + Guid.NewGuid().ToString();
         }
 
         [When(@"the IsValid property is changed")]

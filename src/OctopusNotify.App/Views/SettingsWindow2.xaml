@@ -11,7 +11,8 @@
         Title="Settings" Height="500" Width="809" ResizeMode="CanResizeWithGrip" ShowInTaskbar="True" WindowStartupLocation="CenterScreen" Padding="0" Margin="0"
         Closing="Window_Closing">
     <Window.Resources>
-        <conv:PassthroughConverter x:Key="PassthroughConverter" />
+        <!--<conv:PassthroughConverter x:Key="PassthroughConverter" />-->
+        <conv:InvertBooleanConverter x:Key="InvertBooleanConverter" />
         <Style x:Key="Header" TargetType="TextBlock">
             <Setter Property="Typography.Capitals" Value="Normal" />
             <Setter Property="FontWeight" Value="Bold" />
@@ -116,14 +117,41 @@
                         </Setter.Value>
                     </Setter>
                 </Style>
-            </TabControl.Resources>
-            <TabItem>
-                <TabItem.Header>
+                <DataTemplate x:Key="ServerTemplate">
                     <StackPanel Style="{StaticResource TabItemHeader}">
-                        <Image Name="header" Source="../images/Server.png" Height="16" Margin="0,0,7,0" />
+                        <Image x:Name="TabHeaderImage" Source="../images/Server.png" Height="16" Margin="0,0,7,0" />
                         <TextBlock>Server</TextBlock>
                     </StackPanel>
-                </TabItem.Header>
+                    <DataTemplate.Triggers>
+                        <DataTrigger  Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="true">
+                            <Setter TargetName="TabHeaderImage" Property="Source" Value="../images/Server_Selected.png" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+                <DataTemplate x:Key="NotificationsTemplate">
+                    <StackPanel Style="{StaticResource TabItemHeader}">
+                        <Image x:Name="TabHeaderImage" Source="../images/Notification.png" Height="16" Margin="0,0,7,0" />
+                        <TextBlock>Notifications</TextBlock>
+                    </StackPanel>
+                    <DataTemplate.Triggers>
+                        <DataTrigger  Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="true">
+                            <Setter TargetName="TabHeaderImage" Property="Source" Value="../images/Notification_Selected.png" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+                <DataTemplate x:Key="ApplicationTemplate">
+                    <StackPanel Style="{StaticResource TabItemHeader}">
+                        <Image x:Name="TabHeaderImage" Source="../images/Application.png" Height="16" Margin="0,0,7,0" />
+                        <TextBlock>Notifications</TextBlock>
+                    </StackPanel>
+                    <DataTemplate.Triggers>
+                        <DataTrigger  Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="true">
+                            <Setter TargetName="TabHeaderImage" Property="Source" Value="../images/Application_Selected.png" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </TabControl.Resources>
+            <TabItem HeaderTemplate="{StaticResource ServerTemplate}">
                 <StackPanel Style="{StaticResource TabContentPanel}">
                     <TextBlock Style="{StaticResource Header}">Server</TextBlock>
                     <Separator />
@@ -146,24 +174,26 @@
                     <TextBlock Style="{StaticResource Subheading}">Login</TextBlock>
                     <WrapPanel Orientation="Horizontal">
                         <StackPanel Margin="0,10,10,10">
-                            <RadioButton Margin="0,5" IsChecked="{Binding !(UseApiKey)}">Username and password</RadioButton>
+                            <RadioButton Margin="0,5" IsChecked="{Binding UseApiKey, Converter={StaticResource InvertBooleanConverter}}">Username and password</RadioButton>
                             <RadioButton Margin="0,5" IsChecked="{Binding UseApiKey}">API Key</RadioButton>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="0,10">
-                            <Label x:Name="APiKeyLabel" Content="API Key:"  Width="75" />
-                            <TextBox x:Name="ApiKeyText" IsEnabled="{Binding CanSetApiKey}" Padding="0,3" VerticalAlignment="Top" TextWrapping="NoWrap" Validation.Error="Validation_Error" TextChanged="ApiKeyText_TextChanged" GotFocus="ApiKeyText_GotFocus" LostFocus="ApiKeyText_LostFocus" KeyUp="ApiKeyText_KeyUp" Width="221" MaxWidth="221" Text="{Binding ApiKey}">
-                                <!--<TextBox.Text>
+                            <WrapPanel Orientation="Horizontal" Margin="20,10">
+                                <StackPanel Orientation="Horizontal" Margin="0,0,10,10">
+                                    <Label x:Name="APiKeyLabel" Content="API Key:"  Width="75" />
+                                    <TextBox x:Name="ApiKeyText" IsEnabled="{Binding CanSetApiKey}" Padding="0,3" VerticalAlignment="Top" TextWrapping="NoWrap" Validation.Error="Validation_Error" TextChanged="ApiKeyText_TextChanged" GotFocus="ApiKeyText_GotFocus" LostFocus="ApiKeyText_LostFocus" KeyUp="ApiKeyText_KeyUp" Width="225" MaxWidth="225" Text="{Binding ApiKey}">
+                                        <!--<TextBox.Text>
                                     <MultiBinding Converter="{StaticResource PassthroughConverter}">
                                         <Binding Path="InitialApiKey" Mode="OneTime" />
                                         <Binding Path="ApiKey" Mode="TwoWay" />
                                     </MultiBinding>
                                 </TextBox.Text>-->
-                            </TextBox>
-                            <TextBlock x:Name="textBlock" TextWrapping="Wrap"  Margin="10,0,0,0">
-                            <Hyperlink NavigateUri="{Binding ApiKeyUri}" RequestNavigate="Hyperlink_RequestNavigate">
-                                How do I get an API key?
-                            </Hyperlink>
-                            </TextBlock>
+                                    </TextBox>
+                                </StackPanel>
+                                <TextBlock x:Name="textBlock" TextWrapping="Wrap"  Margin="0,0,0,0">
+                                    <Hyperlink NavigateUri="{Binding ApiKeyUri}" RequestNavigate="Hyperlink_RequestNavigate">
+                                        How do I get an API key?
+                                    </Hyperlink>
+                                </TextBlock>
+                            </WrapPanel>
                         </StackPanel>
                     </WrapPanel>
                     <StackPanel Orientation="Horizontal">
@@ -171,13 +201,7 @@
                     </StackPanel>
                 </StackPanel>
             </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Style="{StaticResource TabItemHeader}">
-                        <Image Source="../images/Notification.png" Height="16" Margin="0,0,7,0" />
-                        <TextBlock>Notifications</TextBlock>
-                    </StackPanel>
-                </TabItem.Header>
+            <TabItem HeaderTemplate="{StaticResource NotificationsTemplate}">
                 <StackPanel Style="{StaticResource TabContentPanel}">
                     <TextBlock Style="{StaticResource Header}">Notifications</TextBlock>
                     <Separator />
@@ -189,7 +213,7 @@
                             <RadioButton Content="Never" IsChecked="{Binding DisableFailedBuildAlerts }" />
                             <CheckBox x:Name="AlertOnGuidedFailure" IsChecked="{Binding AlertOnGuidedFailure}" Margin="5,15,0,0" Content="Alert on Guided Failure" />
                         </StackPanel>
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical" Margin="0,0,0,20">
                             <TextBlock x:Name="SuccessLabel" Style="{StaticResource Subheading}" Text="Notify on Successful Build" />
                             <RadioButton Content="All" IsChecked="{Binding AlertOnSuccessfulBuild}" />
                             <RadioButton Content="Build is fixed" IsChecked="{Binding AlertOnFixedBuild}" />
@@ -214,13 +238,7 @@
                     </StackPanel>
                 </StackPanel>
             </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Style="{StaticResource TabItemHeader}">
-                        <Image Source="../images/Application.png" Height="16" Margin="0,0,7,0" />
-                        <TextBlock>Application</TextBlock>
-                    </StackPanel>
-                </TabItem.Header>
+            <TabItem HeaderTemplate="{StaticResource ApplicationTemplate}">
                 <StackPanel Style="{StaticResource TabContentPanel}">
                     <TextBlock Style="{StaticResource Header}">Startup</TextBlock>
                     <Separator />

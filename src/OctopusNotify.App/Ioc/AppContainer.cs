@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Unity;
+﻿using System;
+using Microsoft.Practices.Unity;
 using Octopus.Client;
 using OctopusNotify.App.Properties;
 using OctopusNotify.App.Utilities;
@@ -18,7 +19,7 @@ namespace OctopusNotify.App.Ioc
 
             UnityContainer.RegisterType<OctopusServerEndpoint>(new[]
             {
-                new InjectionConstructor(Settings.Default.ServerUrl, Settings.Default.ApiKey.Decrypt())
+                new InjectionConstructor(Settings.Default.ServerUrl, new InjectionParameter<string>(Settings.Default.ApiKey?.Decrypt()))
             });
 
             UnityContainer.RegisterType<IOctopusRepository, StubOctopusRepository>("Stub");
@@ -28,7 +29,14 @@ namespace OctopusNotify.App.Ioc
                 new InjectionConstructor(new ResolvedParameter<OctopusServerEndpoint>())
             });
 
-            UnityContainer.RegisterInstance<IDeploymentRepositoryAdapter>(new OctopusAdapter(UnityContainer.Resolve<IOctopusRepository>(name), Settings.Default.PollingInterval * 1000d));
+            try
+            {
+                UnityContainer.RegisterInstance<IDeploymentRepositoryAdapter>(new OctopusAdapter(UnityContainer.Resolve<IOctopusRepository>(name), Settings.Default.PollingInterval * 1000d));
+            }
+            catch(ResolutionFailedException rex) when (rex.InnerException is ArgumentException)
+            {
+                // Do nothing here.
+            }
 
             /*UnityContainer.RegisterType<IDeploymentRepositoryAdapter, OctopusAdapter>(new ContainerControlledLifetimeManager(), new[]
             {

@@ -42,7 +42,7 @@ namespace OctopusNotify.App
             Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
             Container.Current = new AppContainer();
-            Container.Current.Configure();
+            Container.Current.ConfigureAsync();
 
             NotifyIconWindow window = new NotifyIconWindow();
         }

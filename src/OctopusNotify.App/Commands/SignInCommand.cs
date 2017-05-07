@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using OctopusNotify.App.Properties;
 using OctopusNotify.App.Views;
 
 namespace OctopusNotify.App.Commands
@@ -14,9 +15,16 @@ namespace OctopusNotify.App.Commands
 
         public event EventHandler CanExecuteChanged;
 
+        private bool _canExecute = false;
+
+        public SignInCommand()
+        {
+            CommandManager.RequerySuggested += CommandManager_RequerySuggested;
+        }
+
         public bool CanExecute(object parameter)
         {
-            return true;
+            return !String.IsNullOrWhiteSpace(Settings.Default.ServerUrl) && !Settings.Default.UseApiKey;
         }
 
         public void Execute(object parameter)
@@ -33,12 +41,22 @@ namespace OctopusNotify.App.Commands
             CommandManager.InvalidateRequerySuggested();
         }
 
+        private void CommandManager_RequerySuggested(object sender, EventArgs e)
+        {
+            var result = CanExecute(null);
+            if (_canExecute != result)
+            {
+                _canExecute = result;
+                OnCanExecuteChanged();
+            }
+        }
+
         private void Window_Closed(object sender, EventArgs e)
         {
             _window = null;
         }
 
-        private void OnCanExceuteChanged()
+        private void OnCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
