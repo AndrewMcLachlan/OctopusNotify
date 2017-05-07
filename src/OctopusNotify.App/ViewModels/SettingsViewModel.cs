@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Security;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using OctopusNotify.App.Properties;
@@ -307,6 +308,12 @@ namespace OctopusNotify.App.ViewModels
         {
             IConnectionTester tester = Container.Current.Resolve<IConnectionTester>();
             return await tester.Test(new Uri(ServerUrl), apiKey);
+        }
+
+        public async Task<(bool, string)> Test(string userName, SecureString password)
+        {
+            IConnectionTester tester = Container.Current.Resolve<IConnectionTester>();
+            return await tester.Test(new Uri(ServerUrl), userName, password);
         }
 
         public void Save(string apiKey)

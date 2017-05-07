@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OctopusNotify.App.Views"
+        Name="SignInWindow"
         mc:Ignorable="d"
         Title="Signin" Height="300" Width="400" ShowInTaskbar="False" ResizeMode="NoResize" ScrollViewer.VerticalScrollBarVisibility="Disabled" WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown"
@@ -24,7 +25,8 @@
             <Label Content="Password" Foreground="White" FontSize="16" Margin="0,20,0,0" />
             <PasswordBox Name="Password" Padding="5" FontSize="16" TabIndex="2" />
 
-            <Button Name="SignIn" HorizontalAlignment="Right" Margin="0,20,0,0" Click="SignIn_Click" IsDefault="True" TabIndex="3" Style="{StaticResource ActionButton}">Sign In</Button>
+            <Button Name="SignIn" HorizontalAlignment="Right" Margin="0,20,0,0" Click="SignIn_Click" IsDefault="True" TabIndex="3" Style="{StaticResource ActionButton}" Visibility="{Binding Path=TestMode, ElementName=SignInWindow, Converter={StaticResource ToCollapsed }}" >Sign In</Button>
+            <Button Name="Test" HorizontalAlignment="Right" Margin="0,20,0,0" TextBlock.TextAlignment="Center" Width="60" Click="Test_Click" IsDefault="True" TabIndex="3" Visibility="{Binding Path=TestMode, ElementName=SignInWindow, Converter={StaticResource ToVisibility }}" Style="{StaticResource ActionButton}">Test</Button>
         </StackPanel>
     </Canvas>
 </Window>

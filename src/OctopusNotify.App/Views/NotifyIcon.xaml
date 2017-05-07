@@ -18,10 +18,6 @@
         <vm:NotifyIconViewModel />
     </Window.DataContext>
 
-    <Window.Resources>
-        <conv:BooleanToVisibility x:Key="ToVisibility" />
-        <conv:BooleanToCollapsed x:Key="ToCollapsed" />
-    </Window.Resources>
     <Grid>
 
         <Grid.ColumnDefinitions>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security;
 using OctopusNotify.Model;
 
 namespace OctopusNotify
@@ -53,7 +54,7 @@ namespace OctopusNotify
         /// </summary>
         /// <param name="userName"></param>
         /// <param name="password"></param>
-        bool SignIn(string userName, string password);
+        bool SignIn(string userName, SecureString password);
 
         /// <summary>
         /// Signs out a user.

@@ -60,17 +60,42 @@ namespace OctopusNotify.App.Views
         private void TestCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var dc = ((SettingsViewModel)DataContext);
-            dc.Test(_apiKeyChanged ? ApiKeyText.Text : Settings.Default.ApiKey.Decrypt()).ContinueWith(t =>
+
+            if (!dc.CanTest) return;
+
+            if (LoginWithPassword.IsChecked ?? false)
             {
-                if (t.Result.Item1)
+                Signin signinWindow = new Signin(true);
+
+                if (signinWindow.ShowDialog() ?? false)
                 {
-                    DispatcherHelper.Run(Dispatcher, () => MessageBox.Show(this, t.Result.Item2, "Test", MessageBoxButton.OK, MessageBoxImage.Information));
+                    dc.Test(signinWindow.UserName.Text, signinWindow.Password.SecurePassword).ContinueWith(t =>
+                    {
+                        if (t.Result.Item1)
+                        {
+                            DispatcherHelper.Run(Dispatcher, () => MessageBox.Show(this, t.Result.Item2, "Test", MessageBoxButton.OK, MessageBoxImage.Information));
+                        }
+                        else
+                        {
+                            DispatcherHelper.Run(Dispatcher, () => MessageBox.Show(this, t.Result.Item2, "Error", MessageBoxButton.OK, MessageBoxImage.Warning));
+                        }
+                    });
                 }
-                else
+            }
+            else
+            {
+                dc.Test(_apiKeyChanged ? ApiKeyText.Text : Settings.Default.ApiKey.Decrypt()).ContinueWith(t =>
                 {
-                    DispatcherHelper.Run(Dispatcher, () => MessageBox.Show(this, t.Result.Item2, "Error", MessageBoxButton.OK, MessageBoxImage.Warning));
-                }
-            });
+                    if (t.Result.Item1)
+                    {
+                        DispatcherHelper.Run(Dispatcher, () => MessageBox.Show(this, t.Result.Item2, "Test", MessageBoxButton.OK, MessageBoxImage.Information));
+                    }
+                    else
+                    {
+                        DispatcherHelper.Run(Dispatcher, () => MessageBox.Show(this, t.Result.Item2, "Error", MessageBoxButton.OK, MessageBoxImage.Warning));
+                    }
+                });
+            }
             e.Handled = true;
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security;
 using System.Threading.Tasks;
 using System.Timers;
 using Octopus.Client;
@@ -57,14 +58,14 @@ namespace OctopusNotify
         #endregion
 
         #region Public Methods
-        public bool SignIn(string userName, string password)
+        public bool SignIn(string userName, SecureString password)
         {
             try
             {
                 _repository.Users.SignIn(new LoginCommand
                 {
                     Username = userName,
-                    Password = password,
+                    Password = password.ToUnsecureString(),
                     RememberMe = false,
                 });
                 OnSignedIn();

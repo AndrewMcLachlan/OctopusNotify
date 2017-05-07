@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using OctopusNotify.App.Ioc;
+using OctopusNotify.App.Models;
+using OctopusNotify.App.Properties;
 
 namespace OctopusNotify.App.Views
 {
@@ -20,9 +22,22 @@ namespace OctopusNotify.App.Views
     /// </summary>
     public partial class Signin : Window
     {
-        public Signin()
+        public static DependencyProperty TestModeProperty = DependencyProperty.Register("TestMode", typeof(bool), typeof(Signin), new FrameworkPropertyMetadata());
+
+        public bool TestMode
+        {
+            get { return (bool)GetValue(TestModeProperty); }
+            set { SetValue(TestModeProperty, value); }
+        }
+
+        public Signin() : this(false)
+        {
+        }
+
+        public Signin(bool testMode)
         {
             InitializeComponent();
+            TestMode = testMode;
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -32,8 +47,8 @@ namespace OctopusNotify.App.Views
 
         private void SignIn_Click(object sender, RoutedEventArgs e)
         {
-            var _adapter = Container.Current.Resolve<IDeploymentRepositoryAdapter>();
-            if (_adapter.SignIn(UserName.Text, Password.Password))
+            var adapter = Container.Current.Resolve<IDeploymentRepositoryAdapter>();
+            if (adapter.SignIn(UserName.Text, Password.SecurePassword))
             {
                 this.Close();
             }
@@ -41,6 +56,18 @@ namespace OctopusNotify.App.Views
             {
                 MessageBox.Show("User name or password incorrect", "Octopus Notify", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void Test_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+            this.Close();
+            /*var tester = Container.Current.Resolve<IConnectionTester>();
+
+            Uri server = null;
+            Uri.TryCreate(Settings.Default.ServerUrl, UriKind.Absolute, out server);
+
+            tester.Test(server, UserName.Text, Password.SecurePassword);*/
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

@@ -174,8 +174,8 @@
                     <TextBlock Style="{StaticResource Subheading}">Login</TextBlock>
                     <WrapPanel Orientation="Horizontal">
                         <StackPanel Margin="0,10,10,10">
-                            <RadioButton Margin="0,5" IsChecked="{Binding UseApiKey, Converter={StaticResource InvertBooleanConverter}}">Username and password</RadioButton>
-                            <RadioButton Margin="0,5" IsChecked="{Binding UseApiKey}">API Key</RadioButton>
+                            <RadioButton Name="LoginWithPassword" Margin="0,5" IsChecked="{Binding UseApiKey, Converter={StaticResource InvertBooleanConverter}}">Username and password</RadioButton>
+                            <RadioButton Name="LoginWithApiKey" Margin="0,5" IsChecked="{Binding UseApiKey}">API Key</RadioButton>
                             <WrapPanel Orientation="Horizontal" Margin="20,10">
                                 <StackPanel Orientation="Horizontal" Margin="0,0,10,10">
                                     <Label x:Name="APiKeyLabel" Content="API Key:"  Width="75" />

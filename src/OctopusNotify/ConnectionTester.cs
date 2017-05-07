@@ -39,14 +39,39 @@ namespace OctopusNotify
         {
             if (url == null) return (false, "No URL!");
 
+            return await Test(() =>
+            {
+                OctopusServerEndpoint endpoint = new OctopusServerEndpoint(url.ToString(), apiKey);
+                OctopusRepository repo = new OctopusRepository(endpoint);
+                return repo.ServerStatus.GetServerStatus();
+            });
+        }
+
+        public Task<(bool, string)> Test()
+        {
+            return Test(_configuredUri, _configuredApiKey);
+        }
+
+        public async Task<(bool, string)> Test(Uri url, string userName, SecureString password)
+        {
+            if (url == null) return (false, "No URL!");
+
+            return await Test(() =>
+            {
+                OctopusServerEndpoint endpoint = new OctopusServerEndpoint(url.ToString());
+                OctopusRepository repo = new OctopusRepository(endpoint);
+                repo.Users.SignIn(userName, password.ToUnsecureString());
+                var serverStatus = repo.ServerStatus.GetServerStatus();
+                repo.Users.SignOut();
+                return serverStatus;
+            });
+        }
+
+        private async Task<(bool, string)> Test(Func<ServerStatusResource> tester)
+        {
             try
             {
-                Task<ServerStatusResource> task = Task.Factory.StartNew(() =>
-                {
-                    OctopusServerEndpoint endpoint = new OctopusServerEndpoint(url.ToString(), apiKey);
-                    OctopusRepository repo = new OctopusRepository(endpoint);
-                    return repo.ServerStatus.GetServerStatus();
-                });
+                Task<ServerStatusResource> task = Task.Factory.StartNew(tester);
                 if (await Task.WhenAny(task, Task.Delay(5000)) == task)
                 {
                     if (!task.IsFaulted)
@@ -67,16 +92,6 @@ namespace OctopusNotify
             {
                 return (false, ex.Message);
             }
-        }
-
-        public Task<(bool, string)> Test()
-        {
-            return Test(_configuredUri, _configuredApiKey);
-        }
-
-        public Task<(bool, string)> Test(Uri url, string userName, SecureString password)
-        {
-            throw new NotImplementedException();
         }
 
         private string GetMessageFromException(Exception exception)

@@ -3,12 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:OctopusNotify.App"
              xmlns:comm="clr-namespace:OctopusNotify.App.Commands"
+             xmlns:conv="clr-namespace:OctopusNotify.App.ValueConverters"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              Startup="App_Startup"
              Exit="App_Exit">
     <Application.Resources>
         <ResourceDictionary>
             <sys:Boolean x:Key="TestMode">true</sys:Boolean>
+            <conv:BooleanToVisibility x:Key="ToVisibility" />
+            <conv:BooleanToCollapsed x:Key="ToCollapsed" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="StylesDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
