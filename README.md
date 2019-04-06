@@ -1,5 +1,5 @@
 <a href="https://www.andrewmclachlan.com/products/octopus-notify">
-  <img alt="Octopus Notify Logo" src="https://www.andrewmclachlan.com/content/images/octopusnotify/logo.64.png" align="right" />
+  <img alt="Octopus Notify Logo" src="https://www.andrewmclachlan.com/images/octopusnotify/logo.64.png" align="right" />
 </a>
 
 # Octopus Notify ![version-0.5.0](https://img.shields.io/badge/version-0.5.0-2f93e0.svg?style=plastic)
