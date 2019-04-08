@@ -19,6 +19,7 @@ namespace OctopusNotify.App.Tests
     {
         private MockContainer MockContainer { get; set; }
         private Mock<IDeploymentRepositoryAdapter> MockDeploymentRepositoryAdapter { get; set; }
+        private Mock<IConnectionTester> MockConnectionTester { get; set; }
         private NotifyIconViewModel ViewModel { get; set; }
 
         private DeploymentSummaryEventArgs DeploymentSummaryEventArgs { get; set; }
@@ -34,8 +35,14 @@ namespace OctopusNotify.App.Tests
         public void Setup()
         {
             MockDeploymentRepositoryAdapter = new Mock<IDeploymentRepositoryAdapter>();
+            MockConnectionTester = new Mock<IConnectionTester>();
+            MockConnectionTester.Setup(m => m.Test()).ReturnsAsync((true, String.Empty));
 
-            MockContainer = new MockContainer(MockDeploymentRepositoryAdapter);
+            MockContainer = new MockContainer
+            {
+                MockDeploymentRepositoryAdapter = MockDeploymentRepositoryAdapter,
+                MockConnectionTester = MockConnectionTester,
+            };
 
             // Set the server URL so the settings command isn't run
             Properties.Settings.Default.ServerUrl = "http://localhost";

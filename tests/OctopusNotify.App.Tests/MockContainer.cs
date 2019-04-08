@@ -8,13 +8,10 @@ namespace OctopusNotify.App.Tests
     public class MockContainer : Container
     {
         public Mock<IDeploymentRepositoryAdapter> MockDeploymentRepositoryAdapter { get; set; }
+        public Mock<IConnectionTester> MockConnectionTester { get; set; }
 
         public bool ThrowsResolutionException { get; set; }
 
-        public MockContainer(Mock<IDeploymentRepositoryAdapter> mockDeploymentRepositoryAdapter)
-        {
-            MockDeploymentRepositoryAdapter = mockDeploymentRepositoryAdapter;
-        }
 
         public override T Resolve<T>()
         {
@@ -29,6 +26,7 @@ namespace OctopusNotify.App.Tests
         protected override void RegisterTypes()
         {
             UnityContainer.RegisterInstance(MockDeploymentRepositoryAdapter.Object);
+            UnityContainer.RegisterInstance(MockConnectionTester?.Object);
         }
     }
 }
