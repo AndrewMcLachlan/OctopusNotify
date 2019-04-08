@@ -2,7 +2,8 @@
   <img alt="Octopus Notify Logo" src="https://www.andrewmclachlan.com/images/octopusnotify/logo.64.png" align="right" />
 </a>
 
-# Octopus Notify ![version-0.5.0](https://img.shields.io/badge/version-0.5.0-2f93e0.svg?style=plastic)
+# Octopus Notify 
+![Build Status](https://dev.azure.com/andrewmclachlan/Andrew%20McLachlan/_apis/build/status/OctopusNotify?branchName=master) ![version-0.5.0](https://img.shields.io/badge/version-0.5.0-2f93e0.svg?style=plastic)
 
 A simple system tray application to provide notifications from an Octopus Deploy server.
 
